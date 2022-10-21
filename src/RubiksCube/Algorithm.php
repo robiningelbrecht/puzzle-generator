@@ -9,7 +9,6 @@ class Algorithm implements \JsonSerializable
 {
     private const REGEX = "/(?<slices>[2-9]+)?(?<move>[UuFfRrDdLlBbMESxyz])(?<outerBlockIndicator>w)?(?<turnType>\d+\\'|\\'\d+|\d+|\\')?/";
 
-    /** @var Turn[] */
     private readonly array $turns;
 
     private function __construct(
@@ -61,17 +60,11 @@ class Algorithm implements \JsonSerializable
         return self::fromString($string);
     }
 
-    /**
-     * @return Turn[]
-     */
     public function getTurns(): array
     {
         return $this->turns;
     }
 
-    /**
-     * @return Turn[]
-     */
     public function jsonSerialize(): array
     {
         return $this->getTurns();

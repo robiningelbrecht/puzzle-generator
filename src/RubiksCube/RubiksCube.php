@@ -13,13 +13,9 @@ use App\RubiksCube\Turn\TurnType;
 class RubiksCube implements \JsonSerializable
 {
     private int $gridSize;
-    /** @var array<string, array<mixed>> */
     private array $faces;
-    /** @var int[] */
     private array $clockwiseStickerMapping;
-    /** @var int[] */
     private array $counterClockwiseStickerMapping;
-    /** @var int[] */
     private array $oppositeStickerMapping;
     private ?Algorithm $algorithm;
 
@@ -91,9 +87,6 @@ class RubiksCube implements \JsonSerializable
         return $this->mask;
     }
 
-    /**
-     * @return array<string, array<mixed>>
-     */
     public function getFaces(): array
     {
         return $this->faces;
@@ -113,9 +106,6 @@ class RubiksCube implements \JsonSerializable
         return $this;
     }
 
-    /**
-     * @return array<mixed>
-     */
     public function jsonSerialize(): array
     {
         return [
@@ -304,9 +294,6 @@ class RubiksCube implements \JsonSerializable
         }
     }
 
-    /**
-     * @param \App\RubiksCube\Face[] $faceOrder
-     */
     private function rotateAxis(
         int $offset,
         int $range,

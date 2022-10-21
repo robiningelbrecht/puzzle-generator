@@ -9,9 +9,7 @@ use App\RubiksCube\Face;
 
 final class AxisOrientation
 {
-    /**
-     * @return array{'0': array<mixed>, '1': array<mixed>, '2': array<mixed>}
-     */
+
     public static function get(): array
     {
         return [

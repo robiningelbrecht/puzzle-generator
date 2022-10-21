@@ -86,9 +86,6 @@ class ColorScheme implements \JsonSerializable
         };
     }
 
-    /**
-     * @return array{'U': Color, 'R': Color, 'F': Color, 'D': Color, 'L': Color, 'B': Color}
-     */
     public function jsonSerialize(): array
     {
         return [

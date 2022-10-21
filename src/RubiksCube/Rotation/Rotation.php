@@ -73,9 +73,6 @@ class Rotation implements \JsonSerializable
         );
     }
 
-    /**
-     * @return array{'x': int, 'y': int, 'z': int}
-     */
     public function jsonSerialize(): array
     {
         return [

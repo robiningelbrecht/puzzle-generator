@@ -59,9 +59,6 @@ class Svg implements \JsonSerializable
         return $this;
     }
 
-    /**
-     * @return array{'cube': \App\RubiksCube\RubiksCube, 'size': \App\SvgSize, 'backgroundColor': Color}
-     */
     public function jsonSerialize(): array
     {
         return [

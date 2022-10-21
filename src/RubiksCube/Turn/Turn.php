@@ -43,9 +43,6 @@ class Turn implements \JsonSerializable
         return $this->slices;
     }
 
-    /**
-     * @return array{'notation': string, 'move': \App\RubiksCube\Move, 'turnType': \App\RubiksCube\Turn\TurnType, 'slices': int}
-     */
     public function jsonSerialize(): array
     {
         return [
