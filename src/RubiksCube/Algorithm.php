@@ -2,16 +2,19 @@
 
 namespace App\RubiksCube;
 
+use App\RubiksCube\Turn\Turn;
+use App\RubiksCube\Turn\TurnType;
+
 class Algorithm implements \JsonSerializable
 {
     private const REGEX = "/(?<slices>[2-9]+)?(?<move>[UuFfRrDdLlBbMESxyz])(?<outerBlockIndicator>w)?(?<turnType>\d+\\'|\\'\d+|\d+|\\')?/";
 
+    /** @var Turn[] */
     private readonly array $turns;
 
     private function __construct(
         Turn ...$turns
-    )
-    {
+    ) {
         $this->turns = $turns;
     }
 
@@ -28,7 +31,7 @@ class Algorithm implements \JsonSerializable
                 throw new \RuntimeException(sprintf('Invalid move "%s"', $move));
             }
 
-            $slices = (int)$matches['slices'] ?? 1;
+            $slices = $matches['slices'] ?? 1;
             $move = $matches['move'];
             $outerBlockIndicator = $matches['outerBlockIndicator'] ?? '';
             $turnType = $matches['turnType'] ?? '';
@@ -57,11 +60,17 @@ class Algorithm implements \JsonSerializable
         return self::fromString($string);
     }
 
+    /**
+     * @return Turn[]
+     */
     public function getTurns(): array
     {
         return $this->turns;
     }
 
+    /**
+     * @return Turn[]
+     */
     public function jsonSerialize(): array
     {
         return $this->getTurns();
@@ -79,12 +88,12 @@ class Algorithm implements \JsonSerializable
             case "'2":
                 return TurnType::DOUBLE;
             default:
-                // Attempt to parse non standard turn type
+                // Attempt to parse non-standard turn type
                 // (for invalid but reasonable moves like "y3")
                 $reversed = false;
                 if (str_starts_with($turnAbbreviation, "'") || str_ends_with($turnAbbreviation, "'")) {
                     $reversed = true;
-                    $turnAbbreviation = (int)filter_var($turnAbbreviation, FILTER_SANITIZE_NUMBER_INT);
+                    $turnAbbreviation = (int) filter_var($turnAbbreviation, FILTER_SANITIZE_NUMBER_INT);
                 }
 
                 $turns = $turnAbbreviation % 4;
@@ -109,10 +118,6 @@ class Algorithm implements \JsonSerializable
             return 2;
         }
 
-        if (!$outerBlockIndicator && !$slices) {
-            return 1;
-        }
-
-        return $slices;
+        return 1;
     }
 }

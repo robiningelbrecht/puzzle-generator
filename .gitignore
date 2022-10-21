@@ -1,2 +1,4 @@
 vendor/
 to-delete/
+
+.php-cs-fixer.cache

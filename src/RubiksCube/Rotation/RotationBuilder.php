@@ -1,6 +1,6 @@
 <?php
 
-namespace App\RubiksCube;
+namespace App\RubiksCube\Rotation;
 
 class RotationBuilder
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\RubiksCube;
+namespace App\RubiksCube\Axis;
 
 enum Axis: int
 {
@@ -8,4 +8,3 @@ enum Axis: int
     case Y = 1;
     case Z = 2;
 }
-

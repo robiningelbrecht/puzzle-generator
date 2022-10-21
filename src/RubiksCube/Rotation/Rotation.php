@@ -1,6 +1,6 @@
 <?php
 
-namespace App\RubiksCube;
+namespace App\RubiksCube\Rotation;
 
 class Rotation implements \JsonSerializable
 {
@@ -12,8 +12,7 @@ class Rotation implements \JsonSerializable
         private readonly int $x,
         private readonly int $y,
         private readonly int $z
-    )
-    {
+    ) {
         if ($x < -360 || $x > 360) {
             throw new \RuntimeException('Invalid number of degrees for X provided');
         }
@@ -29,8 +28,7 @@ class Rotation implements \JsonSerializable
         int $x,
         int $y,
         int $z,
-    ): self
-    {
+    ): self {
         return new self($x, $y, $z);
     }
 
@@ -75,6 +73,9 @@ class Rotation implements \JsonSerializable
         );
     }
 
+    /**
+     * @return array{'x': int, 'y': int, 'z': int}
+     */
     public function jsonSerialize(): array
     {
         return [
@@ -83,5 +84,4 @@ class Rotation implements \JsonSerializable
             'z' => $this->getZ(),
         ];
     }
-
 }

@@ -1,8 +1,9 @@
 <?php
 
-namespace App\RubiksCube;
+namespace App\RubiksCube\ColorScheme;
 
 use App\Color;
+use App\RubiksCube\Face;
 
 class ColorScheme implements \JsonSerializable
 {
@@ -18,8 +19,7 @@ class ColorScheme implements \JsonSerializable
         private readonly Color $d,
         private readonly Color $l,
         private readonly Color $b,
-    )
-    {
+    ) {
         $colors = [
             $this->getColorForU(),
             $this->getColorForR(),
@@ -40,8 +40,7 @@ class ColorScheme implements \JsonSerializable
         Color $d,
         Color $l,
         Color $b,
-    ): self
-    {
+    ): self {
         return new self($u, $r, $f, $d, $l, $b);
     }
 
@@ -87,6 +86,9 @@ class ColorScheme implements \JsonSerializable
         };
     }
 
+    /**
+     * @return array{'U': Color, 'R': Color, 'F': Color, 'D': Color, 'L': Color, 'B': Color}
+     */
     public function jsonSerialize(): array
     {
         return [
@@ -98,5 +100,4 @@ class ColorScheme implements \JsonSerializable
             'B' => $this->getColorForB(),
         ];
     }
-
 }

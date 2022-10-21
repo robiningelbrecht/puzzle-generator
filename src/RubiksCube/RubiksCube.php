@@ -3,13 +3,23 @@
 namespace App\RubiksCube;
 
 use App\Color;
+use App\RubiksCube\Axis\Axis;
+use App\RubiksCube\Axis\AxisOrientation;
+use App\RubiksCube\ColorScheme\ColorScheme;
+use App\RubiksCube\Rotation\Rotation;
+use App\RubiksCube\Turn\Turn;
+use App\RubiksCube\Turn\TurnType;
 
 class RubiksCube implements \JsonSerializable
 {
     private int $gridSize;
+    /** @var array<string, array<mixed>> */
     private array $faces;
+    /** @var int[] */
     private array $clockwiseStickerMapping;
+    /** @var int[] */
     private array $counterClockwiseStickerMapping;
+    /** @var int[] */
     private array $oppositeStickerMapping;
 
     private function __construct(
@@ -18,8 +28,7 @@ class RubiksCube implements \JsonSerializable
         private readonly ColorScheme $colorScheme,
         private readonly Color $baseColor,
         private readonly ?Mask $mask = null,
-    )
-    {
+    ) {
         $this->gridSize = pow($this->size->getValue(), 2);
         $this->clockwiseStickerMapping = [];
         $this->counterClockwiseStickerMapping = [];
@@ -27,12 +36,12 @@ class RubiksCube implements \JsonSerializable
 
         foreach (Face::cases() as $face) {
             $this->faces[$face->name] = [];
-            for ($i = 0; $i < $this->gridSize; $i++) {
+            for ($i = 0; $i < $this->gridSize; ++$i) {
                 $this->faces[$face->name][] = $this->getColorScheme()->getColorForFace($face);
             }
         }
 
-        for ($i = 1; $i <= $this->gridSize; $i++) {
+        for ($i = 1; $i <= $this->gridSize; ++$i) {
             $this->clockwiseStickerMapping[] = $this->getClockwiseSticker($i);
             $this->counterClockwiseStickerMapping[] = $this->getCounterClockwiseSticker($i);
             $this->oppositeStickerMapping[] = $this->getOppositeSticker($i);
@@ -45,8 +54,7 @@ class RubiksCube implements \JsonSerializable
         ColorScheme $colorScheme,
         Color $baseColor,
         ?Mask $mask = null,
-    ): self
-    {
+    ): self {
         return new self(
             $size,
             $rotation,
@@ -81,6 +89,9 @@ class RubiksCube implements \JsonSerializable
         return $this->mask;
     }
 
+    /**
+     * @return array<string, array<mixed>>
+     */
     public function getFaces(): array
     {
         return $this->faces;
@@ -99,6 +110,9 @@ class RubiksCube implements \JsonSerializable
         return $this;
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function jsonSerialize(): array
     {
         return [
@@ -120,7 +134,7 @@ class RubiksCube implements \JsonSerializable
     {
         $this->rotateFace(Face::R, $turnType);
         $offset = $this->getSize()->getValue() - $slices;
-        $this->rotateXLayers($offset, $turnType === TurnType::CLOCKWISE, $turnType === TurnType::DOUBLE, $slices);
+        $this->rotateXLayers($offset, TurnType::CLOCKWISE === $turnType, TurnType::DOUBLE === $turnType, $slices);
 
         return $this;
     }
@@ -128,7 +142,7 @@ class RubiksCube implements \JsonSerializable
     public function lTurn(TurnType $turnType, int $slices = 1): self
     {
         $this->rotateFace(Face::L, $turnType);
-        $this->rotateXLayers(0, $turnType === TurnType::COUNTER_CLOCKWISE, $turnType === TurnType::DOUBLE, $slices);
+        $this->rotateXLayers(0, TurnType::COUNTER_CLOCKWISE === $turnType, TurnType::DOUBLE === $turnType, $slices);
 
         return $this;
     }
@@ -136,7 +150,7 @@ class RubiksCube implements \JsonSerializable
     public function uTurn(TurnType $turnType, int $slices = 1): self
     {
         $this->rotateFace(Face::U, $turnType);
-        $this->rotateYLayers(0, $turnType === TurnType::CLOCKWISE, $turnType === TurnType::DOUBLE, $slices);
+        $this->rotateYLayers(0, TurnType::CLOCKWISE === $turnType, TurnType::DOUBLE === $turnType, $slices);
 
         return $this;
     }
@@ -145,7 +159,7 @@ class RubiksCube implements \JsonSerializable
     {
         $this->rotateFace(Face::D, $turnType);
         $offset = $this->getSize()->getValue() - $slices;
-        $this->rotateYLayers($offset, $turnType === TurnType::COUNTER_CLOCKWISE, $turnType === TurnType::DOUBLE, $slices);
+        $this->rotateYLayers($offset, TurnType::COUNTER_CLOCKWISE === $turnType, TurnType::DOUBLE === $turnType, $slices);
 
         return $this;
     }
@@ -154,7 +168,7 @@ class RubiksCube implements \JsonSerializable
     {
         $this->rotateFace(Face::F, $turnType);
         $offset = $this->getSize()->getValue() - $slices;
-        $this->rotateZLayers($offset, $turnType === TurnType::CLOCKWISE, $turnType === TurnType::DOUBLE, $slices);
+        $this->rotateZLayers($offset, TurnType::CLOCKWISE === $turnType, TurnType::DOUBLE === $turnType, $slices);
 
         return $this;
     }
@@ -162,7 +176,7 @@ class RubiksCube implements \JsonSerializable
     public function bTurn(TurnType $turnType, int $slices = 1): self
     {
         $this->rotateFace(Face::B, $turnType);
-        $this->rotateZLayers(0, $turnType === TurnType::COUNTER_CLOCKWISE, $turnType === TurnType::DOUBLE, $slices);
+        $this->rotateZLayers(0, TurnType::COUNTER_CLOCKWISE === $turnType, TurnType::DOUBLE === $turnType, $slices);
 
         return $this;
     }
@@ -173,7 +187,7 @@ class RubiksCube implements \JsonSerializable
             return $this;
         }
 
-        $this->rotateXLayers(1, $turnType === TurnType::COUNTER_CLOCKWISE, $turnType === TurnType::DOUBLE, $this->getSize()->getValue() - 2);
+        $this->rotateXLayers(1, TurnType::COUNTER_CLOCKWISE === $turnType, TurnType::DOUBLE === $turnType, $this->getSize()->getValue() - 2);
 
         return $this;
     }
@@ -183,7 +197,7 @@ class RubiksCube implements \JsonSerializable
         if ($this->getSize()->getValue() < 2) {
             return $this;
         }
-        $this->rotateYLayers(1, $turnType === TurnType::COUNTER_CLOCKWISE, $turnType === TurnType::DOUBLE, $this->getSize()->getValue() - 2);
+        $this->rotateYLayers(1, TurnType::COUNTER_CLOCKWISE === $turnType, TurnType::DOUBLE === $turnType, $this->getSize()->getValue() - 2);
 
         return $this;
     }
@@ -193,7 +207,7 @@ class RubiksCube implements \JsonSerializable
         if ($this->getSize()->getValue() < 2) {
             return $this;
         }
-        $this->rotateZLayers(1, $turnType === TurnType::CLOCKWISE, $turnType === TurnType::DOUBLE, $this->getSize()->getValue() - 2);
+        $this->rotateZLayers(1, TurnType::CLOCKWISE === $turnType, TurnType::DOUBLE === $turnType, $this->getSize()->getValue() - 2);
 
         return $this;
     }
@@ -202,7 +216,7 @@ class RubiksCube implements \JsonSerializable
     {
         $this->rotateFace(Face::R, $turnType);
         $this->rotateFace(Face::L, $turnType->getOpposite());
-        $this->rotateXLayers(0, $turnType === TurnType::CLOCKWISE, $turnType === TurnType::DOUBLE, $this->getSize()->getValue());
+        $this->rotateXLayers(0, TurnType::CLOCKWISE === $turnType, TurnType::DOUBLE === $turnType, $this->getSize()->getValue());
 
         return $this;
     }
@@ -210,8 +224,8 @@ class RubiksCube implements \JsonSerializable
     public function yTurn(TurnType $turnType): self
     {
         $this->rotateFace(Face::U, $turnType);
-        $this->rotateFace(Face ::D, $turnType->getOpposite());
-        $this->rotateYLayers(0, $turnType === TurnType::CLOCKWISE, $turnType === TurnType::DOUBLE, $this->getSize()->getValue());
+        $this->rotateFace(Face::D, $turnType->getOpposite());
+        $this->rotateYLayers(0, TurnType::CLOCKWISE === $turnType, TurnType::DOUBLE === $turnType, $this->getSize()->getValue());
 
         return $this;
     }
@@ -220,14 +234,14 @@ class RubiksCube implements \JsonSerializable
     {
         $this->rotateFace(Face::F, $turnType);
         $this->rotateFace(Face::B, $turnType->getOpposite());
-        $this->rotateZLayers(0, $turnType === TurnType::CLOCKWISE, $turnType === TurnType::DOUBLE, $this->getSize()->getValue());
+        $this->rotateZLayers(0, TurnType::CLOCKWISE === $turnType, TurnType::DOUBLE === $turnType, $this->getSize()->getValue());
 
         return $this;
     }
 
     public function turn(Turn $turn): self
     {
-        if ($turn->getTurnType() === TurnType::NONE) {
+        if (TurnType::NONE === $turn->getTurnType()) {
             return $this;
         }
         if ($turn->getSlices() > $this->size->getValue()) {
@@ -269,11 +283,11 @@ class RubiksCube implements \JsonSerializable
     {
         switch ($turn) {
             case TurnType::CLOCKWISE:
-                $this->faces[$face->value] = array_map(fn(int $number) => $this->faces[$face->value][$number - 1], $this->clockwiseStickerMapping);
+                $this->faces[$face->value] = array_map(fn (int $number) => $this->faces[$face->value][$number - 1], $this->clockwiseStickerMapping);
                 break;
 
             case TurnType::COUNTER_CLOCKWISE:
-                $this->faces[$face->value] = array_map(fn(int $number) => $this->faces[$face->value][$number - 1], $this->counterClockwiseStickerMapping);
+                $this->faces[$face->value] = array_map(fn (int $number) => $this->faces[$face->value][$number - 1], $this->counterClockwiseStickerMapping);
                 break;
 
             case TurnType::DOUBLE:
@@ -285,6 +299,9 @@ class RubiksCube implements \JsonSerializable
         }
     }
 
+    /**
+     * @param \App\RubiksCube\Face[] $faceOrder
+     */
     private function rotateAxis(
         int $offset,
         int $range,
@@ -297,12 +314,12 @@ class RubiksCube implements \JsonSerializable
             $faceOrder = array_reverse($faceOrder);
         }
         $cubeSize = $this->getSize()->getValue();
-        $originalValues = array_map(fn(Face $face) => $this->faces[$face->value], $faceOrder);
+        $originalValues = array_map(fn (Face $face) => $this->faces[$face->value], $faceOrder);
 
-        for ($i = 0; $i < $cubeSize; $i++) {
-            for ($r = 0; $r < $range; $r++) {
+        for ($i = 0; $i < $cubeSize; ++$i) {
+            for ($r = 0; $r < $range; ++$r) {
                 $stickerIndex = $cubeSize * $i + ($offset + $r);
-                for ($j = 0; $j < count($faceOrder); $j++) {
+                for ($j = 0; $j < count($faceOrder); ++$j) {
                     /** @var \App\RubiksCube\Face $face */
                     $face = $faceOrder[$j];
                     $nextFace = $doubleTurn ? $faceOrder[($j + 2) % count($faceOrder)] : $faceOrder[($j + 1) % count($faceOrder)];

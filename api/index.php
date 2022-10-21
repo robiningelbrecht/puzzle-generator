@@ -1,25 +1,25 @@
 <?php
 
 use App\Color;
-use App\Svg;
-use App\SvgSize;
 use App\RubiksCube\Algorithm;
-use App\RubiksCube\ColorSchemeBuilder;
+use App\RubiksCube\ColorScheme\ColorSchemeBuilder;
 use App\RubiksCube\CubeSize;
 use App\RubiksCube\Mask;
+use App\RubiksCube\Rotation\RotationBuilder;
 use App\RubiksCube\RubiksCubeBuilder;
-use App\RubiksCube\RotationBuilder;
+use App\Svg;
+use App\SvgSize;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Factory\AppFactory;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
-require __DIR__ . '/../vendor/autoload.php';
+require __DIR__.'/../vendor/autoload.php';
 
 $builder = new DI\ContainerBuilder();
 $builder->addDefinitions([
-    FilesystemLoader::class => DI\create(FilesystemLoader::class)->constructor(dirname(__DIR__) . '/templates'),
+    FilesystemLoader::class => DI\create(FilesystemLoader::class)->constructor(dirname(__DIR__).'/templates'),
     Environment::class => DI\create(Environment::class)->constructor(DI\get(FilesystemLoader::class)),
 ]);
 $container = $builder->build();
@@ -33,7 +33,7 @@ $app->get('/', function (ServerRequestInterface $request, ResponseInterface $res
     $cubeParams = $params['cube'] ?? null;
 
     $cubeBuilder = RubiksCubeBuilder::fromDefaults();
-    if ($cubeParams !== null) {
+    if (null !== $cubeParams) {
         $cubeBuilder
             ->withSize(CubeSize::fromOptionalInt($cubeParams['size'] ?? null))
             ->withRotation(
@@ -62,7 +62,6 @@ $app->get('/', function (ServerRequestInterface $request, ResponseInterface $res
         ->build()
         ->scramble(Algorithm::fromOptionalString($cubeParams['algorithm'] ?? null));
 
-
     $svg = Svg::default($cube)
         ->withSize(SvgSize::fromOptionalInt($svgParams['size'] ?? null))
         ->withBackgroundColor(Color::fromOptionalHexString($svgParams['backgroundColor'] ?? null));
@@ -70,10 +69,10 @@ $app->get('/', function (ServerRequestInterface $request, ResponseInterface $res
     /** @var Environment $twig */
     $twig = $this->get(Environment::class);
     $response->getBody()->write($twig->render('cube.html.twig'));
-    return $response->withHeader('Content-Type', 'image/svg+xml');
-    //$response->getBody()->write(json_encode($svg));
-    //return $response->withHeader('Content-Type', 'application/json');
 
+    return $response->withHeader('Content-Type', 'image/svg+xml');
+    // $response->getBody()->write(json_encode($svg));
+    // return $response->withHeader('Content-Type', 'application/json');
 });
 
 $app->run();

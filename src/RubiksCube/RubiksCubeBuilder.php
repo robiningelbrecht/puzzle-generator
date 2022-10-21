@@ -3,6 +3,8 @@
 namespace App\RubiksCube;
 
 use App\Color;
+use App\RubiksCube\ColorScheme\ColorScheme;
+use App\RubiksCube\Rotation\Rotation;
 
 class RubiksCubeBuilder
 {
@@ -56,18 +58,21 @@ class RubiksCubeBuilder
         }
 
         $this->size = $size;
+
         return $this;
     }
 
     public function withRotation(Rotation $rotation): self
     {
         $this->rotation = $rotation;
+
         return $this;
     }
 
     public function withColorScheme(ColorScheme $colorScheme): self
     {
         $this->colorScheme = $colorScheme;
+
         return $this;
     }
 
@@ -78,13 +83,14 @@ class RubiksCubeBuilder
         }
 
         $this->baseColor = $color;
+
         return $this;
     }
 
     public function withMask(Mask $mask = null): self
     {
         $this->mask = $mask;
+
         return $this;
     }
-
 }

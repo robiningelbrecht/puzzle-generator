@@ -4,7 +4,7 @@ namespace App\RubiksCube;
 
 enum Mask: string
 {
-    case LINE  ='line';
+    case LINE = 'line';
     case FL = 'fl';
     case F2L = 'f2l';
     case F2L_1 = 'f2l_1';
@@ -26,5 +26,4 @@ enum Mask: string
     case CLS = 'cls';
     case CMLL = 'cmll';
     case CROSS = 'cross';
-
 }

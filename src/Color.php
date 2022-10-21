@@ -6,18 +6,18 @@ class Color implements \Stringable, \JsonSerializable
 {
     private function __construct(
         private readonly string $value
-    )
-    {
+    ) {
     }
 
     public static function fromHexString(string $hex): self
     {
         if (!str_starts_with($hex, '#')) {
-            $hex = '#' . $hex;
+            $hex = '#'.$hex;
         }
         if (!preg_match('/^#[a-f0-9]{6}$/i', $hex)) {
             throw new \RuntimeException('Invalid hex color');
         }
+
         return new self($hex);
     }
 
@@ -79,6 +79,4 @@ class Color implements \Stringable, \JsonSerializable
     {
         return $this->getValue();
     }
-
-
 }

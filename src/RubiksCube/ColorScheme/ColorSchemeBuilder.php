@@ -1,6 +1,6 @@
 <?php
 
-namespace App\RubiksCube;
+namespace App\RubiksCube\ColorScheme;
 
 use App\Color;
 
@@ -47,6 +47,7 @@ class ColorSchemeBuilder
         }
 
         $this->u = $color;
+
         return $this;
     }
 
@@ -57,6 +58,7 @@ class ColorSchemeBuilder
         }
 
         $this->r = $color;
+
         return $this;
     }
 
@@ -67,6 +69,7 @@ class ColorSchemeBuilder
         }
 
         $this->f = $color;
+
         return $this;
     }
 
@@ -77,6 +80,7 @@ class ColorSchemeBuilder
         }
 
         $this->d = $color;
+
         return $this;
     }
 
@@ -87,6 +91,7 @@ class ColorSchemeBuilder
         }
 
         $this->l = $color;
+
         return $this;
     }
 
@@ -97,6 +102,7 @@ class ColorSchemeBuilder
         }
 
         $this->b = $color;
+
         return $this;
     }
 }

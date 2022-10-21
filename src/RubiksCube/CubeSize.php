@@ -6,8 +6,7 @@ class CubeSize implements \JsonSerializable
 {
     private function __construct(
         private readonly int $value
-    )
-    {
+    ) {
         if ($this->value < 1 || $this->value > 10) {
             throw new \RuntimeException('Invalid size provided');
         }
@@ -23,6 +22,7 @@ class CubeSize implements \JsonSerializable
         if (is_null($value)) {
             return null;
         }
+
         return new self($value);
     }
 
@@ -35,5 +35,4 @@ class CubeSize implements \JsonSerializable
     {
         return $this->getValue();
     }
-
 }

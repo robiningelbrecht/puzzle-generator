@@ -10,9 +10,7 @@ class Svg implements \JsonSerializable
         private RubiksCube $cube,
         private SvgSize $size,
         private Color $backgroundColor,
-    )
-    {
-
+    ) {
     }
 
     public static function default(RubiksCube $cube): self
@@ -34,13 +32,14 @@ class Svg implements \JsonSerializable
         return $this->size;
     }
 
-    public function withSize(SvgSize $size = null): ?self
+    public function withSize(SvgSize $size = null): self
     {
         if (!$size) {
             return $this;
         }
 
         $this->size = $size;
+
         return $this;
     }
 
@@ -49,16 +48,20 @@ class Svg implements \JsonSerializable
         return $this->backgroundColor;
     }
 
-    public function withBackgroundColor(Color $color = null): ?self
+    public function withBackgroundColor(Color $color = null): self
     {
         if (!$color) {
             return $this;
         }
 
         $this->backgroundColor = $color;
+
         return $this;
     }
 
+    /**
+     * @return array{'cube': \App\RubiksCube\RubiksCube, 'size': \App\SvgSize, 'backgroundColor': Color}
+     */
     public function jsonSerialize(): array
     {
         return [

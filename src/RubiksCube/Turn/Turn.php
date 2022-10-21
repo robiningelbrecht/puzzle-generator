@@ -1,6 +1,8 @@
 <?php
 
-namespace App\RubiksCube;
+namespace App\RubiksCube\Turn;
+
+use App\RubiksCube\Move;
 
 class Turn
 {
@@ -8,16 +10,14 @@ class Turn
         private readonly Move $move,
         private readonly TurnType $turnType,
         private readonly int $slices,
-    )
-    {
+    ) {
     }
 
     public static function fromMoveAndTurnTypeAndSlices(
         Move $move,
         TurnType $turnType,
         int $slices,
-    ): self
-    {
+    ): self {
         return new self($move, $turnType, $slices);
     }
 
