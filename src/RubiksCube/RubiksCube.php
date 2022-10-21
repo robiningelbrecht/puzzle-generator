@@ -21,6 +21,7 @@ class RubiksCube implements \JsonSerializable
     private array $counterClockwiseStickerMapping;
     /** @var int[] */
     private array $oppositeStickerMapping;
+    private ?Algorithm $algorithm;
 
     private function __construct(
         private readonly CubeSize $size,
@@ -33,6 +34,7 @@ class RubiksCube implements \JsonSerializable
         $this->clockwiseStickerMapping = [];
         $this->counterClockwiseStickerMapping = [];
         $this->oppositeStickerMapping = [];
+        $this->algorithm = null;
 
         foreach (Face::cases() as $face) {
             $this->faces[$face->name] = [];
@@ -99,6 +101,7 @@ class RubiksCube implements \JsonSerializable
 
     public function scramble(Algorithm $algorithm): self
     {
+        $this->algorithm = $algorithm;
         if ($algorithm->isEmpty()) {
             return $this;
         }
@@ -122,6 +125,7 @@ class RubiksCube implements \JsonSerializable
             'baseColor' => $this->getBaseColor(),
             'mask' => $this->getMask(),
             'faces' => $this->getFaces(),
+            'algorithm' => $this->algorithm,
             'stickerMapping' => [
                 'clockWise' => $this->clockwiseStickerMapping,
                 'counterClockWise' => $this->counterClockwiseStickerMapping,
@@ -244,8 +248,9 @@ class RubiksCube implements \JsonSerializable
         if (TurnType::NONE === $turn->getTurnType()) {
             return $this;
         }
-        if ($turn->getSlices() > $this->size->getValue()) {
-            throw new \RuntimeException('The number of slices cannot be bigger than the cube size');
+
+        if ($turn->getSlices() >= $this->size->getValue()) {
+            throw new \RuntimeException('The number of slices must be smaller than the cube size');
         }
 
         return match ($turn->getMove()) {

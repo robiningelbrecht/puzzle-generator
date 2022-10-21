@@ -4,9 +4,10 @@ namespace App\RubiksCube\Turn;
 
 use App\RubiksCube\Move;
 
-class Turn
+class Turn implements \JsonSerializable
 {
     private function __construct(
+        private readonly string $notation,
         private readonly Move $move,
         private readonly TurnType $turnType,
         private readonly int $slices,
@@ -14,11 +15,17 @@ class Turn
     }
 
     public static function fromMoveAndTurnTypeAndSlices(
+        string $notation,
         Move $move,
         TurnType $turnType,
         int $slices,
     ): self {
-        return new self($move, $turnType, $slices);
+        return new self($notation, $move, $turnType, $slices);
+    }
+
+    public function getNotation(): string
+    {
+        return $this->notation;
     }
 
     public function getMove(): Move
@@ -34,5 +41,18 @@ class Turn
     public function getSlices(): int
     {
         return $this->slices;
+    }
+
+    /**
+     * @return array{'notation': string, 'move': \App\RubiksCube\Move, 'turnType': \App\RubiksCube\Turn\TurnType, 'slices': int}
+     */
+    public function jsonSerialize(): array
+    {
+        return [
+            'notation' => $this->getNotation(),
+            'move' => $this->getMove(),
+            'turnType' => $this->getTurnType(),
+            'slices' => $this->getSlices(),
+        ];
     }
 }

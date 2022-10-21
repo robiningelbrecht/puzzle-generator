@@ -26,25 +26,26 @@ class Algorithm implements \JsonSerializable
     public static function fromString(string $string): self
     {
         $turns = [];
-        foreach (explode(' ', $string) as $move) {
-            if (!preg_match(self::REGEX, $move, $matches)) {
-                throw new \RuntimeException(sprintf('Invalid move "%s"', $move));
+        foreach (explode(' ', $string) as $notation) {
+            if (!preg_match(self::REGEX, $notation, $matches)) {
+                throw new \RuntimeException(sprintf('Invalid move "%s"', $notation));
             }
 
-            $slices = $matches['slices'] ?? 1;
             $move = $matches['move'];
             $outerBlockIndicator = $matches['outerBlockIndicator'] ?? '';
             $turnType = $matches['turnType'] ?? '';
             $isLowerCaseMove = $move === strtolower($move) && !in_array($move, ['x', 'y', 'z']);
+            $slices = self::getSlices($matches['slices'] ?: null, $outerBlockIndicator);
 
             if ($isLowerCaseMove) {
                 $move = strtoupper($move);
             }
 
             $turns[] = Turn::fromMoveAndTurnTypeAndSlices(
+                $notation,
                 Move::from($move),
                 self::getTurnTypeByTurnAbbreviation($turnType),
-                $isLowerCaseMove ? 2 : self::getSlices($slices, $outerBlockIndicator),
+                $isLowerCaseMove ? 2 : $slices,
             );
         }
 
@@ -118,6 +119,6 @@ class Algorithm implements \JsonSerializable
             return 2;
         }
 
-        return 1;
+        return $slices ?? 1;
     }
 }

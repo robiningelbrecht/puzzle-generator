@@ -2,12 +2,12 @@
 
 namespace App\RubiksCube\Turn;
 
-enum TurnType
+enum TurnType: string
 {
-    case CLOCKWISE;
-    case COUNTER_CLOCKWISE;
-    case DOUBLE;
-    case NONE;
+    case CLOCKWISE = 'clockwise';
+    case COUNTER_CLOCKWISE = 'counterClockwise';
+    case DOUBLE = 'double';
+    case NONE = 'none';
 
     public function getOpposite(): self
     {
