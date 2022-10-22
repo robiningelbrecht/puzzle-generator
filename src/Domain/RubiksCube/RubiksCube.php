@@ -240,7 +240,7 @@ class RubiksCube implements \JsonSerializable
         }
 
         if ($turn->getSlices() >= $this->size->getValue()) {
-            throw new \RuntimeException('The number of slices must be smaller than the cube size');
+            throw new \RuntimeException(sprintf('The number of slices (%s) must be smaller than the cube size (%s)', $turn->getSlices(), $this->size->getValue()));
         }
 
         return match ($turn->getMove()) {

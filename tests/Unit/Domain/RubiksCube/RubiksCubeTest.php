@@ -73,5 +73,24 @@ class RubiksCubeTest extends TestCase
         $cube = RubiksCubeBuilder::fromDefaults()->build();
         $cube->scramble(Algorithm::fromString('U u F f R r D d L l B b M E S x y z'));
         $this->assertMatchesJsonSnapshot(Json::encode($cube));
+
+        // Test all possible turns for 2 by 2.
+        $cube = RubiksCubeBuilder::fromDefaults()
+            ->withSize(CubeSize::fromInt(2))
+            ->build();
+        $cube->scramble(Algorithm::fromString('U F R D L B M E S x y z'));
+        $this->assertMatchesJsonSnapshot(Json::encode($cube));
+    }
+
+    public function testItShouldThrowOnInvalidSlices(): void
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('The number of slices (2) must be smaller than the cube size (2)');
+
+        $cube = RubiksCubeBuilder::fromDefaults()
+            ->withSize(CubeSize::fromInt(2))
+            ->build();
+
+        $cube->scramble(Algorithm::fromString('r'));
     }
 }
