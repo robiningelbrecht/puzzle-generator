@@ -49,13 +49,12 @@ class RubiksCubeTest extends WebTestCase
         $this->assertMatchesJsonSnapshot((string) $response->getBody());
     }
 
-    public function testItShouldThrowWhenRouteNotFound(): void
+    public function testWhenRouteNotFound(): void
     {
         $response = $this->getApp()->handle(
             $this->createRequest('GET', '/not-found'),
         );
 
         $this->assertEquals(404, $response->getStatusCode());
-        $this->assertMatchesHtmlSnapshot((string) $response->getBody());
     }
 }
