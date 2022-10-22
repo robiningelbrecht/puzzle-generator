@@ -11,15 +11,29 @@ class AlgorithmTest extends TestCase
 {
     use MatchesSnapshots;
 
-    private string $cubeSize;
+    private string $snapshotName;
 
     /**
      * @dataProvider provideStringAlgorithms
      */
     public function testFromString(string $algorithm, int $size): void
     {
-        $this->cubeSize = $size.'x'.$size;
+        $this->snapshotName = $size.'x'.$size;
         $this->assertMatchesJsonSnapshot(Json::encode(Algorithm::fromString($algorithm)));
+    }
+
+    public function testEdgeCases(): void
+    {
+        $this->snapshotName = 'edgeCase1';
+        $this->assertMatchesJsonSnapshot(Json::encode(Algorithm::fromString('y3')));
+        $this->snapshotName = 'edgeCase2';
+        $this->assertMatchesJsonSnapshot(Json::encode(Algorithm::fromString('3yw3')));
+        $this->snapshotName = 'edgeCase3';
+        $this->assertMatchesJsonSnapshot(Json::encode(Algorithm::fromString('y4')));
+        $this->snapshotName = 'edgeCase4';
+        $this->assertMatchesJsonSnapshot(Json::encode(Algorithm::fromString('y1')));
+        $this->snapshotName = 'edgeCase5';
+        $this->assertMatchesJsonSnapshot(Json::encode(Algorithm::fromString('2yw2')));
     }
 
     public function testFromOptionalString(): void
@@ -60,6 +74,14 @@ class AlgorithmTest extends TestCase
         Algorithm::fromString('X');
     }
 
+    public function itShouldThrowOnInvalidOuterBlockIndicator(): void
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage("Invalid move: Cannot specify num slices if outer block move indicator 'w' is not present");
+
+        Algorithm::fromString('Fw');
+    }
+
     public function provideStringAlgorithms(): array
     {
         return [
@@ -82,6 +104,6 @@ class AlgorithmTest extends TestCase
     {
         return (new \ReflectionClass($this))->getShortName().'--'.
             $this->getName(false).'--'.
-            $this->cubeSize;
+            $this->snapshotName;
     }
 }

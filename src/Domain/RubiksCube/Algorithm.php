@@ -86,19 +86,13 @@ class Algorithm implements \JsonSerializable
             default:
                 // Attempt to parse non-standard turn type
                 // (for invalid but reasonable moves like "y3")
-                $reversed = false;
-                if (str_starts_with($turnAbbreviation, "'") || str_ends_with($turnAbbreviation, "'")) {
-                    $reversed = true;
-                    $turnAbbreviation = (int) filter_var($turnAbbreviation, FILTER_SANITIZE_NUMBER_INT);
-                }
-
                 $turns = $turnAbbreviation % 4;
 
                 return match ($turns) {
                     0 => TurnType::NONE,
-                    1 => $reversed ? TurnType::COUNTER_CLOCKWISE : TurnType::CLOCKWISE,
+                    1 => TurnType::CLOCKWISE,
                     2 => TurnType::DOUBLE,
-                    3 => $reversed ? TurnType::CLOCKWISE : TurnType::COUNTER_CLOCKWISE,
+                    3 => TurnType::COUNTER_CLOCKWISE,
                     default => throw new \RuntimeException('Invalid turnAbbreviation')
                 };
         }
