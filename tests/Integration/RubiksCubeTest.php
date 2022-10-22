@@ -4,14 +4,13 @@ namespace App\Tests\Integration;
 
 use App\Tests\SvgDriver;
 use App\Tests\WebTestCase;
-use Slim\Exception\HttpNotFoundException;
 use Spatie\Snapshots\MatchesSnapshots;
 
 class RubiksCubeTest extends WebTestCase
 {
     use MatchesSnapshots;
 
-    public function testGetRubiksCube(): void
+    public function testGetRubiksCubeAsSvg(): void
     {
         $params = [
             'cube' => [
@@ -30,12 +29,33 @@ class RubiksCubeTest extends WebTestCase
         $this->assertMatchesSnapshot((string) $response->getBody(), new SvgDriver());
     }
 
+    public function testGetRubiksCubeAsJson(): void
+    {
+        $params = [
+            'json' => 1,
+            'cube' => [
+                'size' => 5,
+            ],
+        ];
+
+        $response = $this->getApp()->handle(
+            $this->createRequest(
+                'GET',
+                sprintf('/cube?%s', http_build_query($params))
+            )
+        );
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertMatchesJsonSnapshot((string) $response->getBody());
+    }
+
     public function testItShouldThrowWhenRouteNotFound(): void
     {
-        $this->expectException(HttpNotFoundException::class);
-
-        $this->getApp()->handle(
+        $response = $this->getApp()->handle(
             $this->createRequest('GET', '/not-found'),
         );
+
+        $this->assertEquals(404, $response->getStatusCode());
+        $this->assertMatchesHtmlSnapshot((string) $response->getBody());
     }
 }

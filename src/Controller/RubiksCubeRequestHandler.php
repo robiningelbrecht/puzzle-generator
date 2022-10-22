@@ -20,8 +20,7 @@ class RubiksCubeRequestHandler
 {
     public function __construct(
         private readonly Environment $twig
-    )
-    {
+    ) {
     }
 
     public function handle(
@@ -68,6 +67,7 @@ class RubiksCubeRequestHandler
 
         if (isset($params['json'])) {
             $response->getBody()->write(Json::encode($svg));
+
             return $response;
         }
 
