@@ -91,7 +91,6 @@ class Algorithm implements \JsonSerializable
                 return match ($turns) {
                     0 => TurnType::NONE,
                     1 => TurnType::CLOCKWISE,
-                    2 => TurnType::DOUBLE,
                     3 => TurnType::COUNTER_CLOCKWISE,
                     default => throw new \RuntimeException('Invalid turnAbbreviation')
                 };

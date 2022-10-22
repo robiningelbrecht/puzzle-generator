@@ -33,7 +33,7 @@ class AlgorithmTest extends TestCase
         $this->snapshotName = 'edgeCase4';
         $this->assertMatchesJsonSnapshot(Json::encode(Algorithm::fromString('y1')));
         $this->snapshotName = 'edgeCase5';
-        $this->assertMatchesJsonSnapshot(Json::encode(Algorithm::fromString('2yw2')));
+        $this->assertMatchesJsonSnapshot(Json::encode(Algorithm::fromString('y2')));
     }
 
     public function testFromOptionalString(): void
@@ -74,12 +74,12 @@ class AlgorithmTest extends TestCase
         Algorithm::fromString('X');
     }
 
-    public function itShouldThrowOnInvalidOuterBlockIndicator(): void
+    public function testItShouldThrowOnInvalidOuterBlockIndicator(): void
     {
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage("Invalid move: Cannot specify num slices if outer block move indicator 'w' is not present");
 
-        Algorithm::fromString('Fw');
+        Algorithm::fromString('2F');
     }
 
     public function provideStringAlgorithms(): array
