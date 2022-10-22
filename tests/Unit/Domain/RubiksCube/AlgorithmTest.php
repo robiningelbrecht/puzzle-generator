@@ -24,7 +24,7 @@ class AlgorithmTest extends TestCase
 
     public function testFromOptionalString(): void
     {
-        $this->assertEquals(Algorithm::fromOptionalString(), Algorithm::fromOptionalString(''));
+        $this->assertTrue(Algorithm::fromOptionalString()->isEmpty());
         $this->assertEquals(Algorithm::fromOptionalString("F' U' R2 F U' F2 R' U R2"), Algorithm::fromString("F' U' R2 F U' F2 R' U R2"));
     }
 
@@ -72,7 +72,7 @@ class AlgorithmTest extends TestCase
             // 5 x 5
             ["Uw' U' Lw D2 L' Dw' L2 R2 D Bw Lw' D B2 Fw2 L U' Fw2 F' Lw Fw' Uw' Rw U' Uw2 Rw2 D Rw2 L Uw Dw2 Lw Rw' U D' B2 Rw' U2 Dw L' F' R2 Rw Lw2 D R' Bw'", 5],
             // 6 x 6
-            ["R' Bw 3Rw2 F Rw' Uw 3Fw Dw2 3Uw D2 Rw2 R' 3Uw2 R2 3Rw2 Uw2 F2 3Rw' Lw' F2 3Rw' Rw L' 3Uw U L' Uw' U2 D2 F", 6],
+            ["R' Bw 3Rw2 F Rw2' Rw'2 Uw 3Fw Dw2 3Uw D2 Rw2 R' 3Uw2 R2 3Rw2 Uw2 F2 3Rw' Lw' F2 3Rw' Rw L' 3Uw U L' Uw' U2 D2 F", 6],
             // 7 x 7
             ["B 3Dw2 3Fw' Bw D R 3Uw' Fw U' Uw Bw B' L Lw' 3Rw' Uw' D 3Fw' B2 Rw' Uw2 3Lw2 3Dw R2 3Uw R' 3Uw2", 7],
         ];

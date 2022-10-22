@@ -24,9 +24,15 @@
         "slices": 1
     },
     {
-        "notation": "Rw'",
+        "notation": "Rw2'",
         "move": "R",
-        "turnType": "counterClockwise",
+        "turnType": "double",
+        "slices": 2
+    },
+    {
+        "notation": "Rw'2",
+        "move": "R",
+        "turnType": "double",
         "slices": 2
     },
     {
