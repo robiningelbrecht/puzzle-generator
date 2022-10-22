@@ -1,0 +1,278 @@
+[
+    {
+        "notation": "Uw'",
+        "move": "U",
+        "turnType": "counterClockwise",
+        "slices": 2
+    },
+    {
+        "notation": "U'",
+        "move": "U",
+        "turnType": "counterClockwise",
+        "slices": 1
+    },
+    {
+        "notation": "Lw",
+        "move": "L",
+        "turnType": "clockwise",
+        "slices": 2
+    },
+    {
+        "notation": "D2",
+        "move": "D",
+        "turnType": "double",
+        "slices": 1
+    },
+    {
+        "notation": "L'",
+        "move": "L",
+        "turnType": "counterClockwise",
+        "slices": 1
+    },
+    {
+        "notation": "Dw'",
+        "move": "D",
+        "turnType": "counterClockwise",
+        "slices": 2
+    },
+    {
+        "notation": "L2",
+        "move": "L",
+        "turnType": "double",
+        "slices": 1
+    },
+    {
+        "notation": "R2",
+        "move": "R",
+        "turnType": "double",
+        "slices": 1
+    },
+    {
+        "notation": "D",
+        "move": "D",
+        "turnType": "clockwise",
+        "slices": 1
+    },
+    {
+        "notation": "Bw",
+        "move": "B",
+        "turnType": "clockwise",
+        "slices": 2
+    },
+    {
+        "notation": "Lw'",
+        "move": "L",
+        "turnType": "counterClockwise",
+        "slices": 2
+    },
+    {
+        "notation": "D",
+        "move": "D",
+        "turnType": "clockwise",
+        "slices": 1
+    },
+    {
+        "notation": "B2",
+        "move": "B",
+        "turnType": "double",
+        "slices": 1
+    },
+    {
+        "notation": "Fw2",
+        "move": "F",
+        "turnType": "double",
+        "slices": 2
+    },
+    {
+        "notation": "L",
+        "move": "L",
+        "turnType": "clockwise",
+        "slices": 1
+    },
+    {
+        "notation": "U'",
+        "move": "U",
+        "turnType": "counterClockwise",
+        "slices": 1
+    },
+    {
+        "notation": "Fw2",
+        "move": "F",
+        "turnType": "double",
+        "slices": 2
+    },
+    {
+        "notation": "F'",
+        "move": "F",
+        "turnType": "counterClockwise",
+        "slices": 1
+    },
+    {
+        "notation": "Lw",
+        "move": "L",
+        "turnType": "clockwise",
+        "slices": 2
+    },
+    {
+        "notation": "Fw'",
+        "move": "F",
+        "turnType": "counterClockwise",
+        "slices": 2
+    },
+    {
+        "notation": "Uw'",
+        "move": "U",
+        "turnType": "counterClockwise",
+        "slices": 2
+    },
+    {
+        "notation": "Rw",
+        "move": "R",
+        "turnType": "clockwise",
+        "slices": 2
+    },
+    {
+        "notation": "U'",
+        "move": "U",
+        "turnType": "counterClockwise",
+        "slices": 1
+    },
+    {
+        "notation": "Uw2",
+        "move": "U",
+        "turnType": "double",
+        "slices": 2
+    },
+    {
+        "notation": "Rw2",
+        "move": "R",
+        "turnType": "double",
+        "slices": 2
+    },
+    {
+        "notation": "D",
+        "move": "D",
+        "turnType": "clockwise",
+        "slices": 1
+    },
+    {
+        "notation": "Rw2",
+        "move": "R",
+        "turnType": "double",
+        "slices": 2
+    },
+    {
+        "notation": "L",
+        "move": "L",
+        "turnType": "clockwise",
+        "slices": 1
+    },
+    {
+        "notation": "Uw",
+        "move": "U",
+        "turnType": "clockwise",
+        "slices": 2
+    },
+    {
+        "notation": "Dw2",
+        "move": "D",
+        "turnType": "double",
+        "slices": 2
+    },
+    {
+        "notation": "Lw",
+        "move": "L",
+        "turnType": "clockwise",
+        "slices": 2
+    },
+    {
+        "notation": "Rw'",
+        "move": "R",
+        "turnType": "counterClockwise",
+        "slices": 2
+    },
+    {
+        "notation": "U",
+        "move": "U",
+        "turnType": "clockwise",
+        "slices": 1
+    },
+    {
+        "notation": "D'",
+        "move": "D",
+        "turnType": "counterClockwise",
+        "slices": 1
+    },
+    {
+        "notation": "B2",
+        "move": "B",
+        "turnType": "double",
+        "slices": 1
+    },
+    {
+        "notation": "Rw'",
+        "move": "R",
+        "turnType": "counterClockwise",
+        "slices": 2
+    },
+    {
+        "notation": "U2",
+        "move": "U",
+        "turnType": "double",
+        "slices": 1
+    },
+    {
+        "notation": "Dw",
+        "move": "D",
+        "turnType": "clockwise",
+        "slices": 2
+    },
+    {
+        "notation": "L'",
+        "move": "L",
+        "turnType": "counterClockwise",
+        "slices": 1
+    },
+    {
+        "notation": "F'",
+        "move": "F",
+        "turnType": "counterClockwise",
+        "slices": 1
+    },
+    {
+        "notation": "R2",
+        "move": "R",
+        "turnType": "double",
+        "slices": 1
+    },
+    {
+        "notation": "Rw",
+        "move": "R",
+        "turnType": "clockwise",
+        "slices": 2
+    },
+    {
+        "notation": "Lw2",
+        "move": "L",
+        "turnType": "double",
+        "slices": 2
+    },
+    {
+        "notation": "D",
+        "move": "D",
+        "turnType": "clockwise",
+        "slices": 1
+    },
+    {
+        "notation": "R'",
+        "move": "R",
+        "turnType": "counterClockwise",
+        "slices": 1
+    },
+    {
+        "notation": "Bw'",
+        "move": "B",
+        "turnType": "counterClockwise",
+        "slices": 2
+    }
+]

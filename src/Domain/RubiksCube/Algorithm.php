@@ -9,7 +9,7 @@ use function Safe\preg_match;
 
 class Algorithm implements \JsonSerializable
 {
-    private const REGEX = "/(?<slices>[2-9]+)?(?<move>[UuFfRrDdLlBbMESxyz])(?<outerBlockIndicator>w)?(?<turnType>\d+\\'|\\'\d+|\d+|\\')?/";
+    private const REGEX = "/^(?<slices>[2-9]+)?(?<move>[UuFfRrDdLlBbMESxyz])(?<outerBlockIndicator>w)?(?<turnType>\d+\\'|\\'\d+|\d+|\\')?$/";
 
     private readonly array $turns;
 

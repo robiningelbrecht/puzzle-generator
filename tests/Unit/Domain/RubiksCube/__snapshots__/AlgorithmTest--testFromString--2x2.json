@@ -1,0 +1,56 @@
+[
+    {
+        "notation": "F'",
+        "move": "F",
+        "turnType": "counterClockwise",
+        "slices": 1
+    },
+    {
+        "notation": "U'",
+        "move": "U",
+        "turnType": "counterClockwise",
+        "slices": 1
+    },
+    {
+        "notation": "R2",
+        "move": "R",
+        "turnType": "double",
+        "slices": 1
+    },
+    {
+        "notation": "F",
+        "move": "F",
+        "turnType": "clockwise",
+        "slices": 1
+    },
+    {
+        "notation": "U'",
+        "move": "U",
+        "turnType": "counterClockwise",
+        "slices": 1
+    },
+    {
+        "notation": "F2",
+        "move": "F",
+        "turnType": "double",
+        "slices": 1
+    },
+    {
+        "notation": "R'",
+        "move": "R",
+        "turnType": "counterClockwise",
+        "slices": 1
+    },
+    {
+        "notation": "U",
+        "move": "U",
+        "turnType": "clockwise",
+        "slices": 1
+    },
+    {
+        "notation": "R2",
+        "move": "R",
+        "turnType": "double",
+        "slices": 1
+    }
+]
