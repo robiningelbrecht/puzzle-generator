@@ -23,7 +23,7 @@ class SvgSizeTest extends TestCase
     public function testItShouldThrowWhenSizeSmallerThanOne(): void
     {
         $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage('Invalid size "0" provided');
+        $this->expectExceptionMessage('Invalid svg size "0" provided');
 
         SvgSize::fromInt(0);
     }
@@ -31,7 +31,7 @@ class SvgSizeTest extends TestCase
     public function testItShouldThrowWhenSizeGreaterThan(): void
     {
         $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage('Invalid size "1025" provided');
+        $this->expectExceptionMessage('Invalid svg size "1025" provided');
 
         SvgSize::fromInt(1025);
     }

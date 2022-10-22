@@ -1,0 +1,177 @@
+{
+    "size": 3,
+    "rotation": {
+        "x": 43,
+        "y": 35,
+        "z": 29
+    },
+    "colorScheme": {
+        "U": "#FEFE00",
+        "R": "#EE0000",
+        "F": "#0000F2",
+        "D": "#FFFFFF",
+        "L": "#FFA100",
+        "B": "#00D800"
+    },
+    "baseColor": "#000000",
+    "mask": null,
+    "faces": {
+        "U": [
+            "#FEFE00",
+            "#FEFE00",
+            "#FEFE00",
+            "#FEFE00",
+            "#FEFE00",
+            "#FEFE00",
+            "#FEFE00",
+            "#FEFE00",
+            "#FEFE00"
+        ],
+        "R": [
+            "#EE0000",
+            "#EE0000",
+            "#EE0000",
+            "#EE0000",
+            "#EE0000",
+            "#EE0000",
+            "#EE0000",
+            "#EE0000",
+            "#EE0000"
+        ],
+        "F": [
+            "#0000F2",
+            "#0000F2",
+            "#0000F2",
+            "#0000F2",
+            "#0000F2",
+            "#0000F2",
+            "#0000F2",
+            "#0000F2",
+            "#0000F2"
+        ],
+        "D": [
+            "#FFFFFF",
+            "#FFFFFF",
+            "#FFFFFF",
+            "#FFFFFF",
+            "#FFFFFF",
+            "#FFFFFF",
+            "#FFFFFF",
+            "#FFFFFF",
+            "#FFFFFF"
+        ],
+        "L": [
+            "#FFA100",
+            "#FFA100",
+            "#FFA100",
+            "#FFA100",
+            "#FFA100",
+            "#FFA100",
+            "#FFA100",
+            "#FFA100",
+            "#FFA100"
+        ],
+        "B": [
+            "#00D800",
+            "#00D800",
+            "#00D800",
+            "#00D800",
+            "#00D800",
+            "#00D800",
+            "#00D800",
+            "#00D800",
+            "#00D800"
+        ]
+    },
+    "algorithm": [
+        {
+            "notation": "F",
+            "move": "F",
+            "turnType": "clockwise",
+            "slices": 1
+        },
+        {
+            "notation": "R",
+            "move": "R",
+            "turnType": "clockwise",
+            "slices": 1
+        },
+        {
+            "notation": "U'",
+            "move": "U",
+            "turnType": "counterClockwise",
+            "slices": 1
+        },
+        {
+            "notation": "R'",
+            "move": "R",
+            "turnType": "counterClockwise",
+            "slices": 1
+        },
+        {
+            "notation": "U",
+            "move": "U",
+            "turnType": "clockwise",
+            "slices": 1
+        },
+        {
+            "notation": "R",
+            "move": "R",
+            "turnType": "clockwise",
+            "slices": 1
+        },
+        {
+            "notation": "U",
+            "move": "U",
+            "turnType": "clockwise",
+            "slices": 1
+        },
+        {
+            "notation": "R'",
+            "move": "R",
+            "turnType": "counterClockwise",
+            "slices": 1
+        },
+        {
+            "notation": "F'",
+            "move": "F",
+            "turnType": "counterClockwise",
+            "slices": 1
+        }
+    ],
+    "stickerMapping": {
+        "clockWise": [
+            7,
+            4,
+            1,
+            8,
+            5,
+            2,
+            9,
+            6,
+            3
+        ],
+        "counterClockWise": [
+            3,
+            6,
+            9,
+            2,
+            5,
+            8,
+            1,
+            4,
+            7
+        ],
+        "opposite": [
+            9,
+            8,
+            7,
+            6,
+            5,
+            4,
+            3,
+            2,
+            1
+        ]
+    }
+}

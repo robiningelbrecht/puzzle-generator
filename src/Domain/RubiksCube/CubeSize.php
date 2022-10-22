@@ -8,7 +8,7 @@ class CubeSize implements \JsonSerializable
         private readonly int $value
     ) {
         if ($this->value < 1 || $this->value > 10) {
-            throw new \RuntimeException('Invalid size provided');
+            throw new \RuntimeException(sprintf('Invalid cube size "%s" provided', $this->value));
         }
     }
 

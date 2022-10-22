@@ -8,7 +8,7 @@ class SvgSize implements \JsonSerializable
         private readonly int $size
     ) {
         if ($this->size < 1 || $this->size > 1024) {
-            throw new \RuntimeException(sprintf('Invalid size "%s" provided', $this->size));
+            throw new \RuntimeException(sprintf('Invalid svg size "%s" provided', $this->size));
         }
     }
 
