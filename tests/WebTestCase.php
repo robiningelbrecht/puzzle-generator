@@ -13,8 +13,9 @@ abstract class WebTestCase extends TestCase
     private App $app;
     private ContainerInterface $container;
 
-    protected function createRequest(string $method, $uri, array $serverParams = []): ServerRequestInterface
+    protected function createRequest(string $method, string $uri, array $serverParams = []): ServerRequestInterface
     {
+        /** @var ServerRequestFactoryInterface $factory */
         $factory = $this->container->get(ServerRequestFactoryInterface::class);
 
         return $factory->createServerRequest($method, $uri, $serverParams);

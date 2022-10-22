@@ -5,6 +5,9 @@ namespace App\Tests\Unit\Infrastructure;
 use App\Infrastructure\Json;
 use PHPUnit\Framework\TestCase;
 use Safe\Exceptions\JsonException;
+
+use function Safe\fopen;
+
 use Spatie\Snapshots\MatchesSnapshots;
 
 class JsonTest extends TestCase

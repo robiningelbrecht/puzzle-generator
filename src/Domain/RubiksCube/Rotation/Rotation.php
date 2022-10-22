@@ -14,13 +14,13 @@ class Rotation implements \JsonSerializable
         private readonly int $z
     ) {
         if ($x < -360 || $x > 360) {
-            throw new \RuntimeException('Invalid number of degrees for X provided');
+            throw new \RuntimeException(sprintf('Invalid number (%s) of degrees for X provided', $this->x));
         }
         if ($y < -360 || $y > 360) {
-            throw new \RuntimeException('Invalid number of degrees for Y provided');
+            throw new \RuntimeException(sprintf('Invalid number (%s) of degrees for Y provided', $this->y));
         }
         if ($z < -360 || $z > 360) {
-            throw new \RuntimeException('Invalid number of degrees for Z provided');
+            throw new \RuntimeException(sprintf('Invalid number (%s) of degrees for Z provided', $this->z));
         }
     }
 
@@ -42,35 +42,9 @@ class Rotation implements \JsonSerializable
         return $this->y;
     }
 
-    public function withY(int $y = null): self
-    {
-        if (is_null($y)) {
-            return $this;
-        }
-
-        return new self(
-            $this->getX(),
-            $y,
-            $this->getZ(),
-        );
-    }
-
     public function getZ(): int
     {
         return $this->z;
-    }
-
-    public function withZ(int $z = null): self
-    {
-        if (is_null($z)) {
-            return $this;
-        }
-
-        return new self(
-            $this->getX(),
-            $this->getY(),
-            $z,
-        );
     }
 
     public function jsonSerialize(): array

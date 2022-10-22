@@ -3,6 +3,7 @@
 namespace App\Tests\Unit\Domain;
 
 use App\Domain\SvgSize;
+use App\Infrastructure\Json;
 use PHPUnit\Framework\TestCase;
 
 class SvgSizeTest extends TestCase
@@ -10,7 +11,7 @@ class SvgSizeTest extends TestCase
     public function testJsonSerialize(): void
     {
         $svg = SvgSize::fromInt(10);
-        $this->assertEquals(10, json_encode($svg));
+        $this->assertEquals(10, Json::encode($svg));
     }
 
     public function testFromOptionalInt(): void
