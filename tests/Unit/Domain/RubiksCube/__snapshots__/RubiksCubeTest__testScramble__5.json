@@ -1,0 +1,123 @@
+{
+    "size": 1,
+    "rotation": {
+        "x": 43,
+        "y": 35,
+        "z": 29
+    },
+    "colorScheme": {
+        "U": "#FEFE00",
+        "R": "#EE0000",
+        "F": "#0000F2",
+        "D": "#FFFFFF",
+        "L": "#FFA100",
+        "B": "#00D800"
+    },
+    "baseColor": "#000000",
+    "mask": null,
+    "faces": {
+        "U": [
+            "#0000F2"
+        ],
+        "R": [
+            "#EE0000"
+        ],
+        "F": [
+            "#FFFFFF"
+        ],
+        "D": [
+            "#00D800"
+        ],
+        "L": [
+            "#FFA100"
+        ],
+        "B": [
+            "#FEFE00"
+        ]
+    },
+    "algorithm": [
+        {
+            "notation": "U",
+            "move": "U",
+            "turnType": "clockwise",
+            "slices": 1
+        },
+        {
+            "notation": "F",
+            "move": "F",
+            "turnType": "clockwise",
+            "slices": 1
+        },
+        {
+            "notation": "R",
+            "move": "R",
+            "turnType": "clockwise",
+            "slices": 1
+        },
+        {
+            "notation": "D",
+            "move": "D",
+            "turnType": "clockwise",
+            "slices": 1
+        },
+        {
+            "notation": "L",
+            "move": "L",
+            "turnType": "clockwise",
+            "slices": 1
+        },
+        {
+            "notation": "B",
+            "move": "B",
+            "turnType": "clockwise",
+            "slices": 1
+        },
+        {
+            "notation": "M",
+            "move": "M",
+            "turnType": "clockwise",
+            "slices": 1
+        },
+        {
+            "notation": "E",
+            "move": "E",
+            "turnType": "clockwise",
+            "slices": 1
+        },
+        {
+            "notation": "S",
+            "move": "S",
+            "turnType": "clockwise",
+            "slices": 1
+        },
+        {
+            "notation": "x",
+            "move": "x",
+            "turnType": "clockwise",
+            "slices": 1
+        },
+        {
+            "notation": "y",
+            "move": "y",
+            "turnType": "clockwise",
+            "slices": 1
+        },
+        {
+            "notation": "z",
+            "move": "z",
+            "turnType": "clockwise",
+            "slices": 1
+        }
+    ],
+    "stickerMapping": {
+        "clockWise": [
+            1
+        ],
+        "counterClockWise": [
+            1
+        ],
+        "opposite": [
+            1
+        ]
+    }
+}
