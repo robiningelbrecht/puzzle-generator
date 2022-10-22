@@ -1,6 +1,8 @@
 <?php
 
-namespace App;
+namespace App\Domain;
+
+use function Safe\preg_match;
 
 class Color implements \Stringable, \JsonSerializable
 {

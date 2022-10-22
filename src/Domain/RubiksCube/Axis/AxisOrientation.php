@@ -1,15 +1,14 @@
 <?php
 
-namespace App\RubiksCube\Axis;
+namespace App\Domain\RubiksCube\Axis;
 
 // Face's orientation related to other faces on a given axis
 // the number represents the number of turns necessary
 // to orient the face in the same direction
-use App\RubiksCube\Face;
+use App\Domain\RubiksCube\Face;
 
 final class AxisOrientation
 {
-
     public static function get(): array
     {
         return [

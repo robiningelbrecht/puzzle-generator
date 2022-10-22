@@ -1,9 +1,11 @@
 <?php
 
-namespace App\RubiksCube;
+namespace App\Domain\RubiksCube;
 
-use App\RubiksCube\Turn\Turn;
-use App\RubiksCube\Turn\TurnType;
+use App\Domain\RubiksCube\Turn\Turn;
+use App\Domain\RubiksCube\Turn\TurnType;
+
+use function Safe\preg_match;
 
 class Algorithm implements \JsonSerializable
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace App;
+namespace App\Domain;
 
-use App\RubiksCube\RubiksCube;
+use App\Domain\RubiksCube\RubiksCube;
 
 class Svg implements \JsonSerializable
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\RubiksCube\ColorScheme;
+namespace App\Domain\RubiksCube\ColorScheme;
 
-use App\Color;
-use App\RubiksCube\Face;
+use App\Domain\Color;
+use App\Domain\RubiksCube\Face;
 
 class ColorScheme implements \JsonSerializable
 {

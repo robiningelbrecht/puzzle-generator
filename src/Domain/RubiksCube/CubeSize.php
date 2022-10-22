@@ -1,6 +1,6 @@
 <?php
 
-namespace App\RubiksCube;
+namespace App\Domain\RubiksCube;
 
 class CubeSize implements \JsonSerializable
 {

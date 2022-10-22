@@ -1,8 +1,8 @@
 <?php
 
-namespace App\RubiksCube\ColorScheme;
+namespace App\Domain\RubiksCube\ColorScheme;
 
-use App\Color;
+use App\Domain\Color;
 
 class ColorSchemeBuilder
 {

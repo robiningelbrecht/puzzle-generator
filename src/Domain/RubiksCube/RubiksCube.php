@@ -1,14 +1,14 @@
 <?php
 
-namespace App\RubiksCube;
+namespace App\Domain\RubiksCube;
 
-use App\Color;
-use App\RubiksCube\Axis\Axis;
-use App\RubiksCube\Axis\AxisOrientation;
-use App\RubiksCube\ColorScheme\ColorScheme;
-use App\RubiksCube\Rotation\Rotation;
-use App\RubiksCube\Turn\Turn;
-use App\RubiksCube\Turn\TurnType;
+use App\Domain\Color;
+use App\Domain\RubiksCube\Axis\Axis;
+use App\Domain\RubiksCube\Axis\AxisOrientation;
+use App\Domain\RubiksCube\ColorScheme\ColorScheme;
+use App\Domain\RubiksCube\Rotation\Rotation;
+use App\Domain\RubiksCube\Turn\Turn;
+use App\Domain\RubiksCube\Turn\TurnType;
 
 class RubiksCube implements \JsonSerializable
 {
@@ -312,7 +312,7 @@ class RubiksCube implements \JsonSerializable
             for ($r = 0; $r < $range; ++$r) {
                 $stickerIndex = $cubeSize * $i + ($offset + $r);
                 for ($j = 0; $j < count($faceOrder); ++$j) {
-                    /** @var \App\RubiksCube\Face $face */
+                    /** @var \App\Domain\RubiksCube\Face $face */
                     $face = $faceOrder[$j];
                     $nextFace = $doubleTurn ? $faceOrder[($j + 2) % count($faceOrder)] : $faceOrder[($j + 1) % count($faceOrder)];
                     $valueIndex = $this->getAxisAlignedSticker($axis, $face, $stickerIndex + 1) - 1;

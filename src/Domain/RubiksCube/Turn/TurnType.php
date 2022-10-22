@@ -1,6 +1,6 @@
 <?php
 
-namespace App\RubiksCube\Turn;
+namespace App\Domain\RubiksCube\Turn;
 
 enum TurnType: string
 {

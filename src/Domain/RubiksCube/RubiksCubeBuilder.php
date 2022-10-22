@@ -1,10 +1,10 @@
 <?php
 
-namespace App\RubiksCube;
+namespace App\Domain\RubiksCube;
 
-use App\Color;
-use App\RubiksCube\ColorScheme\ColorScheme;
-use App\RubiksCube\Rotation\Rotation;
+use App\Domain\Color;
+use App\Domain\RubiksCube\ColorScheme\ColorScheme;
+use App\Domain\RubiksCube\Rotation\Rotation;
 
 class RubiksCubeBuilder
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\RubiksCube\Axis;
+namespace App\Domain\RubiksCube\Axis;
 
 enum Axis: int
 {

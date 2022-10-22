@@ -1,8 +1,8 @@
 <?php
 
-namespace App\RubiksCube\Turn;
+namespace App\Domain\RubiksCube\Turn;
 
-use App\RubiksCube\Move;
+use App\Domain\RubiksCube\Move;
 
 class Turn implements \JsonSerializable
 {

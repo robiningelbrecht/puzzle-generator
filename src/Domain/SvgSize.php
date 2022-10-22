@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Domain;
 
 class SvgSize implements \JsonSerializable
 {
@@ -8,7 +8,7 @@ class SvgSize implements \JsonSerializable
         private readonly int $size
     ) {
         if ($this->size < 1 || $this->size > 1024) {
-            throw new \RuntimeException('Invalid imageSize provided');
+            throw new \RuntimeException('Invalid size provided');
         }
     }
 
