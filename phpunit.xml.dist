@@ -4,10 +4,10 @@
          beStrictAboutChangesToGlobalState="true"
          beStrictAboutOutputDuringTests="true"
          colors="true"
-         defaultTestSuite="unit"
+         defaultTestSuite="full"
 >
     <testsuites>
-        <testsuite name="unit">
+        <testsuite name="full">
             <directory>tests</directory>
         </testsuite>
     </testsuites>
