@@ -24,7 +24,7 @@ abstract class WebTestCase extends TestCase
     {
         parent::setUp();
 
-        $this->app = (require dirname(__DIR__).'/api/bootstrap.php');
+        $this->app = (require dirname(__DIR__).'/config/bootstrap.php');
         $this->container = $this->app->getContainer();
     }
 
