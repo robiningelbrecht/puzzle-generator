@@ -3,6 +3,7 @@
 namespace App\Tests\Unit\Infrastructure;
 
 use App\Infrastructure\ErrorRenderer;
+use App\Infrastructure\PuzzleException;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Exception\HttpNotFoundException;
@@ -12,16 +13,28 @@ class ErrorRendererTest extends TestCase
 {
     use MatchesSnapshots;
 
+    public function testWithPuzzleException(): void
+    {
+        $renderer = new ErrorRenderer();
+        $this->assertMatchesHtmlSnapshot($renderer(new PuzzleException('Something bad happened'), true));
+    }
+
+    public function testWithPuzzleExceptionNoDetails(): void
+    {
+        $renderer = new ErrorRenderer();
+        $this->assertMatchesHtmlSnapshot($renderer(new PuzzleException('Something bad happened'), false));
+    }
+
     public function testWithRuntimeException(): void
     {
         $renderer = new ErrorRenderer();
-        $this->assertMatchesHtmlSnapshot($renderer(new \RuntimeException('Something bad happened'), true));
+        $this->assertStringContainsString('<h2>Trace</h2>',$renderer(new \RuntimeException('Something bad happened'), true));
     }
 
     public function testWithRuntimeExceptionNoDetails(): void
     {
         $renderer = new ErrorRenderer();
-        $this->assertMatchesHtmlSnapshot($renderer(new \RuntimeException('Something bad happened'), false));
+        $this->assertStringNotContainsString('<h2>Trace</h2>',$renderer(new \RuntimeException('Something bad happened'), false));
     }
 
     public function testWithNotFoundException(): void
