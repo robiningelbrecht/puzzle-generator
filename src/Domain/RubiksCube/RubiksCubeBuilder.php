@@ -3,13 +3,13 @@
 namespace App\Domain\RubiksCube;
 
 use App\Domain\Color;
+use App\Domain\RubiksCube\Axis\Axis;
 use App\Domain\RubiksCube\ColorScheme\ColorScheme;
-use App\Domain\RubiksCube\Rotation\Rotation;
 
 class RubiksCubeBuilder
 {
     private CubeSize $size;
-    private Rotation $rotation;
+    private array $rotations;
     private ColorScheme $colorScheme;
     private Color $baseColor;
     private ?Mask $mask;
@@ -17,11 +17,10 @@ class RubiksCubeBuilder
     private function __construct()
     {
         $this->size = CubeSize::fromInt(3);
-        $this->rotation = Rotation::fromXYZ(
-            Rotation::DEFAULT_X,
-            Rotation::DEFAULT_Y,
-            Rotation::DEFAULT_Z,
-        );
+        $this->rotations = [
+            Rotation::fromAxisAndValue(Axis::Y, Rotation::DEFAULT_Y),
+            Rotation::fromAxisAndValue(Axis::X, Rotation::DEFAULT_X),
+        ];
 
         $this->colorScheme = ColorScheme::fromColors(
             Color::yellow(),
@@ -44,7 +43,7 @@ class RubiksCubeBuilder
     {
         return RubiksCube::fromValues(
             $this->size,
-            $this->rotation,
+            $this->rotations,
             $this->colorScheme,
             $this->baseColor,
             $this->mask
@@ -62,9 +61,12 @@ class RubiksCubeBuilder
         return $this;
     }
 
-    public function withRotation(Rotation $rotation): self
+    public function withRotations(Rotation ...$rotations): self
     {
-        $this->rotation = $rotation;
+        if (empty($rotations)) {
+            return $this;
+        }
+        $this->rotations = $rotations;
 
         return $this;
     }

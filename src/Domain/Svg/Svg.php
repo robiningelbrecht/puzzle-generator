@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Domain;
+namespace App\Domain\Svg;
 
+use App\Domain\Color;
 use App\Domain\RubiksCube\RubiksCube;
 
 class Svg implements \JsonSerializable
@@ -18,7 +19,7 @@ class Svg implements \JsonSerializable
         return new self(
             $cube,
             SvgSize::fromInt(128),
-            Color::white(),
+            Color::white(), // @TODO: change default background color to "transparant"
         );
     }
 
@@ -59,12 +60,18 @@ class Svg implements \JsonSerializable
         return $this;
     }
 
+    public function getViewBox(): Viewbox
+    {
+        return Viewbox::fromDefaults();
+    }
+
     public function jsonSerialize(): array
     {
         return [
             'cube' => $this->getCube(),
             'size' => $this->getSize(),
             'backgroundColor' => $this->getBackgroundColor(),
+            'viewbox' => $this->getViewBox(),
         ];
     }
 }

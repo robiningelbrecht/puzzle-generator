@@ -6,7 +6,6 @@ use App\Domain\Color;
 use App\Domain\RubiksCube\Axis\Axis;
 use App\Domain\RubiksCube\Axis\AxisOrientation;
 use App\Domain\RubiksCube\ColorScheme\ColorScheme;
-use App\Domain\RubiksCube\Rotation\Rotation;
 use App\Domain\RubiksCube\Turn\Turn;
 use App\Domain\RubiksCube\Turn\TurnType;
 
@@ -21,7 +20,8 @@ class RubiksCube implements \JsonSerializable
 
     private function __construct(
         private readonly CubeSize $size,
-        private readonly Rotation $rotation,
+        // @TODO move this, does not belong on cube.
+        private readonly array $rotations,
         private readonly ColorScheme $colorScheme,
         private readonly Color $baseColor,
         private readonly ?Mask $mask = null,
@@ -48,14 +48,14 @@ class RubiksCube implements \JsonSerializable
 
     public static function fromValues(
         CubeSize $size,
-        Rotation $rotation,
+        array $rotations,
         ColorScheme $colorScheme,
         Color $baseColor,
         ?Mask $mask = null,
     ): self {
         return new self(
             $size,
-            $rotation,
+            $rotations,
             $colorScheme,
             $baseColor,
             $mask,
@@ -67,9 +67,12 @@ class RubiksCube implements \JsonSerializable
         return $this->size;
     }
 
-    public function getRotation(): Rotation
+    /**
+     * @return \App\Domain\RubiksCube\Rotation[]
+     */
+    public function getRotations(): array
     {
-        return $this->rotation;
+        return $this->rotations;
     }
 
     public function getColorScheme(): ColorScheme
@@ -82,6 +85,7 @@ class RubiksCube implements \JsonSerializable
         return $this->baseColor;
     }
 
+    // @TODO: Move this out of this VO.
     public function getMask(): ?Mask
     {
         return $this->mask;
@@ -110,7 +114,7 @@ class RubiksCube implements \JsonSerializable
     {
         return [
             'size' => $this->getSize(),
-            'rotation' => $this->getRotation(),
+            'rotations' => $this->getRotations(),
             'colorScheme' => $this->getColorScheme(),
             'baseColor' => $this->getBaseColor(),
             'mask' => $this->getMask(),

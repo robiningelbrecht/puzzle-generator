@@ -3,14 +3,13 @@
 namespace App\Controller;
 
 use App\Domain\Color;
+use App\Domain\Render;
 use App\Domain\RubiksCube\Algorithm;
 use App\Domain\RubiksCube\ColorScheme\ColorSchemeBuilder;
 use App\Domain\RubiksCube\CubeSize;
 use App\Domain\RubiksCube\Mask;
-use App\Domain\RubiksCube\Rotation\RotationBuilder;
+use App\Domain\RubiksCube\Rotation;
 use App\Domain\RubiksCube\RubiksCubeBuilder;
-use App\Domain\Svg;
-use App\Domain\SvgSize;
 use App\Infrastructure\Json;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -28,20 +27,14 @@ class RubiksCubeRequestHandler
         ResponseInterface $response): ResponseInterface
     {
         $params = $request->getQueryParams();
-        $svgParams = $params['svg'] ?? null;
         $cubeParams = $params['cube'] ?? null;
+        unset($params['cube']);
 
         $cubeBuilder = RubiksCubeBuilder::fromDefaults();
         if (null !== $cubeParams) {
             $cubeBuilder
                 ->withSize(CubeSize::fromOptionalInt($cubeParams['size'] ?? null))
-                ->withRotation(
-                    RotationBuilder::fromDefaults()
-                        ->withX($cubeParams['rotation']['x'] ?? null)
-                        ->withY($cubeParams['rotation']['y'] ?? null)
-                        ->withZ($cubeParams['rotation']['z'] ?? null)
-                        ->build()
-                )
+                ->withRotations(...Rotation::fromMap($cubeParams['rotations'] ?? []))
                 ->withColorScheme(
                     ColorSchemeBuilder::fromDefaults()
                         ->withColorForU(Color::fromOptionalHexString($cubeParams['colorScheme']['U'] ?? null))
@@ -53,17 +46,14 @@ class RubiksCubeRequestHandler
                         ->build()
                 )
                 ->withBaseColor(Color::fromOptionalHexString($cubeParams['baseColor'] ?? null))
-                ->withMask(Mask::tryFrom($cubeParams['mask'] ?? ''))
-                ->build();
+                ->withMask(Mask::tryFrom($cubeParams['mask'] ?? ''));
         }
 
         $cube = $cubeBuilder
             ->build()
             ->scramble(Algorithm::fromOptionalString($cubeParams['algorithm'] ?? null));
 
-        $svg = Svg::default($cube)
-            ->withSize(SvgSize::fromOptionalInt($svgParams['size'] ?? null))
-            ->withBackgroundColor(Color::fromOptionalHexString($svgParams['backgroundColor'] ?? null));
+        $svg = Render::cube($cube, $params);
 
         if (isset($params['json'])) {
             $response->getBody()->write(Json::encode($svg));
@@ -71,7 +61,9 @@ class RubiksCubeRequestHandler
             return $response;
         }
 
-        $response->getBody()->write($this->twig->render('cube.html.twig'));
+        $response->getBody()->write($this->twig->render('cube.html.twig', [
+            'svg' => $svg,
+        ]));
 
         return $response;
     }

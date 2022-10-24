@@ -1,10 +1,15 @@
 {
     "size": 4,
-    "rotation": {
-        "x": 100,
-        "y": 50,
-        "z": 38
-    },
+    "rotations": [
+        {
+            "axis": "x",
+            "value": 100
+        },
+        {
+            "axis": "y",
+            "value": 33
+        }
+    ],
     "colorScheme": {
         "U": "#FEFE00",
         "R": "#0000F2",

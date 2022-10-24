@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain;
+namespace App\Domain\Svg;
 
 class SvgSize implements \JsonSerializable
 {

@@ -6,6 +6,7 @@ use function Safe\preg_match;
 
 class Color implements \Stringable, \JsonSerializable
 {
+    // @TODO: Support transparant.
     private function __construct(
         private readonly string $value
     ) {

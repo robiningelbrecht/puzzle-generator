@@ -4,11 +4,12 @@ namespace App\Tests\Unit\Domain\RubiksCube;
 
 use App\Domain\Color;
 use App\Domain\RubiksCube\Algorithm;
+use App\Domain\RubiksCube\Axis\Axis;
 use App\Domain\RubiksCube\ColorScheme\ColorScheme;
 use App\Domain\RubiksCube\CubeSize;
 use App\Domain\RubiksCube\Mask;
 use App\Domain\RubiksCube\Move;
-use App\Domain\RubiksCube\Rotation\Rotation;
+use App\Domain\RubiksCube\Rotation;
 use App\Domain\RubiksCube\RubiksCubeBuilder;
 use App\Domain\RubiksCube\Turn\Turn;
 use App\Domain\RubiksCube\Turn\TurnType;
@@ -36,7 +37,10 @@ class RubiksCubeTest extends TestCase
     {
         $cube = RubiksCubeBuilder::fromDefaults()
             ->withSize(CubeSize::fromInt(4))
-            ->withRotation(Rotation::fromXYZ(100, 50, 38))
+            ->withRotations(
+                Rotation::fromAxisAndValue(Axis::X, 100),
+                Rotation::fromAxisAndValue(Axis::Y, 33)
+            )
             ->withColorScheme(ColorScheme::fromColors(
                 Color::yellow(),
                 Color::blue(),

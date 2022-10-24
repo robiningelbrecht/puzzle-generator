@@ -1,11 +1,16 @@
 {
     "cube": {
         "size": 5,
-        "rotation": {
-            "x": 43,
-            "y": 35,
-            "z": 29
-        },
+        "rotations": [
+            {
+                "axis": "y",
+                "value": 45
+            },
+            {
+                "axis": "x",
+                "value": -34
+            }
+        ],
         "colorScheme": {
             "U": "#FEFE00",
             "R": "#EE0000",
@@ -266,5 +271,11 @@
         }
     },
     "size": 128,
-    "backgroundColor": "#FFFFFF"
+    "backgroundColor": "#FFFFFF",
+    "viewbox": {
+        "x": -0.9,
+        "y": -0.9,
+        "width": 1.8,
+        "height": 1.8
+    }
 }

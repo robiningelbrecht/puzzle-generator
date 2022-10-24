@@ -2,9 +2,9 @@
 
 namespace App\Domain\RubiksCube\Axis;
 
-enum Axis: int
+enum Axis: string
 {
-    case X = 0;
-    case Y = 1;
-    case Z = 2;
+    case X = 'x';
+    case Y = 'y';
+    case Z = 'z';
 }

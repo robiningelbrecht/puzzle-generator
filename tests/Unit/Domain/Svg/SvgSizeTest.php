@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Tests\Unit\Domain;
+namespace App\Tests\Unit\Domain\Svg;
 
-use App\Domain\SvgSize;
+use App\Domain\Svg\SvgSize;
 use App\Infrastructure\Json;
 use PHPUnit\Framework\TestCase;
 
