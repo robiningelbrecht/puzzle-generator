@@ -3,25 +3,17 @@
 namespace App\Domain\RubiksCube;
 
 use App\Domain\Color;
-use App\Domain\RubiksCube\Axis\Axis;
 use App\Domain\RubiksCube\ColorScheme\ColorScheme;
 
 class RubiksCubeBuilder
 {
     private CubeSize $size;
-    private array $rotations;
     private ColorScheme $colorScheme;
     private Color $baseColor;
-    private ?Mask $mask;
 
     private function __construct()
     {
         $this->size = CubeSize::fromInt(3);
-        $this->rotations = [
-            Rotation::fromAxisAndValue(Axis::Y, Rotation::DEFAULT_Y),
-            Rotation::fromAxisAndValue(Axis::X, Rotation::DEFAULT_X),
-        ];
-
         $this->colorScheme = ColorScheme::fromColors(
             Color::yellow(),
             Color::red(),
@@ -31,7 +23,6 @@ class RubiksCubeBuilder
             Color::green(),
         );
         $this->baseColor = Color::black();
-        $this->mask = null;
     }
 
     public static function fromDefaults(): self
@@ -43,10 +34,8 @@ class RubiksCubeBuilder
     {
         return RubiksCube::fromValues(
             $this->size,
-            $this->rotations,
             $this->colorScheme,
             $this->baseColor,
-            $this->mask
         );
     }
 
@@ -57,16 +46,6 @@ class RubiksCubeBuilder
         }
 
         $this->size = $size;
-
-        return $this;
-    }
-
-    public function withRotations(Rotation ...$rotations): self
-    {
-        if (empty($rotations)) {
-            return $this;
-        }
-        $this->rotations = $rotations;
 
         return $this;
     }
@@ -85,13 +64,6 @@ class RubiksCubeBuilder
         }
 
         $this->baseColor = $color;
-
-        return $this;
-    }
-
-    public function withMask(Mask $mask = null): self
-    {
-        $this->mask = $mask;
 
         return $this;
     }

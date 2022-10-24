@@ -8,6 +8,7 @@ use App\Domain\RubiksCube\Axis\AxisOrientation;
 use App\Domain\RubiksCube\ColorScheme\ColorScheme;
 use App\Domain\RubiksCube\Turn\Turn;
 use App\Domain\RubiksCube\Turn\TurnType;
+use App\Infrastructure\PuzzleException;
 
 class RubiksCube implements \JsonSerializable
 {
@@ -20,11 +21,8 @@ class RubiksCube implements \JsonSerializable
 
     private function __construct(
         private readonly CubeSize $size,
-        // @TODO move this, does not belong on cube.
-        private readonly array $rotations,
         private readonly ColorScheme $colorScheme,
         private readonly Color $baseColor,
-        private readonly ?Mask $mask = null,
     ) {
         $this->gridSize = pow($this->size->getValue(), 2);
         $this->clockwiseStickerMapping = [];
@@ -48,31 +46,19 @@ class RubiksCube implements \JsonSerializable
 
     public static function fromValues(
         CubeSize $size,
-        array $rotations,
         ColorScheme $colorScheme,
         Color $baseColor,
-        ?Mask $mask = null,
     ): self {
         return new self(
             $size,
-            $rotations,
             $colorScheme,
             $baseColor,
-            $mask,
         );
     }
 
     public function getSize(): CubeSize
     {
         return $this->size;
-    }
-
-    /**
-     * @return \App\Domain\RubiksCube\Rotation[]
-     */
-    public function getRotations(): array
-    {
-        return $this->rotations;
     }
 
     public function getColorScheme(): ColorScheme
@@ -83,12 +69,6 @@ class RubiksCube implements \JsonSerializable
     public function getBaseColor(): Color
     {
         return $this->baseColor;
-    }
-
-    // @TODO: Move this out of this VO.
-    public function getMask(): ?Mask
-    {
-        return $this->mask;
     }
 
     public function getFaces(): array
@@ -114,10 +94,8 @@ class RubiksCube implements \JsonSerializable
     {
         return [
             'size' => $this->getSize(),
-            'rotations' => $this->getRotations(),
             'colorScheme' => $this->getColorScheme(),
             'baseColor' => $this->getBaseColor(),
-            'mask' => $this->getMask(),
             'faces' => $this->getFaces(),
             'algorithm' => $this->algorithm,
             'stickerMapping' => [
@@ -244,7 +222,7 @@ class RubiksCube implements \JsonSerializable
         }
 
         if ($turn->getSlices() > $this->size->getValue()) {
-            throw new \RuntimeException(sprintf('The number of slices (%s) must be smaller than the cube size (%s)', $turn->getSlices(), $this->size->getValue()));
+            throw new PuzzleException(sprintf('The number of slices (%s) must be smaller than the cube size (%s)', $turn->getSlices(), $this->size->getValue()));
         }
 
         return match ($turn->getMove()) {
@@ -330,7 +308,7 @@ class RubiksCube implements \JsonSerializable
     private function getAxisAlignedSticker(Axis $axis, Face $face, int $stickerIndex): int
     {
         if (!isset(AxisOrientation::get()[$axis->value][$face->value])) {
-            throw new \RuntimeException(sprintf('Invalid axis face orientation value ${AXIS_ORIENTATION[%s][%s]}', $axis->name, $face->value));
+            throw new PuzzleException(sprintf('Invalid axis face orientation value ${AXIS_ORIENTATION[%s][%s]}', $axis->name, $face->value));
         }
 
         return match (AxisOrientation::get()[$axis->value][$face->value]) {
@@ -338,7 +316,7 @@ class RubiksCube implements \JsonSerializable
             1 => $this->getClockwiseSticker($stickerIndex),
             2 => $this->getOppositeSticker($stickerIndex),
             -1 => $this->getCounterClockwiseSticker($stickerIndex),
-            default => throw new \RuntimeException(sprintf('Invalid axis face orientation value ${AXIS_ORIENTATION[%s][%s]}', $axis->name, $face->value))
+            default => throw new PuzzleException(sprintf('Invalid axis face orientation value ${AXIS_ORIENTATION[%s][%s]}', $axis->name, $face->value))
         };
     }
 

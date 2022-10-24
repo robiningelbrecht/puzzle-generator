@@ -4,6 +4,7 @@ namespace App\Tests\Unit\Domain;
 
 use App\Domain\Color;
 use App\Infrastructure\Json;
+use App\Infrastructure\PuzzleException;
 use PHPUnit\Framework\TestCase;
 
 class ColorTest extends TestCase
@@ -23,7 +24,7 @@ class ColorTest extends TestCase
 
     public function testItShouldThrowOnInvalidString(): void
     {
-        $this->expectException(\RuntimeException::class);
+        $this->expectException(PuzzleException::class);
         $this->expectExceptionMessage('Invalid hex color "#invalid"');
 
         Color::fromHexString('invalid');

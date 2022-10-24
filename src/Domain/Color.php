@@ -2,11 +2,14 @@
 
 namespace App\Domain;
 
+use App\Infrastructure\PuzzleException;
+
 use function Safe\preg_match;
 
 class Color implements \Stringable, \JsonSerializable
 {
-    // @TODO: Support transparant.
+    private const TRANSPARENT = 'transparent';
+
     private function __construct(
         private readonly string $value
     ) {
@@ -18,7 +21,7 @@ class Color implements \Stringable, \JsonSerializable
             $hex = '#'.$hex;
         }
         if (!preg_match('/^#[a-f0-9]{6}$/i', $hex)) {
-            throw new \RuntimeException(sprintf('Invalid hex color "%s"', $hex));
+            throw new PuzzleException(sprintf('Invalid hex color "%s"', $hex));
         }
 
         return new self($hex);
@@ -31,6 +34,11 @@ class Color implements \Stringable, \JsonSerializable
         }
 
         return self::fromHexString($hex);
+    }
+
+    public static function transparent(): self
+    {
+        return new self(self::TRANSPARENT);
     }
 
     public static function yellow(): self
@@ -71,6 +79,11 @@ class Color implements \Stringable, \JsonSerializable
     public function getValue(): string
     {
         return strtoupper($this->value);
+    }
+
+    public function isTransparent(): bool
+    {
+        return self::TRANSPARENT === (string) $this;
     }
 
     public function __toString(): string

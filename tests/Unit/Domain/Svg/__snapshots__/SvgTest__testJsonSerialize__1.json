@@ -1,16 +1,6 @@
 {
     "cube": {
         "size": 3,
-        "rotations": [
-            {
-                "axis": "y",
-                "value": 45
-            },
-            {
-                "axis": "x",
-                "value": -34
-            }
-        ],
         "colorScheme": {
             "U": "#FEFE00",
             "R": "#EE0000",
@@ -20,7 +10,6 @@
             "B": "#00D800"
         },
         "baseColor": "#000000",
-        "mask": null,
         "faces": {
             "U": [
                 "#FEFE00",
@@ -127,6 +116,16 @@
         }
     },
     "size": 100,
+    "rotations": [
+        {
+            "axis": "y",
+            "value": 45
+        },
+        {
+            "axis": "x",
+            "value": -34
+        }
+    ],
     "backgroundColor": "#FFA100",
     "viewbox": {
         "x": -0.9,

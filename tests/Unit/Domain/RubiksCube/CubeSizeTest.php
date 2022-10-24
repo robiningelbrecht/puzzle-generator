@@ -4,6 +4,7 @@ namespace App\Tests\Unit\Domain\RubiksCube;
 
 use App\Domain\RubiksCube\CubeSize;
 use App\Infrastructure\Json;
+use App\Infrastructure\PuzzleException;
 use PHPUnit\Framework\TestCase;
 
 class CubeSizeTest extends TestCase
@@ -22,7 +23,7 @@ class CubeSizeTest extends TestCase
 
     public function testItShouldThrowWhenSizeSmallerThanOne(): void
     {
-        $this->expectException(\RuntimeException::class);
+        $this->expectException(PuzzleException::class);
         $this->expectExceptionMessage('Invalid cube size "0" provided');
 
         CubeSize::fromInt(0);
@@ -30,7 +31,7 @@ class CubeSizeTest extends TestCase
 
     public function testItShouldThrowWhenSizeGreaterThan(): void
     {
-        $this->expectException(\RuntimeException::class);
+        $this->expectException(PuzzleException::class);
         $this->expectExceptionMessage('Invalid cube size "11" provided');
 
         CubeSize::fromInt(11);

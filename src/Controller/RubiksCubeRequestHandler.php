@@ -1,5 +1,7 @@
 <?php
 
+// @TODO: add docker compose.
+
 namespace App\Controller;
 
 use App\Domain\Color;
@@ -7,9 +9,9 @@ use App\Domain\Render;
 use App\Domain\RubiksCube\Algorithm;
 use App\Domain\RubiksCube\ColorScheme\ColorSchemeBuilder;
 use App\Domain\RubiksCube\CubeSize;
-use App\Domain\RubiksCube\Mask;
 use App\Domain\RubiksCube\Rotation;
 use App\Domain\RubiksCube\RubiksCubeBuilder;
+use App\Domain\Svg\SvgSize;
 use App\Infrastructure\Json;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -34,7 +36,6 @@ class RubiksCubeRequestHandler
         if (null !== $cubeParams) {
             $cubeBuilder
                 ->withSize(CubeSize::fromOptionalInt($cubeParams['size'] ?? null))
-                ->withRotations(...Rotation::fromMap($cubeParams['rotations'] ?? []))
                 ->withColorScheme(
                     ColorSchemeBuilder::fromDefaults()
                         ->withColorForU(Color::fromOptionalHexString($cubeParams['colorScheme']['U'] ?? null))
@@ -45,15 +46,19 @@ class RubiksCubeRequestHandler
                         ->withColorForB(Color::fromOptionalHexString($cubeParams['colorScheme']['B'] ?? null))
                         ->build()
                 )
-                ->withBaseColor(Color::fromOptionalHexString($cubeParams['baseColor'] ?? null))
-                ->withMask(Mask::tryFrom($cubeParams['mask'] ?? ''));
+                ->withBaseColor(Color::fromOptionalHexString($cubeParams['baseColor'] ?? null));
         }
 
         $cube = $cubeBuilder
             ->build()
             ->scramble(Algorithm::fromOptionalString($cubeParams['algorithm'] ?? null));
 
-        $svg = Render::cube($cube, $params);
+        $svg = Render::cube(
+            $cube,
+            Rotation::fromMap(!empty($params['rotations']) && is_array($params['rotations']) ? $params['rotations'] : []),
+            SvgSize::fromOptionalInt($params['size'] ?? null),
+            Color::fromOptionalHexString($params['backgroundColor'] ?? null),
+        );
 
         if (isset($params['json'])) {
             $response->getBody()->write(Json::encode($svg));

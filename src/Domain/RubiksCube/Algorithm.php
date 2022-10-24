@@ -4,6 +4,7 @@ namespace App\Domain\RubiksCube;
 
 use App\Domain\RubiksCube\Turn\Turn;
 use App\Domain\RubiksCube\Turn\TurnType;
+use App\Infrastructure\PuzzleException;
 
 use function Safe\preg_match;
 
@@ -29,7 +30,7 @@ class Algorithm implements \JsonSerializable
         $turns = [];
         foreach (explode(' ', $string) as $notation) {
             if (!preg_match(self::REGEX, $notation, $matches)) {
-                throw new \RuntimeException(sprintf('Invalid move "%s"', $notation));
+                throw new PuzzleException(sprintf('Invalid move "%s"', $notation));
             }
 
             $move = $matches['move'];
@@ -92,7 +93,7 @@ class Algorithm implements \JsonSerializable
                     0 => TurnType::NONE,
                     1 => TurnType::CLOCKWISE,
                     3 => TurnType::COUNTER_CLOCKWISE,
-                    default => throw new \RuntimeException('Invalid turnAbbreviation')
+                    default => throw new PuzzleException('Invalid turnAbbreviation')
                 };
         }
     }
@@ -100,7 +101,7 @@ class Algorithm implements \JsonSerializable
     private static function getSlices(int $slices = null, string $outerBlockIndicator = null): int
     {
         if (!$outerBlockIndicator && $slices) {
-            throw new \RuntimeException("Invalid move: Cannot specify num slices if outer block move indicator 'w' is not present");
+            throw new PuzzleException("Invalid move: Cannot specify num slices if outer block move indicator 'w' is not present");
         }
 
         if ($outerBlockIndicator && !$slices) {

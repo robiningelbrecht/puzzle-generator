@@ -1,6 +1,7 @@
 <?php
 
 use App\Infrastructure\ErrorRenderer;
+use App\Infrastructure\Json;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Slim\App;
@@ -8,14 +9,15 @@ use Slim\App;
 return function (App $app) {
     // Add middleware to add response ContentType.
     $app->add(function (ServerRequestInterface $request, RequestHandlerInterface $handler) {
-        $params = $request->getQueryParams();
         $response = $handler->handle($request);
 
-        if (isset($params['json'])) {
-            return $response->withHeader('Content-Type', 'application/json');
-        }
+        try {
+            Json::decode($response->getBody());
 
-        return $response->withHeader('Content-Type', 'image/svg+xml');
+            return $response->withHeader('Content-Type', 'application/json');
+        } catch (\Safe\Exceptions\JsonException) {
+            return $response->withHeader('Content-Type', 'image/svg+xml');
+        }
     });
 
     // Add Error middleware.

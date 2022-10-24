@@ -4,16 +4,14 @@ namespace App\Tests\Unit\Domain\RubiksCube;
 
 use App\Domain\Color;
 use App\Domain\RubiksCube\Algorithm;
-use App\Domain\RubiksCube\Axis\Axis;
 use App\Domain\RubiksCube\ColorScheme\ColorScheme;
 use App\Domain\RubiksCube\CubeSize;
-use App\Domain\RubiksCube\Mask;
 use App\Domain\RubiksCube\Move;
-use App\Domain\RubiksCube\Rotation;
 use App\Domain\RubiksCube\RubiksCubeBuilder;
 use App\Domain\RubiksCube\Turn\Turn;
 use App\Domain\RubiksCube\Turn\TurnType;
 use App\Infrastructure\Json;
+use App\Infrastructure\PuzzleException;
 use PHPUnit\Framework\TestCase;
 use Spatie\Snapshots\MatchesSnapshots;
 
@@ -26,7 +24,6 @@ class RubiksCubeTest extends TestCase
         $cube = RubiksCubeBuilder::fromDefaults()
             ->withSize(null)
             ->withBaseColor(null)
-            ->withMask(null)
             ->build();
 
         $this->assertEquals($cube, RubiksCubeBuilder::fromDefaults()->build());
@@ -37,10 +34,6 @@ class RubiksCubeTest extends TestCase
     {
         $cube = RubiksCubeBuilder::fromDefaults()
             ->withSize(CubeSize::fromInt(4))
-            ->withRotations(
-                Rotation::fromAxisAndValue(Axis::X, 100),
-                Rotation::fromAxisAndValue(Axis::Y, 33)
-            )
             ->withColorScheme(ColorScheme::fromColors(
                 Color::yellow(),
                 Color::blue(),
@@ -50,7 +43,6 @@ class RubiksCubeTest extends TestCase
                 Color::red()
             ))
             ->withBaseColor(Color::fromHexString('#EEEEEE'))
-            ->withMask(Mask::OLL)
             ->build();
 
         $this->assertMatchesJsonSnapshot(Json::encode($cube));
@@ -108,7 +100,7 @@ class RubiksCubeTest extends TestCase
 
     public function testItShouldThrowOnInvalidSlices(): void
     {
-        $this->expectException(\RuntimeException::class);
+        $this->expectException(PuzzleException::class);
         $this->expectExceptionMessage('The number of slices (3) must be smaller than the cube size (2)');
 
         $cube = RubiksCubeBuilder::fromDefaults()

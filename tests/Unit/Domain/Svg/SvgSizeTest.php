@@ -4,6 +4,7 @@ namespace App\Tests\Unit\Domain\Svg;
 
 use App\Domain\Svg\SvgSize;
 use App\Infrastructure\Json;
+use App\Infrastructure\PuzzleException;
 use PHPUnit\Framework\TestCase;
 
 class SvgSizeTest extends TestCase
@@ -22,7 +23,7 @@ class SvgSizeTest extends TestCase
 
     public function testItShouldThrowWhenSizeSmallerThanOne(): void
     {
-        $this->expectException(\RuntimeException::class);
+        $this->expectException(PuzzleException::class);
         $this->expectExceptionMessage('Invalid svg size "0" provided');
 
         SvgSize::fromInt(0);
@@ -30,7 +31,7 @@ class SvgSizeTest extends TestCase
 
     public function testItShouldThrowWhenSizeGreaterThan(): void
     {
-        $this->expectException(\RuntimeException::class);
+        $this->expectException(PuzzleException::class);
         $this->expectExceptionMessage('Invalid svg size "1025" provided');
 
         SvgSize::fromInt(1025);

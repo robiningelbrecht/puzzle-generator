@@ -6,6 +6,7 @@ use App\Domain\Color;
 use App\Domain\RubiksCube\ColorScheme\ColorSchemeBuilder;
 use App\Domain\RubiksCube\Face;
 use App\Infrastructure\Json;
+use App\Infrastructure\PuzzleException;
 use PHPUnit\Framework\TestCase;
 use Spatie\Snapshots\MatchesSnapshots;
 
@@ -63,7 +64,7 @@ class ColorSchemeTest extends TestCase
 
     public function testItShouldThrowWhenNonUniqueColors(): void
     {
-        $this->expectException(\RuntimeException::class);
+        $this->expectException(PuzzleException::class);
         $this->expectExceptionMessage('Invalid ColorScheme provided, all colors have to be unique.');
 
         ColorSchemeBuilder::fromDefaults()

@@ -4,6 +4,7 @@ namespace App\Domain\RubiksCube\ColorScheme;
 
 use App\Domain\Color;
 use App\Domain\RubiksCube\Face;
+use App\Infrastructure\PuzzleException;
 
 class ColorScheme implements \JsonSerializable
 {
@@ -29,7 +30,7 @@ class ColorScheme implements \JsonSerializable
             $this->getColorForB(),
         ];
         if (count($colors) !== count(array_unique($colors))) {
-            throw new \RuntimeException('Invalid ColorScheme provided, all colors have to be unique.');
+            throw new PuzzleException('Invalid ColorScheme provided, all colors have to be unique.');
         }
     }
 

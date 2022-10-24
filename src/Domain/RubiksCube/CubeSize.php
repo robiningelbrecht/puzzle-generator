@@ -2,13 +2,15 @@
 
 namespace App\Domain\RubiksCube;
 
+use App\Infrastructure\PuzzleException;
+
 class CubeSize implements \JsonSerializable
 {
     private function __construct(
         private readonly int $value
     ) {
         if ($this->value < 1 || $this->value > 10) {
-            throw new \RuntimeException(sprintf('Invalid cube size "%s" provided', $this->value));
+            throw new PuzzleException(sprintf('Invalid cube size "%s" provided', $this->value));
         }
     }
 

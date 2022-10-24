@@ -2,13 +2,15 @@
 
 namespace App\Domain\Svg;
 
+use App\Infrastructure\PuzzleException;
+
 class SvgSize implements \JsonSerializable
 {
     private function __construct(
         private readonly int $size
     ) {
         if ($this->size < 1 || $this->size > 1024) {
-            throw new \RuntimeException(sprintf('Invalid svg size "%s" provided', $this->size));
+            throw new PuzzleException(sprintf('Invalid svg size "%s" provided', $this->size));
         }
     }
 

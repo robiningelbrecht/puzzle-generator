@@ -3,6 +3,7 @@
 namespace App\Domain\RubiksCube;
 
 use App\Domain\RubiksCube\Axis\Axis;
+use App\Infrastructure\PuzzleException;
 
 class Rotation implements \JsonSerializable
 {
@@ -14,7 +15,7 @@ class Rotation implements \JsonSerializable
         private readonly int $value,
     ) {
         if ($value < -360 || $value > 360) {
-            throw new \RuntimeException(sprintf('Invalid number (%s) of rotation degrees provided', $this->value));
+            throw new PuzzleException(sprintf('Invalid number (%s) of rotation degrees provided', $this->value));
         }
     }
 
@@ -27,10 +28,16 @@ class Rotation implements \JsonSerializable
 
     public static function fromMap(array $map): array
     {
-        return array_map(fn (array $item) => self::fromAxisAndValue(
-            Axis::from($item['axis']),
-            $map['value'],
-        ), $map);
+        return array_map(function (array $item) {
+            if (empty($item['axis']) || empty($item['value'])) {
+                throw new PuzzleException('Invalid rotation provided. "axis" and "value" are required');
+            }
+
+            return self::fromAxisAndValue(
+                Axis::from($item['axis']),
+                $item['value'],
+            );
+        }, $map);
     }
 
     public function getAxis(): Axis

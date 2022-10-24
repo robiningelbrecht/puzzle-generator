@@ -2,25 +2,29 @@
 
 namespace App\Infrastructure;
 
-use Slim\Error\AbstractErrorRenderer;
+use Slim\Error\Renderers\HtmlErrorRenderer;
 
-class ErrorRenderer extends AbstractErrorRenderer
+class ErrorRenderer extends HtmlErrorRenderer
 {
     protected $defaultErrorTitle = 'Waw, this is embarrassing';
 
     public function __invoke(\Throwable $exception, bool $displayErrorDetails): string
     {
-        if ($displayErrorDetails) {
-            $html = '<p>The application could not run because of the following error:</p>';
-            $html .= sprintf('<h2>%s</h2>', htmlentities($exception->getMessage()));
-        } else {
-            $html = "<p>{$this->getErrorDescription($exception)}</p>";
+        if ($exception instanceof PuzzleException) {
+            if ($displayErrorDetails) {
+                $html = '<p>The application could not run because of the following error:</p>';
+                $html .= sprintf('<h2>%s</h2>', htmlentities($exception->getMessage()));
+            } else {
+                $html = "<p>{$this->getErrorDescription($exception)}</p>";
+            }
+
+            return $this->renderBody($this->getErrorTitle($exception), $html);
         }
 
-        return $this->renderHtmlBody($this->getErrorTitle($exception), $html);
+        return parent::__invoke($exception, $displayErrorDetails);
     }
 
-    public function renderHtmlBody(string $title = '', string $html = ''): string
+    private function renderBody(string $title = '', string $html = ''): string
     {
         return sprintf(
             '<!doctype html>'.

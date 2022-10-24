@@ -3,14 +3,17 @@
 namespace App\Domain\Svg;
 
 use App\Domain\Color;
+use App\Domain\RubiksCube\Axis\Axis;
+use App\Domain\RubiksCube\Rotation;
 use App\Domain\RubiksCube\RubiksCube;
 
 class Svg implements \JsonSerializable
 {
     private function __construct(
-        private RubiksCube $cube,
+        private readonly RubiksCube $cube,
         private SvgSize $size,
         private Color $backgroundColor,
+        private array $rotations,
     ) {
     }
 
@@ -19,7 +22,11 @@ class Svg implements \JsonSerializable
         return new self(
             $cube,
             SvgSize::fromInt(128),
-            Color::white(), // @TODO: change default background color to "transparant"
+            Color::transparent(),
+            [
+                Rotation::fromAxisAndValue(Axis::Y, Rotation::DEFAULT_Y),
+                Rotation::fromAxisAndValue(Axis::X, Rotation::DEFAULT_X),
+            ]
         );
     }
 
@@ -60,6 +67,22 @@ class Svg implements \JsonSerializable
         return $this;
     }
 
+    public function getRotations(): array
+    {
+        return $this->rotations;
+    }
+
+    public function withRotations(Rotation ...$rotations): self
+    {
+        if (!$rotations) {
+            return $this;
+        }
+
+        $this->rotations = $rotations;
+
+        return $this;
+    }
+
     public function getViewBox(): Viewbox
     {
         return Viewbox::fromDefaults();
@@ -70,6 +93,7 @@ class Svg implements \JsonSerializable
         return [
             'cube' => $this->getCube(),
             'size' => $this->getSize(),
+            'rotations' => $this->getRotations(),
             'backgroundColor' => $this->getBackgroundColor(),
             'viewbox' => $this->getViewBox(),
         ];

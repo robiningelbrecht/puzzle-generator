@@ -4,6 +4,7 @@ namespace App\Tests\Unit\Domain\RubiksCube;
 
 use App\Domain\RubiksCube\Algorithm;
 use App\Infrastructure\Json;
+use App\Infrastructure\PuzzleException;
 use PHPUnit\Framework\TestCase;
 use Spatie\Snapshots\MatchesSnapshots;
 
@@ -44,7 +45,7 @@ class AlgorithmTest extends TestCase
 
     public function testItShouldThrowOnInvalidAlgorithm(): void
     {
-        $this->expectException(\RuntimeException::class);
+        $this->expectException(PuzzleException::class);
         $this->expectExceptionMessage('Invalid move "P"');
 
         Algorithm::fromString('P');
@@ -52,7 +53,7 @@ class AlgorithmTest extends TestCase
 
     public function testItShouldThrowOnInvalidAlgorithmCase2(): void
     {
-        $this->expectException(\RuntimeException::class);
+        $this->expectException(PuzzleException::class);
         $this->expectExceptionMessage('Invalid move "DD"');
 
         Algorithm::fromString('DD');
@@ -60,7 +61,7 @@ class AlgorithmTest extends TestCase
 
     public function testItShouldThrowOnInvalidAlgorithmCase3(): void
     {
-        $this->expectException(\RuntimeException::class);
+        $this->expectException(PuzzleException::class);
         $this->expectExceptionMessage('Invalid move "DX"');
 
         Algorithm::fromString('DX');
@@ -68,7 +69,7 @@ class AlgorithmTest extends TestCase
 
     public function testItShouldThrowOnInvalidAlgorithmCase4(): void
     {
-        $this->expectException(\RuntimeException::class);
+        $this->expectException(PuzzleException::class);
         $this->expectExceptionMessage('Invalid move "X"');
 
         Algorithm::fromString('X');
@@ -76,7 +77,7 @@ class AlgorithmTest extends TestCase
 
     public function testItShouldThrowOnInvalidOuterBlockIndicator(): void
     {
-        $this->expectException(\RuntimeException::class);
+        $this->expectException(PuzzleException::class);
         $this->expectExceptionMessage("Invalid move: Cannot specify num slices if outer block move indicator 'w' is not present");
 
         Algorithm::fromString('2F');

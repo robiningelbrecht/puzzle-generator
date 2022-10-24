@@ -7,6 +7,7 @@ use App\Domain\RubiksCube\Face;
 use App\Domain\RubiksCube\RubiksCube;
 use App\Infrastructure\Math\Math;
 use App\Infrastructure\Math\Position;
+use App\Infrastructure\PuzzleException;
 
 class Sticker
 {
@@ -18,7 +19,7 @@ class Sticker
     ) {
     }
 
-    public static function createForCubeAndDistance(RubiksCube $cube, int $distance): array
+    public static function createForCubeAndDistance(RubiksCube $cube, int $distance, array $rotations = []): array
     {
         $stickers = [];
         $cubeSize = $cube->getSize()->getValue();
@@ -44,7 +45,7 @@ class Sticker
                     $position = Math::translate($position, $centerTranslation);
                     $position = Math::scale($position, 1 / $cubeSize);
                     // Rotate cube as per parameter settings.
-                    foreach ($cube->getRotations() as $rotation) {
+                    foreach ($rotations as $rotation) {
                         $position = Math::rotate($position, $rotation->getAxis(), (Math::PI * $rotation->getValue()) / 180);
                     }
 
@@ -103,7 +104,7 @@ class Sticker
     private function addBoundries(Position ...$boundries): void
     {
         if (4 != count($boundries)) {
-            throw new \RuntimeException('Invalid number of boundries provided');
+            throw new PuzzleException('Invalid number of boundries provided');
         }
         $this->boundries = $boundries;
     }

@@ -1,15 +1,5 @@
 {
     "size": 4,
-    "rotations": [
-        {
-            "axis": "x",
-            "value": 100
-        },
-        {
-            "axis": "y",
-            "value": 33
-        }
-    ],
     "colorScheme": {
         "U": "#FEFE00",
         "R": "#0000F2",
@@ -19,7 +9,6 @@
         "B": "#EE0000"
     },
     "baseColor": "#EEEEEE",
-    "mask": "oll",
     "faces": {
         "U": [
             "#FEFE00",
