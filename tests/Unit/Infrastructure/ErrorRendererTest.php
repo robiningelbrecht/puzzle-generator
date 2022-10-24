@@ -28,13 +28,13 @@ class ErrorRendererTest extends TestCase
     public function testWithRuntimeException(): void
     {
         $renderer = new ErrorRenderer();
-        $this->assertStringContainsString('<h2>Trace</h2>',$renderer(new \RuntimeException('Something bad happened'), true));
+        $this->assertStringContainsString('<h2>Trace</h2>', $renderer(new \RuntimeException('Something bad happened'), true));
     }
 
     public function testWithRuntimeExceptionNoDetails(): void
     {
         $renderer = new ErrorRenderer();
-        $this->assertStringNotContainsString('<h2>Trace</h2>',$renderer(new \RuntimeException('Something bad happened'), false));
+        $this->assertStringNotContainsString('<h2>Trace</h2>', $renderer(new \RuntimeException('Something bad happened'), false));
     }
 
     public function testWithNotFoundException(): void
