@@ -1,5 +1,6 @@
-vendor/
-to-delete/
+/vendor/
+/to-delete/
+/nginx/
 
 .php-cs-fixer.cache
 .phpunit.result.cache

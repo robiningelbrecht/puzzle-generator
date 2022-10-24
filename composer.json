@@ -40,8 +40,7 @@
     "sort-packages": true
   },
   "scripts": {
-    "dev": "php -S localhost:8080 -t api api/index.php",
-    "dev-old": "php -S localhost:9090 -t api to-delete/visualcube.php",
+    "dev": "php -S localhost:9000 -t api to-delete/visualcube.php",
     "phpcs:fix": "./vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php",
     "phpstan:run": "./vendor/bin/phpstan analyse --memory-limit=1G",
     "phpstan:generate-baseline": " ./vendor/bin/phpstan analyse --generate-baseline --memory-limit=1G",

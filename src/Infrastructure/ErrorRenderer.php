@@ -19,35 +19,30 @@ class ErrorRenderer extends HtmlErrorRenderer
                 $html = "<p>{$this->getErrorDescription($exception)}</p>";
             }
 
-            return $this->renderBody($this->getErrorTitle($exception), $html);
+            return sprintf(
+                '<!doctype html>'.
+                '<html lang="en">'.
+                '    <head>'.
+                '        <meta charset="utf-8">'.
+                '        <meta name="viewport" content="width=device-width, initial-scale=1">'.
+                '        <title>%s</title>'.
+                '        <style>'.
+                '            body{margin:0;padding:30px;font:12px/1.5 Helvetica,Arial,Verdana,sans-serif}'.
+                '            h1{margin:0;font-size:48px;font-weight:normal;line-height:48px}'.
+                '            strong{display:inline-block;width:65px}'.
+                '        </style>'.
+                '    </head>'.
+                '    <body>'.
+                '        <h1>%s</h1>'.
+                '        <div>%s</div>'.
+                '    </body>'.
+                '</html>',
+                $this->getErrorTitle($exception),
+                $this->getErrorTitle($exception),
+                $html
+            );
         }
 
         return parent::__invoke($exception, $displayErrorDetails);
-    }
-
-    private function renderBody(string $title = '', string $html = ''): string
-    {
-        return sprintf(
-            '<!doctype html>'.
-            '<html lang="en">'.
-            '    <head>'.
-            '        <meta charset="utf-8">'.
-            '        <meta name="viewport" content="width=device-width, initial-scale=1">'.
-            '        <title>%s</title>'.
-            '        <style>'.
-            '            body{margin:0;padding:30px;font:12px/1.5 Helvetica,Arial,Verdana,sans-serif}'.
-            '            h1{margin:0;font-size:48px;font-weight:normal;line-height:48px}'.
-            '            strong{display:inline-block;width:65px}'.
-            '        </style>'.
-            '    </head>'.
-            '    <body>'.
-            '        <h1>%s</h1>'.
-            '        <div>%s</div>'.
-            '    </body>'.
-            '</html>',
-            $title,
-            $title,
-            $html
-        );
     }
 }

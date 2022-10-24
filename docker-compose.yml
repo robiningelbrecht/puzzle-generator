@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  php-cli:
+    build: ./docker/php-cli
+    container_name: puzzle-generator-php-cli
+    volumes:
+      - ./:/var/www/
+    working_dir: /var/www
+
+  php-fpm:
+    image: php:8.1-fpm
+    container_name: puzzle-generator-php-fpm
+    volumes:
+      - ./:/var/www/
+    working_dir: /var/www
+
+  nginx:
+    image: nginx:stable-alpine
+    container_name: puzzle-generator-nginx
+    ports:
+      - '9090:80'
+    volumes:
+      - ./api/:/var/www/api/
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php-fpm

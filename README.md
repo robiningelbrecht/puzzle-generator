@@ -11,3 +11,7 @@
 ---
 
 Generate Full 3D pictures of WCA twisty puzzles! (Rubiks cube image generator)
+
+* `git clone git@github.com:robiningelbrecht/puzzle-generator.git`
+* `docker-compose up --build -d`
+* Navigate to `http://localhost:9090/cube`
