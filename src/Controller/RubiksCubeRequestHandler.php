@@ -1,7 +1,5 @@
 <?php
 
-// @TODO: add docker compose.
-
 namespace App\Controller;
 
 use App\Domain\Color;
