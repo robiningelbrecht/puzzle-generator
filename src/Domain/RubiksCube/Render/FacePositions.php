@@ -35,11 +35,17 @@ class FacePositions
         return new self($rotations);
     }
 
+    /**
+     * @return Face[]
+     */
     public function getHiddenFaces(): array
     {
         return array_filter($this->getRenderOrder(), fn (Face $face) => !$this->isFaceVisible($face));
     }
 
+    /**
+     * @return Face[]
+     */
     public function getVisibleFaces(): array
     {
         return array_filter($this->getRenderOrder(), fn (Face $face) => $this->isFaceVisible($face));

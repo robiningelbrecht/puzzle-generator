@@ -7,6 +7,7 @@ use App\Domain\RubiksCube\Face;
 use App\Domain\RubiksCube\RubiksCube;
 use App\Infrastructure\Math;
 use App\Infrastructure\ValueObject\Color;
+use App\Infrastructure\ValueObject\Point;
 use App\Infrastructure\ValueObject\Position;
 
 class Sticker
@@ -74,10 +75,10 @@ class Sticker
                     /** @var \App\Domain\RubiksCube\Render\Sticker $sticker */
                     $sticker = $stickers[$face->value][$row][$col];
                     $sticker->addBoundries(
-                        Math::transScale($stickers[$face->value][$col][$row]->getPosition(), $centerPoint, 0.85),
-                        Math::transScale($stickers[$face->value][$col + 1][$row]->getPosition(), $centerPoint, 0.85),
-                        Math::transScale($stickers[$face->value][$col + 1][$row + 1]->getPosition(), $centerPoint, 0.85),
-                        Math::transScale($stickers[$face->value][$col][$row + 1]->getPosition(), $centerPoint, 0.85),
+                        Point::fromPosition(Math::transScale($stickers[$face->value][$col][$row]->getPosition(), $centerPoint, 0.85)),
+                        Point::fromPosition(Math::transScale($stickers[$face->value][$col + 1][$row]->getPosition(), $centerPoint, 0.85)),
+                        Point::fromPosition(Math::transScale($stickers[$face->value][$col + 1][$row + 1]->getPosition(), $centerPoint, 0.85)),
+                        Point::fromPosition(Math::transScale($stickers[$face->value][$col][$row + 1]->getPosition(), $centerPoint, 0.85)),
                     );
                 }
             }
@@ -101,7 +102,7 @@ class Sticker
         return $this->boundries;
     }
 
-    private function addBoundries(Position ...$boundries): void
+    private function addBoundries(Point ...$boundries): void
     {
         if (4 != count($boundries)) {
             throw new PuzzleException('Invalid number of boundries provided');
