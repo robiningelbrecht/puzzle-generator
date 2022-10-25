@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Tests\Unit\Domain;
+namespace App\Tests\Unit\Infrastructure\ValueObject;
 
-use App\Domain\Color;
+use App\Domain\PuzzleException;
 use App\Infrastructure\Json;
-use App\Infrastructure\PuzzleException;
+use App\Infrastructure\ValueObject\Color;
 use PHPUnit\Framework\TestCase;
 
 class ColorTest extends TestCase

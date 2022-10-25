@@ -2,11 +2,11 @@
 
 namespace App\Tests\Unit\Domain\Svg;
 
-use App\Domain\Color;
 use App\Domain\RubiksCube\RubiksCubeBuilder;
 use App\Domain\Svg\Svg;
 use App\Domain\Svg\SvgSize;
 use App\Infrastructure\Json;
+use App\Infrastructure\ValueObject\Color;
 use PHPUnit\Framework\TestCase;
 use Spatie\Snapshots\MatchesSnapshots;
 

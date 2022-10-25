@@ -2,9 +2,9 @@
 
 namespace App\Tests\Unit\Domain\RubiksCube;
 
+use App\Domain\PuzzleException;
 use App\Domain\RubiksCube\CubeSize;
 use App\Infrastructure\Json;
-use App\Infrastructure\PuzzleException;
 use PHPUnit\Framework\TestCase;
 
 class CubeSizeTest extends TestCase

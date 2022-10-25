@@ -7,10 +7,11 @@ use App\Domain\RubiksCube\Render\Sticker;
 use App\Domain\RubiksCube\RubiksCube;
 use App\Domain\Svg\Svg;
 use App\Domain\Svg\SvgSize;
+use App\Infrastructure\ValueObject\Color;
 
-class Render
+class Renderer
 {
-    public static function cube(
+    public static function renderCube(
         RubiksCube $cube,
         array $rotations = [],
         SvgSize $svgSize = null,
@@ -19,10 +20,9 @@ class Render
         $svg = Svg::default($cube)
             ->withSize($svgSize)
             ->withBackgroundColor($backgroundColor)
-            ->withRotations(...$rotations); // This is only added on the SVG VO so we can output it in the JSON notation.
+            ->withRotations(...$rotations); // This is only added on the SVG VO, so we can output it in the JSON notation.
 
-        $facePositions = FacePositions::default()
-            ->rotate(...$rotations);
+        $facePositions = FacePositions::fromRotations(...$rotations);
 
         $stickers = Sticker::createForCubeAndDistance($cube, 5, $rotations);
 

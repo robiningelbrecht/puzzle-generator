@@ -4,26 +4,35 @@ namespace App\Domain\RubiksCube\Render;
 
 use App\Domain\RubiksCube\Face;
 use App\Domain\RubiksCube\Rotation;
-use App\Infrastructure\Math\Math;
-use App\Infrastructure\Math\Position;
+use App\Infrastructure\Math;
+use App\Infrastructure\ValueObject\Position;
 
 class FacePositions
 {
-    private function __construct(
-        private array $values
-    ) {
-    }
+    private array $values;
 
-    public static function default(): self
-    {
-        return new self([
+    private function __construct(
+        array $rotations
+    ) {
+        $this->values = [
             Face::U->value => Position::fromXYZ(0, -1, 0),
             Face::R->value => Position::fromXYZ(1, 0, 0),
             Face::F->value => Position::fromXYZ(0, 0, -1),
             Face::D->value => Position::fromXYZ(0, 1, 0),
             Face::L->value => Position::fromXYZ(-1, 0, 0),
             Face::B->value => Position::fromXYZ(0, 0, 1),
-        ]);
+        ];
+
+        foreach (Face::cases() as $face) {
+            foreach ($rotations as $rotation) {
+                $this->values[$face->value] = Math::rotate($this->values[$face->value], $rotation->getAxis(), (Math::PI * $rotation->getValue()) / 180);
+            }
+        }
+    }
+
+    public static function fromRotations(Rotation ...$rotations): self
+    {
+        return new self($rotations);
     }
 
     public function getHiddenFaces(): array
@@ -56,16 +65,5 @@ class FacePositions
         });
 
         return $faces;
-    }
-
-    public function rotate(Rotation ...$rotations): self
-    {
-        foreach (Face::cases() as $face) {
-            foreach ($rotations as $rotation) {
-                $this->values[$face->value] = Math::rotate($this->values[$face->value], $rotation->getAxis(), (Math::PI * $rotation->getValue()) / 180);
-            }
-        }
-
-        return $this;
     }
 }

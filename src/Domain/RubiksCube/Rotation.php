@@ -2,8 +2,8 @@
 
 namespace App\Domain\RubiksCube;
 
+use App\Domain\PuzzleException;
 use App\Domain\RubiksCube\Axis\Axis;
-use App\Infrastructure\PuzzleException;
 
 class Rotation implements \JsonSerializable
 {

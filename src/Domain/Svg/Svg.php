@@ -2,10 +2,10 @@
 
 namespace App\Domain\Svg;
 
-use App\Domain\Color;
 use App\Domain\RubiksCube\Axis\Axis;
 use App\Domain\RubiksCube\Rotation;
 use App\Domain\RubiksCube\RubiksCube;
+use App\Infrastructure\ValueObject\Color;
 
 class Svg implements \JsonSerializable
 {

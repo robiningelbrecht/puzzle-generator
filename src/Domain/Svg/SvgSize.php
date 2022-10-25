@@ -2,7 +2,7 @@
 
 namespace App\Domain\Svg;
 
-use App\Infrastructure\PuzzleException;
+use App\Domain\PuzzleException;
 
 class SvgSize implements \JsonSerializable
 {

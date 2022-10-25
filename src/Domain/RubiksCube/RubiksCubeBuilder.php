@@ -2,8 +2,8 @@
 
 namespace App\Domain\RubiksCube;
 
-use App\Domain\Color;
 use App\Domain\RubiksCube\ColorScheme\ColorScheme;
+use App\Infrastructure\ValueObject\Color;
 
 class RubiksCubeBuilder
 {

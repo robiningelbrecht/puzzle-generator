@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Domain;
+namespace App\Infrastructure\ValueObject;
 
-use App\Infrastructure\PuzzleException;
+use App\Domain\PuzzleException;
 
 use function Safe\preg_match;
 
@@ -24,7 +24,7 @@ class Color implements \Stringable, \JsonSerializable
             throw new PuzzleException(sprintf('Invalid hex color "%s"', $hex));
         }
 
-        return new self($hex);
+        return new self(strtoupper($hex));
     }
 
     public static function fromOptionalHexString(string $hex = null): ?self
@@ -78,7 +78,7 @@ class Color implements \Stringable, \JsonSerializable
 
     public function getValue(): string
     {
-        return strtoupper($this->value);
+        return $this->value;
     }
 
     public function isTransparent(): bool

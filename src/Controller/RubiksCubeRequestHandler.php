@@ -2,8 +2,7 @@
 
 namespace App\Controller;
 
-use App\Domain\Color;
-use App\Domain\Render;
+use App\Domain\Renderer;
 use App\Domain\RubiksCube\Algorithm;
 use App\Domain\RubiksCube\ColorScheme\ColorSchemeBuilder;
 use App\Domain\RubiksCube\CubeSize;
@@ -11,6 +10,7 @@ use App\Domain\RubiksCube\Rotation;
 use App\Domain\RubiksCube\RubiksCubeBuilder;
 use App\Domain\Svg\SvgSize;
 use App\Infrastructure\Json;
+use App\Infrastructure\ValueObject\Color;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Twig\Environment;
@@ -51,7 +51,7 @@ class RubiksCubeRequestHandler
             ->build()
             ->scramble(Algorithm::fromOptionalString($cubeParams['algorithm'] ?? null));
 
-        $svg = Render::cube(
+        $svg = Renderer::renderCube(
             $cube,
             Rotation::fromMap(!empty($params['rotations']) && is_array($params['rotations']) ? $params['rotations'] : []),
             SvgSize::fromOptionalInt($params['size'] ?? null),

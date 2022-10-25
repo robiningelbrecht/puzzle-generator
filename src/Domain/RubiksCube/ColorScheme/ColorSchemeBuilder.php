@@ -2,7 +2,7 @@
 
 namespace App\Domain\RubiksCube\ColorScheme;
 
-use App\Domain\Color;
+use App\Infrastructure\ValueObject\Color;
 
 class ColorSchemeBuilder
 {

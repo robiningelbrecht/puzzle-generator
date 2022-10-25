@@ -2,6 +2,7 @@
 
 namespace App\Infrastructure;
 
+use App\Domain\PuzzleException;
 use Slim\Error\Renderers\HtmlErrorRenderer;
 use Slim\Exception\HttpNotFoundException;
 

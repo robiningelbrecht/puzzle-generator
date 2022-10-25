@@ -2,10 +2,10 @@
 
 namespace App\Tests\Unit\Domain\RubiksCube;
 
+use App\Domain\PuzzleException;
 use App\Domain\RubiksCube\Axis\Axis;
 use App\Domain\RubiksCube\Rotation;
 use App\Infrastructure\Json;
-use App\Infrastructure\PuzzleException;
 use PHPUnit\Framework\TestCase;
 use Spatie\Snapshots\MatchesSnapshots;
 

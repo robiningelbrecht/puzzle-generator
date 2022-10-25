@@ -2,9 +2,9 @@
 
 namespace App\Tests\Unit\Domain\Svg;
 
+use App\Domain\PuzzleException;
 use App\Domain\Svg\SvgSize;
 use App\Infrastructure\Json;
-use App\Infrastructure\PuzzleException;
 use PHPUnit\Framework\TestCase;
 
 class SvgSizeTest extends TestCase

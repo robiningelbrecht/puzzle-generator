@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Infrastructure\Math;
+namespace App\Infrastructure;
 
 use App\Domain\RubiksCube\Axis\Axis;
+use App\Infrastructure\ValueObject\Position;
 
 class Math
 {
