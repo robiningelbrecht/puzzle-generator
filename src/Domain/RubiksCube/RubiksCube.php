@@ -20,7 +20,7 @@ class RubiksCube implements \JsonSerializable
     private ?Algorithm $algorithm;
 
     private function __construct(
-        private readonly CubeSize $size,
+        private readonly Size $size,
         private readonly ColorScheme $colorScheme,
         private readonly Color $baseColor,
     ) {
@@ -45,7 +45,7 @@ class RubiksCube implements \JsonSerializable
     }
 
     public static function fromValues(
-        CubeSize $size,
+        Size $size,
         ColorScheme $colorScheme,
         Color $baseColor,
     ): self {
@@ -56,7 +56,7 @@ class RubiksCube implements \JsonSerializable
         );
     }
 
-    public function getSize(): CubeSize
+    public function getSize(): Size
     {
         return $this->size;
     }

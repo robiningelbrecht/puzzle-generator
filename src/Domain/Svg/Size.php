@@ -4,7 +4,7 @@ namespace App\Domain\Svg;
 
 use App\Domain\PuzzleException;
 
-class SvgSize implements \JsonSerializable
+class Size implements \JsonSerializable
 {
     private function __construct(
         private readonly int $size

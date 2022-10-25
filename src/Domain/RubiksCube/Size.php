@@ -4,7 +4,7 @@ namespace App\Domain\RubiksCube;
 
 use App\Domain\PuzzleException;
 
-class CubeSize implements \JsonSerializable
+class Size implements \JsonSerializable
 {
     private function __construct(
         private readonly int $value

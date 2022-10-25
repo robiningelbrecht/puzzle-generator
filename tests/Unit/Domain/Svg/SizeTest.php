@@ -3,22 +3,22 @@
 namespace App\Tests\Unit\Domain\Svg;
 
 use App\Domain\PuzzleException;
-use App\Domain\Svg\SvgSize;
+use App\Domain\Svg\Size;
 use App\Infrastructure\Json;
 use PHPUnit\Framework\TestCase;
 
-class SvgSizeTest extends TestCase
+class SizeTest extends TestCase
 {
     public function testJsonSerialize(): void
     {
-        $svg = SvgSize::fromInt(10);
+        $svg = Size::fromInt(10);
         $this->assertEquals(10, Json::encode($svg));
     }
 
     public function testFromOptionalInt(): void
     {
-        $this->assertNull(SvgSize::fromOptionalInt(null));
-        $this->assertEquals(SvgSize::fromInt(10), SvgSize::fromOptionalInt(10));
+        $this->assertNull(Size::fromOptionalInt(null));
+        $this->assertEquals(Size::fromInt(10), Size::fromOptionalInt(10));
     }
 
     public function testItShouldThrowWhenSizeSmallerThanOne(): void
@@ -26,7 +26,7 @@ class SvgSizeTest extends TestCase
         $this->expectException(PuzzleException::class);
         $this->expectExceptionMessage('Invalid svg size "0" provided');
 
-        SvgSize::fromInt(0);
+        Size::fromInt(0);
     }
 
     public function testItShouldThrowWhenSizeGreaterThan(): void
@@ -34,6 +34,6 @@ class SvgSizeTest extends TestCase
         $this->expectException(PuzzleException::class);
         $this->expectExceptionMessage('Invalid svg size "1025" provided');
 
-        SvgSize::fromInt(1025);
+        Size::fromInt(1025);
     }
 }

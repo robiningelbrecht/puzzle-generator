@@ -5,8 +5,8 @@ namespace App\Domain;
 use App\Domain\RubiksCube\Render\FacePositions;
 use App\Domain\RubiksCube\Render\Sticker;
 use App\Domain\RubiksCube\RubiksCube;
+use App\Domain\Svg\Size;
 use App\Domain\Svg\Svg;
-use App\Domain\Svg\SvgSize;
 use App\Infrastructure\ValueObject\Color;
 use App\Infrastructure\ValueObject\Point;
 
@@ -17,7 +17,7 @@ class Renderer
     public static function renderCube(
         RubiksCube $cube,
         array $rotations = [],
-        SvgSize $svgSize = null,
+        Size $svgSize = null,
         Color $backgroundColor = null): Svg
     {
         $svg = Svg::default($cube)

@@ -5,9 +5,9 @@ namespace App\Tests\Unit\Domain\RubiksCube;
 use App\Domain\PuzzleException;
 use App\Domain\RubiksCube\Algorithm;
 use App\Domain\RubiksCube\ColorScheme\ColorScheme;
-use App\Domain\RubiksCube\CubeSize;
 use App\Domain\RubiksCube\Move;
 use App\Domain\RubiksCube\RubiksCubeBuilder;
+use App\Domain\RubiksCube\Size;
 use App\Domain\RubiksCube\Turn\Turn;
 use App\Domain\RubiksCube\Turn\TurnType;
 use App\Infrastructure\Json;
@@ -33,7 +33,7 @@ class RubiksCubeTest extends TestCase
     public function testWithAllValues(): void
     {
         $cube = RubiksCubeBuilder::fromDefaults()
-            ->withSize(CubeSize::fromInt(4))
+            ->withSize(Size::fromInt(4))
             ->withColorScheme(ColorScheme::fromColors(
                 Color::yellow(),
                 Color::blue(),
@@ -75,14 +75,14 @@ class RubiksCubeTest extends TestCase
 
         // Test all possible turns for 2 by 2.
         $cube = RubiksCubeBuilder::fromDefaults()
-            ->withSize(CubeSize::fromInt(2))
+            ->withSize(Size::fromInt(2))
             ->build();
         $cube->scramble(Algorithm::fromString('U F R D L B M E S x y z'));
         $this->assertMatchesJsonSnapshot(Json::encode($cube));
 
         // Test all possible turns for 1 by 1.
         $cube = RubiksCubeBuilder::fromDefaults()
-            ->withSize(CubeSize::fromInt(1))
+            ->withSize(Size::fromInt(1))
             ->build();
         $cube->scramble(Algorithm::fromString('U F R D L B M E S x y z'));
         $this->assertMatchesJsonSnapshot(Json::encode($cube));
@@ -91,7 +91,7 @@ class RubiksCubeTest extends TestCase
     public function testTurnTypeNone(): void
     {
         $cube = RubiksCubeBuilder::fromDefaults()
-            ->withSize(CubeSize::fromInt(1))
+            ->withSize(Size::fromInt(1))
             ->build();
         $cube->scramble(Algorithm::fromString('U F R D L B M E S x y z'));
 
@@ -104,7 +104,7 @@ class RubiksCubeTest extends TestCase
         $this->expectExceptionMessage('The number of slices (3) must be smaller than the cube size (2)');
 
         $cube = RubiksCubeBuilder::fromDefaults()
-            ->withSize(CubeSize::fromInt(2))
+            ->withSize(Size::fromInt(2))
             ->build();
 
         $cube->scramble(Algorithm::fromString('3Rw'));

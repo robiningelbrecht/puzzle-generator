@@ -11,7 +11,7 @@ class Svg implements \JsonSerializable
 {
     private function __construct(
         private readonly RubiksCube $cube,
-        private SvgSize $size,
+        private Size $size,
         private Color $backgroundColor,
         private array $rotations,
     ) {
@@ -21,7 +21,7 @@ class Svg implements \JsonSerializable
     {
         return new self(
             $cube,
-            SvgSize::fromInt(128),
+            Size::fromInt(128),
             Color::transparent(),
             [
                 Rotation::fromAxisAndValue(Axis::Y, Rotation::DEFAULT_Y),
@@ -35,12 +35,12 @@ class Svg implements \JsonSerializable
         return $this->cube;
     }
 
-    public function getSize(): SvgSize
+    public function getSize(): Size
     {
         return $this->size;
     }
 
-    public function withSize(SvgSize $size = null): self
+    public function withSize(Size $size = null): self
     {
         if (!$size) {
             return $this;

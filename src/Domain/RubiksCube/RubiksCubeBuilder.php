@@ -7,13 +7,13 @@ use App\Infrastructure\ValueObject\Color;
 
 class RubiksCubeBuilder
 {
-    private CubeSize $size;
+    private Size $size;
     private ColorScheme $colorScheme;
     private Color $baseColor;
 
     private function __construct()
     {
-        $this->size = CubeSize::fromInt(3);
+        $this->size = Size::fromInt(3);
         $this->colorScheme = ColorScheme::fromColors(
             Color::yellow(),
             Color::red(),
@@ -39,7 +39,7 @@ class RubiksCubeBuilder
         );
     }
 
-    public function withSize(CubeSize $size = null): self
+    public function withSize(Size $size = null): self
     {
         if (!$size) {
             return $this;

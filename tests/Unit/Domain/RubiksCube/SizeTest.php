@@ -3,22 +3,22 @@
 namespace App\Tests\Unit\Domain\RubiksCube;
 
 use App\Domain\PuzzleException;
-use App\Domain\RubiksCube\CubeSize;
+use App\Domain\RubiksCube\Size;
 use App\Infrastructure\Json;
 use PHPUnit\Framework\TestCase;
 
-class CubeSizeTest extends TestCase
+class SizeTest extends TestCase
 {
     public function testJsonSerialize(): void
     {
-        $size = CubeSize::fromInt(3);
+        $size = Size::fromInt(3);
         $this->assertEquals(3, Json::encode($size));
     }
 
     public function testFromOptionalInt(): void
     {
-        $this->assertNull(CubeSize::fromOptionalInt(null));
-        $this->assertEquals(CubeSize::fromInt(3), CubeSize::fromOptionalInt(3));
+        $this->assertNull(Size::fromOptionalInt(null));
+        $this->assertEquals(Size::fromInt(3), Size::fromOptionalInt(3));
     }
 
     public function testItShouldThrowWhenSizeSmallerThanOne(): void
@@ -26,7 +26,7 @@ class CubeSizeTest extends TestCase
         $this->expectException(PuzzleException::class);
         $this->expectExceptionMessage('Invalid cube size "0" provided');
 
-        CubeSize::fromInt(0);
+        Size::fromInt(0);
     }
 
     public function testItShouldThrowWhenSizeGreaterThan(): void
@@ -34,6 +34,6 @@ class CubeSizeTest extends TestCase
         $this->expectException(PuzzleException::class);
         $this->expectExceptionMessage('Invalid cube size "11" provided');
 
-        CubeSize::fromInt(11);
+        Size::fromInt(11);
     }
 }

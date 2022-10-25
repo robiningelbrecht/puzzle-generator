@@ -2,7 +2,7 @@
 
 namespace App\Infrastructure\ValueObject;
 
-class Point
+class Point implements \JsonSerializable
 {
     private function __construct(
         private readonly float $x,
@@ -33,5 +33,13 @@ class Point
     public function getY(): float
     {
         return $this->y;
+    }
+
+    public function jsonSerialize(): array
+    {
+        return [
+            'x' => $this->getX(),
+            'y' => $this->getY(),
+        ];
     }
 }
