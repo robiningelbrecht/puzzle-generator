@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="128" height="128" viewBox="-0.9 -0.9 1.8 1.8">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128" viewBox="-0.9 -0.9 1.8 1.8">
   <defs/>
-  <rect width="1.8" height="1.8" x="-0.9" y="-0.9" fill="none" opacity="0"/>
+  <rect width="1.8" height="1.8" x="-0.9" y="-0.9" fill="none" opacity="0">
+    </rect>
   <g opacity="1" stroke="#000000" stroke-width="0.1" stroke-linejoin="round">
     <polygon points="-4.916544434495171e-17,-0.7173417095434858 0.7040503714557547,-0.412727063604675 6.310854057798544e-17,-0.021725090572532482 -0.7040503714557547,-0.41272706360467487" fill="black" stroke="black"/>
     <polygon points="6.310854057798544e-17,-0.021725090572532482 0.7040503714557547,-0.412727063604675 0.6294802835706107,0.36901272915735306 5.558946895936223e-17,0.811070564442442" fill="black" stroke="black"/>

@@ -3,6 +3,7 @@
 namespace App\Domain\Svg;
 
 use App\Infrastructure\ValueObject\Color;
+use App\Infrastructure\ValueObject\Point;
 
 class Polygon implements \JsonSerializable
 {
@@ -11,6 +12,22 @@ class Polygon implements \JsonSerializable
         private readonly Color $fillColor,
         private readonly Color $strokeColor,
     ) {
+    }
+
+    public static function fromPointsAndFillColorAndStrokeColor(
+        array $points,
+        Color $fillColor,
+        Color $strokeColor,
+    ): self {
+        foreach ($points as $point) {
+            if ($point instanceof Point) {
+                continue;
+            }
+
+            throw new \RuntimeException('Invalid point provided');
+        }
+
+        return new self($points, $fillColor, $strokeColor);
     }
 
     public function getPoints(): array

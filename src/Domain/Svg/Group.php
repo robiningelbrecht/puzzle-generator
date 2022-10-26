@@ -4,10 +4,24 @@ namespace App\Domain\Svg;
 
 class Group implements \JsonSerializable
 {
+    private array $polygons;
+
     private function __construct(
         private readonly array $attributes,
-        private readonly array $polygons
     ) {
+        $this->polygons = [];
+    }
+
+    public static function fromAttributes(Attribute ...$attributes): self
+    {
+        return new self($attributes);
+    }
+
+    public function addPolygon(Polygon $polygon): self
+    {
+        $this->polygons[] = $polygon;
+
+        return $this;
     }
 
     public function getAttributes(): array

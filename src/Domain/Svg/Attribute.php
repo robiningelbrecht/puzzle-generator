@@ -10,6 +10,13 @@ class Attribute implements \Stringable, \JsonSerializable
     ) {
     }
 
+    public static function fromNameAndValue(
+        string $name,
+        string $value
+    ): self {
+        return new self($name, $value);
+    }
+
     public function getName(): string
     {
         return $this->name;

@@ -2,7 +2,7 @@
 
 namespace App\Domain\Svg;
 
-class Viewbox implements \JsonSerializable
+class Viewbox implements \JsonSerializable, \Stringable
 {
     private function __construct(
         private readonly float $x,
@@ -35,6 +35,12 @@ class Viewbox implements \JsonSerializable
     public function getHeight(): float
     {
         return $this->height;
+    }
+
+    public function __toString(): string
+    {
+        // -0.9 -0.9 1.8 1.8
+        return sprintf('%s %s %s %s', $this->getX(), $this->getY(), $this->getWidth(), $this->getHeight());
     }
 
     public function jsonSerialize(): array

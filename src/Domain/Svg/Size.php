@@ -4,13 +4,13 @@ namespace App\Domain\Svg;
 
 use App\Domain\PuzzleException;
 
-class Size implements \JsonSerializable
+class Size implements \JsonSerializable, \Stringable
 {
     private function __construct(
-        private readonly int $size
+        private readonly int $value
     ) {
-        if ($this->size < 1 || $this->size > 1024) {
-            throw new PuzzleException(sprintf('Invalid svg size "%s" provided', $this->size));
+        if ($this->value < 1 || $this->value > 1024) {
+            throw new PuzzleException(sprintf('Invalid svg size "%s" provided', $this->value));
         }
     }
 
@@ -28,13 +28,18 @@ class Size implements \JsonSerializable
         return new self($size);
     }
 
-    public function getSize(): int
+    public function getValue(): int
     {
-        return $this->size;
+        return $this->value;
+    }
+
+    public function __toString(): string
+    {
+        return (string) $this->getValue();
     }
 
     public function jsonSerialize(): int
     {
-        return $this->getSize();
+        return $this->getValue();
     }
 }

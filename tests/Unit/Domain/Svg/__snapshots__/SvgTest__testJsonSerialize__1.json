@@ -115,22 +115,50 @@
             ]
         }
     },
-    "size": 100,
-    "rotations": [
-        {
-            "axis": "y",
-            "value": 45
+    "svg": {
+        "size": 100,
+        "rotations": [
+            {
+                "axis": "y",
+                "value": 45
+            },
+            {
+                "axis": "x",
+                "value": -34
+            }
+        ],
+        "backgroundColor": "#FFA100",
+        "viewbox": {
+            "x": -0.9,
+            "y": -0.9,
+            "width": 1.8,
+            "height": 1.8
         },
-        {
-            "axis": "x",
-            "value": -34
-        }
-    ],
-    "backgroundColor": "#FFA100",
-    "viewbox": {
-        "x": -0.9,
-        "y": -0.9,
-        "width": 1.8,
-        "height": 1.8
+        "faces": {
+            "visible": [],
+            "hidden": []
+        },
+        "groups": [
+            {
+                "attributes": [
+                    {
+                        "name": "name",
+                        "value": "value"
+                    }
+                ],
+                "polygons": [
+                    {
+                        "points": [
+                            {
+                                "x": 1,
+                                "y": 2
+                            }
+                        ],
+                        "fill": "#FFA100",
+                        "stroke": "#EE0000"
+                    }
+                ]
+            }
+        ]
     }
 }
