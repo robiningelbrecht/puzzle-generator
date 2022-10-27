@@ -2,13 +2,13 @@
 
 namespace App\Controller;
 
-use App\Domain\Renderer;
 use App\Domain\RubiksCube\Algorithm;
 use App\Domain\RubiksCube\ColorScheme\ColorSchemeBuilder;
 use App\Domain\RubiksCube\Rotation;
 use App\Domain\RubiksCube\RubiksCubeBuilder;
 use App\Domain\RubiksCube\Size as CubeSize;
 use App\Domain\Svg\Size as SvgSize;
+use App\Domain\Svg\SvgBuilder;
 use App\Infrastructure\Json;
 use App\Infrastructure\ValueObject\Color;
 use Psr\Http\Message\ResponseInterface;
@@ -51,12 +51,11 @@ class RubiksCubeRequestHandler
             ->build()
             ->scramble(Algorithm::fromOptionalString($cubeParams['algorithm'] ?? null));
 
-        $svg = Renderer::renderCube(
-            $cube,
-            Rotation::fromMap(!empty($params['rotations']) && is_array($params['rotations']) ? $params['rotations'] : []),
-            SvgSize::fromOptionalInt($params['size'] ?? null),
-            Color::fromOptionalHexString($params['backgroundColor'] ?? null),
-        );
+        $svg = SvgBuilder::forCube($cube)
+            ->withSize(SvgSize::fromOptionalInt($params['size'] ?? null))
+            ->withBackgroundColor(Color::fromOptionalHexString($params['backgroundColor'] ?? null))
+            ->withRotations(...Rotation::fromMap(!empty($params['rotations']) && is_array($params['rotations']) ? $params['rotations'] : []))
+            ->build();
 
         if (isset($params['json'])) {
             $response->getBody()->write(Json::encode($svg));

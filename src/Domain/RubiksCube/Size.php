@@ -2,7 +2,7 @@
 
 namespace App\Domain\RubiksCube;
 
-use App\Domain\PuzzleException;
+use App\Infrastructure\Exception\PuzzleException;
 
 class Size implements \JsonSerializable
 {

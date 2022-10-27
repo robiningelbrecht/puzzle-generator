@@ -2,8 +2,8 @@
 
 namespace App\Tests\Unit\Domain\RubiksCube;
 
-use App\Domain\PuzzleException;
 use App\Domain\RubiksCube\Size;
+use App\Infrastructure\Exception\PuzzleException;
 use App\Infrastructure\Json;
 use PHPUnit\Framework\TestCase;
 

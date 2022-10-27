@@ -2,12 +2,12 @@
 
 namespace App\Domain\RubiksCube;
 
-use App\Domain\PuzzleException;
 use App\Domain\RubiksCube\Axis\Axis;
 use App\Domain\RubiksCube\Axis\AxisOrientation;
 use App\Domain\RubiksCube\ColorScheme\ColorScheme;
 use App\Domain\RubiksCube\Turn\Turn;
 use App\Domain\RubiksCube\Turn\TurnType;
+use App\Infrastructure\Exception\PuzzleException;
 use App\Infrastructure\ValueObject\Color;
 
 class RubiksCube implements \JsonSerializable

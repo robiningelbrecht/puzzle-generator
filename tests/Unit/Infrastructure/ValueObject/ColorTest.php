@@ -2,7 +2,7 @@
 
 namespace App\Tests\Unit\Infrastructure\ValueObject;
 
-use App\Domain\PuzzleException;
+use App\Infrastructure\Exception\PuzzleException;
 use App\Infrastructure\Json;
 use App\Infrastructure\ValueObject\Color;
 use PHPUnit\Framework\TestCase;

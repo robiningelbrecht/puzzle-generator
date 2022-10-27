@@ -2,7 +2,7 @@
 
 namespace App\Infrastructure\ValueObject;
 
-use App\Domain\PuzzleException;
+use App\Infrastructure\Exception\PuzzleException;
 
 use function Safe\preg_match;
 

@@ -2,8 +2,8 @@
 
 namespace App\Tests\Unit\Domain\Svg;
 
-use App\Domain\PuzzleException;
 use App\Domain\Svg\Size;
+use App\Infrastructure\Exception\PuzzleException;
 use App\Infrastructure\Json;
 use PHPUnit\Framework\TestCase;
 

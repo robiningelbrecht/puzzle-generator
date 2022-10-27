@@ -2,8 +2,8 @@
 
 namespace App\Tests\Unit\Infrastructure;
 
-use App\Domain\PuzzleException;
-use App\Infrastructure\ErrorRenderer;
+use App\Infrastructure\Exception\ErrorRenderer;
+use App\Infrastructure\Exception\PuzzleException;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Exception\HttpNotFoundException;

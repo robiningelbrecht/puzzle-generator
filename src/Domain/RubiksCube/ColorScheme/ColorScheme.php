@@ -2,8 +2,8 @@
 
 namespace App\Domain\RubiksCube\ColorScheme;
 
-use App\Domain\PuzzleException;
 use App\Domain\RubiksCube\Face;
+use App\Infrastructure\Exception\PuzzleException;
 use App\Infrastructure\ValueObject\Color;
 
 class ColorScheme implements \JsonSerializable

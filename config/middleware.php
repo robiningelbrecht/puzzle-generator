@@ -1,6 +1,6 @@
 <?php
 
-use App\Infrastructure\ErrorRenderer;
+use App\Infrastructure\Exception\ErrorRenderer;
 use App\Infrastructure\Json;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;

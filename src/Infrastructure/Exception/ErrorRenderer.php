@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Infrastructure;
+namespace App\Infrastructure\Exception;
 
-use App\Domain\PuzzleException;
 use Slim\Error\Renderers\HtmlErrorRenderer;
 use Slim\Exception\HttpNotFoundException;
 

@@ -2,39 +2,39 @@
 
 namespace App\Domain\Svg;
 
-use App\Domain\RubiksCube\Axis\Axis;
-use App\Domain\RubiksCube\Face;
-use App\Domain\RubiksCube\Rotation;
 use App\Domain\RubiksCube\RubiksCube;
 use App\Infrastructure\ValueObject\Color;
 
 class Svg implements \JsonSerializable
 {
-    private array $groups;
-    private array $visibleFaces;
-    private array $hiddenFaces;
-
     private function __construct(
         private readonly RubiksCube $cube,
-        private Size $size,
-        private Color $backgroundColor,
-        private array $rotations,
+        private readonly Size $size,
+        private readonly Color $backgroundColor,
+        private readonly array $rotations,
+        private readonly array $groups,
+        private readonly array $visibleFaces,
+        private readonly array $hiddenFaces,
     ) {
-        $this->groups = [];
-        $this->visibleFaces = [];
-        $this->hiddenFaces = [];
     }
 
-    public static function default(RubiksCube $cube): self
-    {
+    public static function fromValues(
+        RubiksCube $cube,
+        Size $size,
+        Color $backgroundColor,
+        array $rotations,
+        array $groups,
+        array $visibleFaces,
+        array $hiddenFaces,
+    ): self {
         return new self(
             $cube,
-            Size::fromInt(128),
-            Color::transparent(),
-            [
-                Rotation::fromAxisAndValue(Axis::Y, Rotation::DEFAULT_Y),
-                Rotation::fromAxisAndValue(Axis::X, Rotation::DEFAULT_X),
-            ],
+            $size,
+            $backgroundColor,
+            $rotations,
+            $groups,
+            $visibleFaces,
+            $hiddenFaces,
         );
     }
 
@@ -48,31 +48,9 @@ class Svg implements \JsonSerializable
         return $this->size;
     }
 
-    public function withSize(Size $size = null): self
-    {
-        if (!$size) {
-            return $this;
-        }
-
-        $this->size = $size;
-
-        return $this;
-    }
-
     public function getBackgroundColor(): Color
     {
         return $this->backgroundColor;
-    }
-
-    public function withBackgroundColor(Color $color = null): self
-    {
-        if (!$color) {
-            return $this;
-        }
-
-        $this->backgroundColor = $color;
-
-        return $this;
     }
 
     public function getRotations(): array
@@ -80,27 +58,9 @@ class Svg implements \JsonSerializable
         return $this->rotations;
     }
 
-    public function withRotations(Rotation ...$rotations): self
-    {
-        if (!$rotations) {
-            return $this;
-        }
-
-        $this->rotations = $rotations;
-
-        return $this;
-    }
-
     public function getVisibleFaces(): array
     {
         return $this->visibleFaces;
-    }
-
-    public function withVisibleFaces(Face ...$visibleFaces): self
-    {
-        $this->visibleFaces = $visibleFaces;
-
-        return $this;
     }
 
     public function getHiddenFaces(): array
@@ -108,23 +68,9 @@ class Svg implements \JsonSerializable
         return $this->hiddenFaces;
     }
 
-    public function withHiddenFaces(Face ...$hiddenFaces): self
-    {
-        $this->hiddenFaces = $hiddenFaces;
-
-        return $this;
-    }
-
     public function getGroups(): array
     {
         return $this->groups;
-    }
-
-    public function withGroups(Group ...$groups): self
-    {
-        $this->groups = $groups;
-
-        return $this;
     }
 
     public function getViewBox(): Viewbox

@@ -1,40 +1,46 @@
 <?php
 
-namespace App\Domain;
+namespace App\Domain\Svg;
 
+use App\Domain\RubiksCube\Axis\Axis;
+use App\Domain\RubiksCube\Face;
 use App\Domain\RubiksCube\Render\FacePositions;
 use App\Domain\RubiksCube\Render\Sticker;
+use App\Domain\RubiksCube\Rotation;
 use App\Domain\RubiksCube\RubiksCube;
-use App\Domain\Svg\Attribute;
-use App\Domain\Svg\Group;
-use App\Domain\Svg\Polygon;
-use App\Domain\Svg\Size;
-use App\Domain\Svg\Svg;
-use App\Infrastructure\Json;
 use App\Infrastructure\ValueObject\Color;
 use App\Infrastructure\ValueObject\Point;
 
-class Renderer
+class SvgBuilder
 {
     private const OUTLINE_WIDTH = 0.94;
+    private const DEPTH = 5;
 
-    public static function renderCube(
-        RubiksCube $cube,
-        array $rotations = [],
-        Size $svgSize = null,
-        Color $backgroundColor = null): Svg
+    private Size $size;
+    private Color $backgroundColor;
+    private array $rotations;
+
+    private function __construct(
+        private readonly RubiksCube $cube
+    ) {
+        $this->size = Size::fromInt(128);
+        $this->backgroundColor = Color::transparent();
+        $this->rotations = [
+            Rotation::fromAxisAndValue(Axis::Y, Rotation::DEFAULT_Y),
+            Rotation::fromAxisAndValue(Axis::X, Rotation::DEFAULT_X),
+        ];
+    }
+
+    public static function forCube(RubiksCube $cube): self
     {
-        $svg = Svg::default($cube)
-            ->withSize($svgSize)
-            ->withBackgroundColor($backgroundColor)
-            ->withRotations(...$rotations); // This is only added on the SVG VO, so we can output it in the JSON notation.
+        return new self($cube);
+    }
 
-        $facePositions = FacePositions::fromRotations(...$svg->getRotations());
-        // These are only added on the SVG VO, so we can output it in the JSON notation for debugging reasons.
-        $svg
-            ->withVisibleFaces(...$facePositions->getVisibleFaces())
-            ->withHiddenFaces(...$facePositions->getHiddenFaces());
-        $stickers = Sticker::createForCubeAndDistance($cube, 5, $svg->getRotations());
+    public function build(): Svg
+    {
+        $cube = $this->cube;
+        $facePositions = FacePositions::fromRotations(...$this->rotations);
+        $stickers = Sticker::createForCubeAndDistance($cube, self::DEPTH, $this->rotations);
 
         $cubeSize = $cube->getSize()->getValue();
         $cubeOutlineGroup = Group::fromAttributes(
@@ -79,8 +85,47 @@ class Renderer
             $faceStickerGroups[] = $group;
         }
 
-        $svg->withGroups($cubeOutlineGroup, ...$faceStickerGroups);
+        return Svg::fromValues(
+            $this->cube,
+            $this->size,
+            $this->backgroundColor,
+            $this->rotations,
+            [$cubeOutlineGroup, ...$faceStickerGroups],
+            $facePositions->getVisibleFaces(),
+            $facePositions->getHiddenFaces(),
+        );
+    }
 
-        return $svg;
+    public function withSize(Size $size = null): self
+    {
+        if (!$size) {
+            return $this;
+        }
+
+        $this->size = $size;
+
+        return $this;
+    }
+
+    public function withBackgroundColor(Color $color = null): self
+    {
+        if (!$color) {
+            return $this;
+        }
+
+        $this->backgroundColor = $color;
+
+        return $this;
+    }
+
+    public function withRotations(Rotation ...$rotations): self
+    {
+        if (!$rotations) {
+            return $this;
+        }
+
+        $this->rotations = $rotations;
+
+        return $this;
     }
 }

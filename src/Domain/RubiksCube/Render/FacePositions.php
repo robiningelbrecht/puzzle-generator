@@ -40,7 +40,7 @@ class FacePositions
      */
     public function getHiddenFaces(): array
     {
-        return array_filter($this->getRenderOrder(), fn (Face $face) => !$this->isFaceVisible($face));
+        return array_values(array_filter($this->getRenderOrder(), fn (Face $face) => !$this->isFaceVisible($face)));
     }
 
     /**
@@ -48,7 +48,7 @@ class FacePositions
      */
     public function getVisibleFaces(): array
     {
-        return array_filter($this->getRenderOrder(), fn (Face $face) => $this->isFaceVisible($face));
+        return array_values(array_filter($this->getRenderOrder(), fn (Face $face) => $this->isFaceVisible($face)));
     }
 
     private function isFaceVisible(Face $face): bool

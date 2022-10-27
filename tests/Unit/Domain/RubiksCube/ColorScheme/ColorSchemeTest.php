@@ -2,9 +2,9 @@
 
 namespace App\Tests\Unit\Domain\RubiksCube\ColorScheme;
 
-use App\Domain\PuzzleException;
 use App\Domain\RubiksCube\ColorScheme\ColorSchemeBuilder;
 use App\Domain\RubiksCube\Face;
+use App\Infrastructure\Exception\PuzzleException;
 use App\Infrastructure\Json;
 use App\Infrastructure\ValueObject\Color;
 use PHPUnit\Framework\TestCase;

@@ -2,9 +2,9 @@
 
 namespace App\Domain\RubiksCube\Render;
 
-use App\Domain\PuzzleException;
 use App\Domain\RubiksCube\Face;
 use App\Domain\RubiksCube\RubiksCube;
+use App\Infrastructure\Exception\PuzzleException;
 use App\Infrastructure\Math;
 use App\Infrastructure\ValueObject\Color;
 use App\Infrastructure\ValueObject\Point;

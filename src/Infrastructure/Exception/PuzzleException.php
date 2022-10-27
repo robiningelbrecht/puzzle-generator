@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain;
+namespace App\Infrastructure\Exception;
 
 class PuzzleException extends \RuntimeException
 {

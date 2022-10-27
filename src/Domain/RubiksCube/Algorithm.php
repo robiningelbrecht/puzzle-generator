@@ -2,9 +2,9 @@
 
 namespace App\Domain\RubiksCube;
 
-use App\Domain\PuzzleException;
 use App\Domain\RubiksCube\Turn\Turn;
 use App\Domain\RubiksCube\Turn\TurnType;
+use App\Infrastructure\Exception\PuzzleException;
 
 use function Safe\preg_match;
 

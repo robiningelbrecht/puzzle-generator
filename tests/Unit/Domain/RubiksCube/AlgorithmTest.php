@@ -2,8 +2,8 @@
 
 namespace App\Tests\Unit\Domain\RubiksCube;
 
-use App\Domain\PuzzleException;
 use App\Domain\RubiksCube\Algorithm;
+use App\Infrastructure\Exception\PuzzleException;
 use App\Infrastructure\Json;
 use PHPUnit\Framework\TestCase;
 use Spatie\Snapshots\MatchesSnapshots;

@@ -2,7 +2,6 @@
 
 namespace App\Tests\Unit\Domain\RubiksCube;
 
-use App\Domain\PuzzleException;
 use App\Domain\RubiksCube\Algorithm;
 use App\Domain\RubiksCube\ColorScheme\ColorScheme;
 use App\Domain\RubiksCube\Move;
@@ -10,6 +9,7 @@ use App\Domain\RubiksCube\RubiksCubeBuilder;
 use App\Domain\RubiksCube\Size;
 use App\Domain\RubiksCube\Turn\Turn;
 use App\Domain\RubiksCube\Turn\TurnType;
+use App\Infrastructure\Exception\PuzzleException;
 use App\Infrastructure\Json;
 use App\Infrastructure\ValueObject\Color;
 use PHPUnit\Framework\TestCase;
