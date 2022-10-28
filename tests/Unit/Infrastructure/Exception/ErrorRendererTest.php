@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Unit\Infrastructure;
+namespace App\Tests\Unit\Infrastructure\Exception;
 
 use App\Infrastructure\Exception\ErrorRenderer;
 use App\Infrastructure\Exception\PuzzleException;

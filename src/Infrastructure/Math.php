@@ -68,17 +68,4 @@ class Math
             $position->getZ()
         );
     }
-
-    public static function createMatrix(int $rows, int $cols): array
-    {
-        $matrix = [];
-        for ($r = 0; $r < $rows; ++$r) {
-            $matrix[$r] = [];
-            for ($c = 0; $c < $cols; ++$c) {
-                $matrix[$r][$c] = null;
-            }
-        }
-
-        return $matrix;
-    }
 }

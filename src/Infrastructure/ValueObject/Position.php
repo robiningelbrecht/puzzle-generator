@@ -2,7 +2,7 @@
 
 namespace App\Infrastructure\ValueObject;
 
-class Position
+class Position implements \JsonSerializable
 {
     private function __construct(
         private readonly float $x,
@@ -32,5 +32,14 @@ class Position
     public function getZ(): float
     {
         return $this->z;
+    }
+
+    public function jsonSerialize(): array
+    {
+        return [
+            'x' => $this->getX(),
+            'y' => $this->getY(),
+            'z' => $this->getZ(),
+        ];
     }
 }
