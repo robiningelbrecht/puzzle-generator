@@ -41,11 +41,6 @@ class Color implements \Stringable, \JsonSerializable
         return new self(self::TRANSPARENT);
     }
 
-    public static function yellow(): self
-    {
-        return self::fromHexString('#FEFE00');
-    }
-
     public static function white(): self
     {
         return self::fromHexString('#FFFFFF');
@@ -54,6 +49,16 @@ class Color implements \Stringable, \JsonSerializable
     public static function black(): self
     {
         return self::fromHexString('#000000');
+    }
+
+    public static function darkGrey(): self
+    {
+        return self::fromHexString('#404040');
+    }
+
+    public static function yellow(): self
+    {
+        return self::fromHexString('#FEFE00');
     }
 
     public static function red(): self

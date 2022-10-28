@@ -23,6 +23,7 @@ class RubiksCube implements \JsonSerializable
         private readonly Size $size,
         private readonly ColorScheme $colorScheme,
         private readonly Color $baseColor,
+        private readonly ?Mask $mask = null
     ) {
         $this->gridSize = pow($this->size->getValue(), 2);
         $this->clockwiseStickerMapping = [];
@@ -32,7 +33,12 @@ class RubiksCube implements \JsonSerializable
 
         foreach (Face::cases() as $face) {
             $this->faces[$face->name] = [];
+            $stickersToMask = $this->mask?->getStickersToMask($face) ?? [];
             for ($i = 0; $i < $this->gridSize; ++$i) {
+                if (in_array($i, $stickersToMask)) {
+                    $this->faces[$face->name][] = Color::darkGrey();
+                    continue;
+                }
                 $this->faces[$face->name][] = $this->getColorScheme()->getColorForFace($face);
             }
         }
@@ -48,11 +54,13 @@ class RubiksCube implements \JsonSerializable
         Size $size,
         ColorScheme $colorScheme,
         Color $baseColor,
+        Mask $mask = null,
     ): self {
         return new self(
             $size,
             $colorScheme,
             $baseColor,
+            $mask,
         );
     }
 
@@ -74,6 +82,11 @@ class RubiksCube implements \JsonSerializable
     public function getFaces(): array
     {
         return $this->faces;
+    }
+
+    public function getMask(): ?Mask
+    {
+        return $this->mask;
     }
 
     public function scramble(Algorithm $algorithm): self
@@ -98,6 +111,7 @@ class RubiksCube implements \JsonSerializable
             'baseColor' => $this->getBaseColor(),
             'faces' => $this->getFaces(),
             'algorithm' => $this->algorithm,
+            'mask' => $this->mask,
             'stickerMapping' => [
                 'clockWise' => $this->clockwiseStickerMapping,
                 'counterClockWise' => $this->counterClockwiseStickerMapping,

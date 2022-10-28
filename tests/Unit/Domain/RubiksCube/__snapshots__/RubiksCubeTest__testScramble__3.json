@@ -187,6 +187,7 @@
             "slices": 1
         }
     ],
+    "mask": null,
     "stickerMapping": {
         "clockWise": [
             7,

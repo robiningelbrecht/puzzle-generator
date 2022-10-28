@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Domain\RubiksCube\Algorithm;
 use App\Domain\RubiksCube\ColorScheme\ColorSchemeBuilder;
+use App\Domain\RubiksCube\Mask;
 use App\Domain\RubiksCube\Rotation;
 use App\Domain\RubiksCube\RubiksCubeBuilder;
 use App\Domain\RubiksCube\Size as CubeSize;
@@ -44,7 +45,8 @@ class RubiksCubeRequestHandler
                         ->withColorForB(Color::fromOptionalHexString($cubeParams['colorScheme']['B'] ?? null))
                         ->build()
                 )
-                ->withBaseColor(Color::fromOptionalHexString($cubeParams['baseColor'] ?? null));
+                ->withBaseColor(Color::fromOptionalHexString($cubeParams['baseColor'] ?? null))
+                ->withMask(Mask::tryFrom($cubeParams['mask'] ?? ''));
         }
 
         $cube = $cubeBuilder

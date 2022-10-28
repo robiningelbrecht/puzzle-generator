@@ -175,6 +175,7 @@
             ]
         },
         "algorithm": [],
+        "mask": null,
         "stickerMapping": {
             "clockWise": [
                 21,

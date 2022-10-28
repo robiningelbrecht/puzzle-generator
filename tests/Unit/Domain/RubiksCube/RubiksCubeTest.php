@@ -4,6 +4,7 @@ namespace App\Tests\Unit\Domain\RubiksCube;
 
 use App\Domain\RubiksCube\Algorithm;
 use App\Domain\RubiksCube\ColorScheme\ColorScheme;
+use App\Domain\RubiksCube\Mask;
 use App\Domain\RubiksCube\Move;
 use App\Domain\RubiksCube\RubiksCubeBuilder;
 use App\Domain\RubiksCube\Size;
@@ -24,6 +25,7 @@ class RubiksCubeTest extends TestCase
         $cube = RubiksCubeBuilder::fromDefaults()
             ->withSize(null)
             ->withBaseColor(null)
+            ->withMask(null)
             ->build();
 
         $this->assertEquals($cube, RubiksCubeBuilder::fromDefaults()->build());
@@ -43,6 +45,7 @@ class RubiksCubeTest extends TestCase
                 Color::red()
             ))
             ->withBaseColor(Color::fromHexString('#EEEEEE'))
+            ->withMask(Mask::F2L)
             ->build();
 
         $this->assertMatchesJsonSnapshot(Json::encode($cube));

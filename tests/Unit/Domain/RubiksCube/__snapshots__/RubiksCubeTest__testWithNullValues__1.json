@@ -78,6 +78,7 @@
         ]
     },
     "algorithm": null,
+    "mask": null,
     "stickerMapping": {
         "clockWise": [
             7,

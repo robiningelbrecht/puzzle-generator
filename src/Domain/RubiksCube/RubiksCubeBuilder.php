@@ -10,6 +10,7 @@ class RubiksCubeBuilder
     private Size $size;
     private ColorScheme $colorScheme;
     private Color $baseColor;
+    private ?Mask $mask;
 
     private function __construct()
     {
@@ -23,6 +24,7 @@ class RubiksCubeBuilder
             Color::green(),
         );
         $this->baseColor = Color::black();
+        $this->mask = null;
     }
 
     public static function fromDefaults(): self
@@ -36,6 +38,7 @@ class RubiksCubeBuilder
             $this->size,
             $this->colorScheme,
             $this->baseColor,
+            $this->mask
         );
     }
 
@@ -64,6 +67,13 @@ class RubiksCubeBuilder
         }
 
         $this->baseColor = $color;
+
+        return $this;
+    }
+
+    public function withMask(Mask $mask = null): self
+    {
+        $this->mask = $mask;
 
         return $this;
     }
