@@ -1,5 +1,5 @@
 {
-    "size": 2,
+    "size": 1,
     "colorScheme": {
         "U": "#FEFE00",
         "R": "#EE0000",
@@ -11,40 +11,22 @@
     "baseColor": "#000000",
     "faces": {
         "U": [
-            "#FEFE00",
-            "#0000F2",
-            "#00D800",
-            "#EE0000"
+            "#0000F2"
         ],
         "R": [
-            "#FFFFFF",
-            "#FFA100",
-            "#00D800",
-            "#FEFE00"
+            "#EE0000"
         ],
         "F": [
-            "#FFA100",
-            "#0000F2",
-            "#00D800",
-            "#FEFE00"
+            "#FFFFFF"
         ],
         "D": [
-            "#FFFFFF",
-            "#EE0000",
-            "#FEFE00",
-            "#FFA100"
+            "#00D800"
         ],
         "L": [
-            "#FFA100",
-            "#FFFFFF",
-            "#0000F2",
-            "#EE0000"
+            "#FFA100"
         ],
         "B": [
-            "#FFFFFF",
-            "#00D800",
-            "#0000F2",
-            "#EE0000"
+            "#FEFE00"
         ]
     },
     "algorithm": [
@@ -124,21 +106,12 @@
     "mask": null,
     "stickerMapping": {
         "clockWise": [
-            3,
-            1,
-            4,
-            2
+            1
         ],
         "counterClockWise": [
-            2,
-            4,
-            1,
-            3
+            1
         ],
         "opposite": [
-            4,
-            3,
-            2,
             1
         ]
     }

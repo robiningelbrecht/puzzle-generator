@@ -67,6 +67,10 @@ class RubiksCubeTest extends TestCase
         $cube->scramble(Algorithm::fromString("F R U' R' U' R U R' F'"));
         $this->assertMatchesJsonSnapshot(Json::encode($cube));
 
+        $cube = RubiksCubeBuilder::fromDefaults()->build();
+        $cube->scramble(Algorithm::fromString('F R2'));
+        $this->assertMatchesJsonSnapshot(Json::encode($cube));
+
         // Using the inverse algorithm should bring it back to a solved state.
         $cube->scramble(Algorithm::fromString("F R U' R' U R U R' F'"));
         $this->assertMatchesJsonSnapshot(Json::encode($cube));

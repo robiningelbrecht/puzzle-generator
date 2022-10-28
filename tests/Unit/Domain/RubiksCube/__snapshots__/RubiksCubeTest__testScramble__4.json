@@ -1,5 +1,5 @@
 {
-    "size": 2,
+    "size": 3,
     "colorScheme": {
         "U": "#FEFE00",
         "R": "#EE0000",
@@ -12,39 +12,69 @@
     "faces": {
         "U": [
             "#FEFE00",
-            "#0000F2",
+            "#FFA100",
+            "#FEFE00",
             "#00D800",
-            "#EE0000"
+            "#00D800",
+            "#0000F2",
+            "#FFFFFF",
+            "#EE0000",
+            "#FFFFFF"
         ],
         "R": [
+            "#00D800",
             "#FFFFFF",
+            "#0000F2",
+            "#EE0000",
+            "#FEFE00",
             "#FFA100",
             "#00D800",
-            "#FEFE00"
+            "#FEFE00",
+            "#0000F2"
         ],
         "F": [
             "#FFA100",
-            "#0000F2",
+            "#FFFFFF",
+            "#FFA100",
             "#00D800",
-            "#FEFE00"
+            "#FFA100",
+            "#0000F2",
+            "#EE0000",
+            "#FEFE00",
+            "#EE0000"
         ],
         "D": [
             "#FFFFFF",
-            "#EE0000",
-            "#FEFE00",
-            "#FFA100"
-        ],
-        "L": [
             "#FFA100",
-            "#FFFFFF",
-            "#0000F2",
-            "#EE0000"
-        ],
-        "B": [
             "#FFFFFF",
             "#00D800",
             "#0000F2",
-            "#EE0000"
+            "#0000F2",
+            "#FEFE00",
+            "#EE0000",
+            "#FEFE00"
+        ],
+        "L": [
+            "#00D800",
+            "#FEFE00",
+            "#0000F2",
+            "#FFA100",
+            "#FFFFFF",
+            "#EE0000",
+            "#00D800",
+            "#FFFFFF",
+            "#0000F2"
+        ],
+        "B": [
+            "#EE0000",
+            "#FFFFFF",
+            "#EE0000",
+            "#00D800",
+            "#EE0000",
+            "#0000F2",
+            "#FFA100",
+            "#FEFE00",
+            "#FFA100"
         ]
     },
     "algorithm": [
@@ -55,10 +85,22 @@
             "slices": 1
         },
         {
+            "notation": "u",
+            "move": "U",
+            "turnType": "clockwise",
+            "slices": 2
+        },
+        {
             "notation": "F",
             "move": "F",
             "turnType": "clockwise",
             "slices": 1
+        },
+        {
+            "notation": "f",
+            "move": "F",
+            "turnType": "clockwise",
+            "slices": 2
         },
         {
             "notation": "R",
@@ -67,10 +109,22 @@
             "slices": 1
         },
         {
+            "notation": "r",
+            "move": "R",
+            "turnType": "clockwise",
+            "slices": 2
+        },
+        {
             "notation": "D",
             "move": "D",
             "turnType": "clockwise",
             "slices": 1
+        },
+        {
+            "notation": "d",
+            "move": "D",
+            "turnType": "clockwise",
+            "slices": 2
         },
         {
             "notation": "L",
@@ -79,10 +133,22 @@
             "slices": 1
         },
         {
+            "notation": "l",
+            "move": "L",
+            "turnType": "clockwise",
+            "slices": 2
+        },
+        {
             "notation": "B",
             "move": "B",
             "turnType": "clockwise",
             "slices": 1
+        },
+        {
+            "notation": "b",
+            "move": "B",
+            "turnType": "clockwise",
+            "slices": 2
         },
         {
             "notation": "M",
@@ -124,18 +190,33 @@
     "mask": null,
     "stickerMapping": {
         "clockWise": [
-            3,
-            1,
+            7,
             4,
-            2
-        ],
-        "counterClockWise": [
+            1,
+            8,
+            5,
             2,
-            4,
-            1,
+            9,
+            6,
             3
         ],
+        "counterClockWise": [
+            3,
+            6,
+            9,
+            2,
+            5,
+            8,
+            1,
+            4,
+            7
+        ],
         "opposite": [
+            9,
+            8,
+            7,
+            6,
+            5,
             4,
             3,
             2,

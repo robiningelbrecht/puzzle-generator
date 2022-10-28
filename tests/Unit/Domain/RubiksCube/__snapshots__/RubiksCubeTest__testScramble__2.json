@@ -13,66 +13,66 @@
         "U": [
             "#FEFE00",
             "#FEFE00",
+            "#EE0000",
             "#FEFE00",
             "#FEFE00",
-            "#FEFE00",
-            "#FEFE00",
-            "#FEFE00",
-            "#FEFE00",
-            "#FEFE00"
+            "#FFFFFF",
+            "#FFA100",
+            "#FFA100",
+            "#FFFFFF"
         ],
         "R": [
             "#EE0000",
             "#EE0000",
+            "#FEFE00",
             "#EE0000",
             "#EE0000",
+            "#FEFE00",
             "#EE0000",
             "#EE0000",
-            "#EE0000",
-            "#EE0000",
-            "#EE0000"
+            "#FEFE00"
         ],
         "F": [
             "#0000F2",
             "#0000F2",
+            "#00D800",
             "#0000F2",
             "#0000F2",
+            "#00D800",
             "#0000F2",
             "#0000F2",
-            "#0000F2",
-            "#0000F2",
-            "#0000F2"
+            "#00D800"
         ],
         "D": [
+            "#EE0000",
+            "#EE0000",
+            "#FEFE00",
             "#FFFFFF",
             "#FFFFFF",
+            "#FEFE00",
             "#FFFFFF",
             "#FFFFFF",
-            "#FFFFFF",
-            "#FFFFFF",
-            "#FFFFFF",
-            "#FFFFFF",
-            "#FFFFFF"
+            "#FFA100"
         ],
         "L": [
             "#FFA100",
             "#FFA100",
+            "#FFFFFF",
             "#FFA100",
             "#FFA100",
+            "#FFFFFF",
             "#FFA100",
             "#FFA100",
-            "#FFA100",
-            "#FFA100",
-            "#FFA100"
+            "#FFFFFF"
         ],
         "B": [
+            "#0000F2",
             "#00D800",
             "#00D800",
+            "#0000F2",
             "#00D800",
             "#00D800",
-            "#00D800",
-            "#00D800",
-            "#00D800",
+            "#0000F2",
             "#00D800",
             "#00D800"
         ]
@@ -85,51 +85,9 @@
             "slices": 1
         },
         {
-            "notation": "R",
+            "notation": "R2",
             "move": "R",
-            "turnType": "clockwise",
-            "slices": 1
-        },
-        {
-            "notation": "U'",
-            "move": "U",
-            "turnType": "counterClockwise",
-            "slices": 1
-        },
-        {
-            "notation": "R'",
-            "move": "R",
-            "turnType": "counterClockwise",
-            "slices": 1
-        },
-        {
-            "notation": "U",
-            "move": "U",
-            "turnType": "clockwise",
-            "slices": 1
-        },
-        {
-            "notation": "R",
-            "move": "R",
-            "turnType": "clockwise",
-            "slices": 1
-        },
-        {
-            "notation": "U",
-            "move": "U",
-            "turnType": "clockwise",
-            "slices": 1
-        },
-        {
-            "notation": "R'",
-            "move": "R",
-            "turnType": "counterClockwise",
-            "slices": 1
-        },
-        {
-            "notation": "F'",
-            "move": "F",
-            "turnType": "counterClockwise",
+            "turnType": "double",
             "slices": 1
         }
     ],
