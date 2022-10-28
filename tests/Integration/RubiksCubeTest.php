@@ -129,6 +129,26 @@ class RubiksCubeTest extends WebTestCase
         $this->assertMatchesSnapshot((string) $response->getBody(), new SvgDriver());
     }
 
+    public function testGetRubiksCubeInNetViewAsSvg(): void
+    {
+        $params = [
+            'view' => 'net',
+            'cube' => [
+                'size' => 3,
+            ],
+        ];
+
+        $response = $this->getApp()->handle(
+            $this->createRequest(
+                'GET',
+                sprintf('/cube?%s', http_build_query($params))
+            )
+        );
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertMatchesSnapshot((string) $response->getBody(), new SvgDriver());
+    }
+
     public function testGetRubiksCubeAsJson(): void
     {
         $params = [
