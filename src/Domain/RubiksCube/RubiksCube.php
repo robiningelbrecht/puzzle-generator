@@ -111,7 +111,7 @@ class RubiksCube implements \JsonSerializable
             'baseColor' => $this->getBaseColor(),
             'faces' => $this->getFaces(),
             'algorithm' => $this->algorithm,
-            'mask' => $this->mask,
+            'mask' => $this->getMask(),
             'stickerMapping' => [
                 'clockWise' => $this->clockwiseStickerMapping,
                 'counterClockWise' => $this->counterClockwiseStickerMapping,
