@@ -22,6 +22,12 @@ class ColorTest extends TestCase
         $this->assertEquals(Color::fromHexString('#ffffff'), Color::fromOptionalHexString('#ffffff'));
     }
 
+    public function testIsTransparent(): void
+    {
+        $this->assertTrue(Color::transparent()->isTransparent());
+        $this->assertFalse(Color::black()->isTransparent());
+    }
+
     public function testItShouldThrowOnInvalidString(): void
     {
         $this->expectException(PuzzleException::class);
