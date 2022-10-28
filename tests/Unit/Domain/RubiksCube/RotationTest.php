@@ -18,11 +18,36 @@ class RotationTest extends TestCase
         $this->assertMatchesJsonSnapshot(Json::encode(Rotation::fromAxisAndValue(Axis::Y, 30)));
     }
 
+    public function testFromMap(): void
+    {
+        $this->assertMatchesJsonSnapshot(Json::encode(Rotation::fromMap([
+            ['axis' => 'x', 'value' => 30],
+            ['axis' => 'y', 'value' => 231],
+            ['axis' => 'z', 'value' => -90],
+        ])));
+    }
+
     public function testItShouldThrowOnInvalidValue(): void
     {
         $this->expectException(PuzzleException::class);
         $this->expectExceptionMessage('Invalid number (361) of rotation degrees provided');
 
         Rotation::fromAxisAndValue(Axis::Y, 361);
+    }
+
+    public function testItShouldThrowOnInvalidMap(): void
+    {
+        $this->expectException(PuzzleException::class);
+        $this->expectExceptionMessage('Invalid rotation provided. "axis" and "value" are required');
+
+        Rotation::fromMap([['axis' => 'x', 'john' => 'doe']]);
+    }
+
+    public function testItShouldThrowOnInvalidMapCase2(): void
+    {
+        $this->expectException(PuzzleException::class);
+        $this->expectExceptionMessage('Invalid rotation provided. "axis" and "value" are required');
+
+        Rotation::fromMap([['john' => 'doe', 'value' => 3]]);
     }
 }

@@ -4,15 +4,14 @@ namespace App\Domain\RubiksCube\Render;
 
 use App\Domain\RubiksCube\Face;
 use App\Domain\RubiksCube\RubiksCube;
-use App\Infrastructure\Exception\PuzzleException;
 use App\Infrastructure\Math;
 use App\Infrastructure\ValueObject\Color;
 use App\Infrastructure\ValueObject\Point;
 use App\Infrastructure\ValueObject\Position;
 
-class Sticker
+class Sticker implements \JsonSerializable
 {
-    private array $boundries;
+    private array $boundries = [];
 
     private function __construct(
         private readonly Position $position,
@@ -20,8 +19,11 @@ class Sticker
     ) {
     }
 
-    public static function createForCubeAndDistance(RubiksCube $cube, int $distance, array $rotations = []): array
+    public static function createForCubeAndDistance(RubiksCube $cube, int $distance, array $rotations): array
     {
+        if (empty($rotations)) {
+            throw new \RuntimeException('Rotations cannot be empty');
+        }
         $stickers = [];
         $cubeSize = $cube->getSize()->getValue();
 
@@ -104,9 +106,15 @@ class Sticker
 
     private function addBoundries(Point ...$boundries): void
     {
-        if (4 != count($boundries)) {
-            throw new PuzzleException('Invalid number of boundries provided');
-        }
         $this->boundries = $boundries;
+    }
+
+    public function jsonSerialize(): array
+    {
+        return [
+            'position' => $this->getPosition(),
+            'color' => $this->getColor(),
+            'boundries' => $this->getBoundries(),
+        ];
     }
 }
