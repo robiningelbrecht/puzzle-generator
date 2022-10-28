@@ -33,4 +33,9 @@ abstract class WebTestCase extends TestCase
     {
         return $this->app;
     }
+
+    public function getContainer(): ContainerInterface
+    {
+        return $this->container;
+    }
 }

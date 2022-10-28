@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Waw, this is embarrassing</title>
+    <title>{{ title }}</title>
     <style>
         body {
             margin: 0;
@@ -22,13 +22,17 @@
             display: inline-block;
             width: 65px
         }
+
+        table tr {
+            border-top: 1px solid #373e47;
+        }
+
+        table tr:nth-child(2n) {
+            background-color: #cccccc;
+        }
     </style>
 </head>
 <body>
-    <h1>Waw, this is embarrassing</h1>
-    <div>
-        <p>The application could not run because of the following error:</p>
-<h2>Something bad happened</h2>
-    </div>
+{{ content | raw }}
 </body>
 </html>

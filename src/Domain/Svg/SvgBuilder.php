@@ -17,7 +17,7 @@ use App\Infrastructure\ValueObject\Position;
 class SvgBuilder
 {
     private const OUTLINE_WIDTH = 0.94;
-    private const DEPTH = 5;
+    private const DISTANCE = 5;
 
     private Size $size;
     private Color $backgroundColor;
@@ -112,7 +112,7 @@ class SvgBuilder
 
         $svgGroups = [];
         $facePositions = FacePositions::fromRotations(...$this->rotations);
-        $stickers = Sticker::createForCubeAndDistance($cube, self::DEPTH, $this->rotations);
+        $stickers = Sticker::createForCubeAndDistance($cube, self::DISTANCE, $this->rotations);
 
         $cubeOutlineGroup = Group::fromAttributes(
             Attribute::fromNameAndValue('opacity', '1'),

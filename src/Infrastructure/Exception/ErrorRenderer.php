@@ -4,10 +4,16 @@ namespace App\Infrastructure\Exception;
 
 use Slim\Error\Renderers\HtmlErrorRenderer;
 use Slim\Exception\HttpNotFoundException;
+use Twig\Environment;
 
 class ErrorRenderer extends HtmlErrorRenderer
 {
     protected $defaultErrorTitle = 'Waw, this is embarrassing';
+
+    public function __construct(
+        private readonly Environment $twig
+    ) {
+    }
 
     public function __invoke(\Throwable $exception, bool $displayErrorDetails): string
     {
@@ -19,28 +25,10 @@ class ErrorRenderer extends HtmlErrorRenderer
                 $html = "<p>{$this->getErrorDescription($exception)}</p>";
             }
 
-            return sprintf(
-                '<!doctype html>'.
-                '<html lang="en">'.
-                '    <head>'.
-                '        <meta charset="utf-8">'.
-                '        <meta name="viewport" content="width=device-width, initial-scale=1">'.
-                '        <title>%s</title>'.
-                '        <style>'.
-                '            body{margin:0;padding:30px;font:12px/1.5 Helvetica,Arial,Verdana,sans-serif}'.
-                '            h1{margin:0;font-size:48px;font-weight:normal;line-height:48px}'.
-                '            strong{display:inline-block;width:65px}'.
-                '        </style>'.
-                '    </head>'.
-                '    <body>'.
-                '        <h1>%s</h1>'.
-                '        <div>%s</div>'.
-                '    </body>'.
-                '</html>',
-                $this->getErrorTitle($exception),
-                $this->getErrorTitle($exception),
-                $html
-            );
+            return $this->twig->render('error.html.twig', [
+                'title' => $this->getErrorTitle($exception),
+                'content' => $html,
+            ]);
         }
 
         return parent::__invoke($exception, $displayErrorDetails);
