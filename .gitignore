@@ -1,5 +1,4 @@
 /vendor/
-/to-delete/
 /nginx/
 
 .php-cs-fixer.cache

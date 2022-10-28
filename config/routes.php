@@ -1,5 +1,6 @@
 <?php
 
+use App\Controller\DocsRequestHandler;
 use App\Controller\RubiksCubeRequestHandler;
 use Slim\App;
 use Slim\Handlers\Strategies\RequestResponseArgs;
@@ -9,4 +10,5 @@ return function (App $app) {
     $routeCollector->setDefaultInvocationStrategy(new RequestResponseArgs());
 
     $app->get('/cube', RubiksCubeRequestHandler::class.':handle');
+    $app->get('/', DocsRequestHandler::class.':handle');
 };

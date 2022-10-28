@@ -17,7 +17,31 @@ class SvgTest extends TestCase
 {
     use MatchesSnapshots;
 
-    public function testJsonSerialize(): void
+    public function testJsonSerializeWithView3D(): void
+    {
+        $svg = SvgBuilder::forCube(RubiksCubeBuilder::fromDefaults()->build())
+            ->withSize(Size::fromInt(100))
+            ->withBackgroundColor(Color::orange())
+            ->withRotations(Rotation::fromAxisAndValue(Axis::Y, 30))
+            ->withView(View::THREE_D)
+            ->build();
+
+        $this->assertMatchesJsonSnapshot(Json::encode($svg));
+    }
+
+    public function testJsonSerializeWithViewTop(): void
+    {
+        $svg = SvgBuilder::forCube(RubiksCubeBuilder::fromDefaults()->build())
+            ->withSize(Size::fromInt(100))
+            ->withBackgroundColor(Color::orange())
+            ->withRotations(Rotation::fromAxisAndValue(Axis::Y, 30))
+            ->withView(View::TOP)
+            ->build();
+
+        $this->assertMatchesJsonSnapshot(Json::encode($svg));
+    }
+
+    public function testJsonSerializeWithViewNet(): void
     {
         $svg = SvgBuilder::forCube(RubiksCubeBuilder::fromDefaults()->build())
             ->withSize(Size::fromInt(100))

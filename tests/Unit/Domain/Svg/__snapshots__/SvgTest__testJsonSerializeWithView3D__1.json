@@ -125,7 +125,7 @@
             }
         ],
         "backgroundColor": "#FFA100",
-        "view": "net",
+        "view": "3D",
         "viewbox": {
             "x": -0.9,
             "y": -0.9,

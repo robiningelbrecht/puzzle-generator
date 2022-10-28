@@ -44,6 +44,65 @@ class SvgBuilder
     public function build(): Svg
     {
         $cube = $this->cube;
+        $cubeSize = $cube->getSize()->getValue();
+
+        if (VIEW::NET === $this->view) {
+            $length = 1;
+            $halfLength = $length / 2;
+            $elementWidth = $length / $cubeSize;
+            $halfElementWidth = $elementWidth / 2;
+
+            $group = Group::fromAttributes(
+                Attribute::fromNameAndValue('opacity', '1'),
+                Attribute::fromNameAndValue('stroke', Color::black()),
+                Attribute::fromNameAndValue('stroke-width', '0.02'),
+                Attribute::fromNameAndValue('stroke-linejoin', 'round')
+            );
+            foreach ([Face::U, Face::R, Face::F, Face::D, Face::L, Face::B] as $face) {
+                for ($i = 0; $i < $cubeSize; ++$i) {
+                    $vOffset = -(-$halfLength + $halfElementWidth + $elementWidth * $i);
+                    for ($j = 0; $j < $cubeSize; ++$j) {
+                        $hOffset = -$halfLength + $halfElementWidth + $elementWidth * $j;
+
+                        $translation = match ($face) {
+                            Face::U => Position::fromXYZ(0, 1, 0),
+                            Face::R => Position::fromXYZ(1, 0, 0),
+                            Face::F => Position::fromXYZ(0, 0, 0),
+                            Face::D => Position::fromXYZ(0, -1, 0),
+                            Face::L => Position::fromXYZ(-1, 0, 0),
+                            Face::B => Position::fromXYZ(2, 0, 0),
+                        };
+
+                        $p1 = Math::translate(Position::fromXYZ(-$halfElementWidth + $hOffset, $halfElementWidth + $vOffset, 0), $translation);
+                        $p2 = Math::translate(Position::fromXYZ($halfElementWidth + $hOffset, $halfElementWidth + $vOffset, 0), $translation);
+                        $p3 = Math::translate(Position::fromXYZ($halfElementWidth + $hOffset, -$halfElementWidth + $vOffset, 0), $translation);
+                        $p4 = Math::translate(Position::fromXYZ(-$halfElementWidth + $hOffset, -$halfElementWidth + $vOffset, 0), $translation);
+
+                        $group->addPolygon(Polygon::fromPointsAndFillColorAndStrokeColor(
+                            [
+                                Point::fromPosition(Math::scale(Math::translate($p1, Position::fromXYZ(-0.50, 0, 0)), 0.44)),
+                                Point::fromPosition(Math::scale(Math::translate($p2, Position::fromXYZ(-0.50, 0, 0)), 0.44)),
+                                Point::fromPosition(Math::scale(Math::translate($p3, Position::fromXYZ(-0.50, 0, 0)), 0.44)),
+                                Point::fromPosition(Math::scale(Math::translate($p4, Position::fromXYZ(-0.50, 0, 0)), 0.44)),
+                            ],
+                            $cube->getFaces()[$face->value][($i * $cubeSize) + $j] ?? Color::black(),
+                            $cube->getBaseColor()
+                        ));
+                    }
+                }
+            }
+
+            return Svg::fromValues(
+                $this->cube,
+                $this->size,
+                $this->backgroundColor,
+                $this->view,
+                $this->rotations,
+                [$group],
+                Face::cases(),
+                [],
+            );
+        }
         if (View::TOP === $this->view) {
             // If the "top" view has to be rendered, we can ignore any given rotations.
             $this->rotations = [
@@ -55,7 +114,6 @@ class SvgBuilder
         $facePositions = FacePositions::fromRotations(...$this->rotations);
         $stickers = Sticker::createForCubeAndDistance($cube, self::DEPTH, $this->rotations);
 
-        $cubeSize = $cube->getSize()->getValue();
         $cubeOutlineGroup = Group::fromAttributes(
             Attribute::fromNameAndValue('opacity', '1'),
             Attribute::fromNameAndValue('stroke', Color::black()),

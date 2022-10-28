@@ -10,7 +10,7 @@
 
 ---
 
-Generate Full 3D pictures of WCA twisty puzzles! (Rubiks cube image generator)
+Generate Full 3D pictures of Rubiks cube puzzles!
 
 * `git clone git@github.com:robiningelbrecht/puzzle-generator.git`
 * `docker-compose up --build -d`

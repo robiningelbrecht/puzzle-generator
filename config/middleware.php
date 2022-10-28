@@ -16,8 +16,13 @@ return function (App $app) {
 
             return $response->withHeader('Content-Type', 'application/json');
         } catch (\Safe\Exceptions\JsonException) {
+        }
+
+        if (str_starts_with($response->getBody(), '<svg')) {
             return $response->withHeader('Content-Type', 'image/svg+xml');
         }
+
+        return $response;
     });
 
     // Add Error middleware.
