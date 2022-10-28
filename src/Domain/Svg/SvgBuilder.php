@@ -8,8 +8,11 @@ use App\Domain\RubiksCube\Render\FacePositions;
 use App\Domain\RubiksCube\Render\Sticker;
 use App\Domain\RubiksCube\Rotation;
 use App\Domain\RubiksCube\RubiksCube;
+use App\Domain\RubiksCube\View;
+use App\Infrastructure\Math;
 use App\Infrastructure\ValueObject\Color;
 use App\Infrastructure\ValueObject\Point;
+use App\Infrastructure\ValueObject\Position;
 
 class SvgBuilder
 {
@@ -18,6 +21,7 @@ class SvgBuilder
 
     private Size $size;
     private Color $backgroundColor;
+    private View $view;
     private array $rotations;
 
     private function __construct(
@@ -25,6 +29,7 @@ class SvgBuilder
     ) {
         $this->size = Size::fromInt(128);
         $this->backgroundColor = Color::transparent();
+        $this->view = View::THREE_D;
         $this->rotations = [
             Rotation::fromAxisAndValue(Axis::Y, Rotation::DEFAULT_Y),
             Rotation::fromAxisAndValue(Axis::X, Rotation::DEFAULT_X),
@@ -39,6 +44,14 @@ class SvgBuilder
     public function build(): Svg
     {
         $cube = $this->cube;
+        if (View::TOP === $this->view) {
+            // If the "top" view has to be rendered, we can ignore any given rotations.
+            $this->rotations = [
+                Rotation::fromAxisAndValue(Axis::X, -90),
+            ];
+        }
+
+        $svgGroups = [];
         $facePositions = FacePositions::fromRotations(...$this->rotations);
         $stickers = Sticker::createForCubeAndDistance($cube, self::DEPTH, $this->rotations);
 
@@ -49,7 +62,7 @@ class SvgBuilder
             Attribute::fromNameAndValue('stroke-width', '0.1'),
             Attribute::fromNameAndValue('stroke-linejoin', 'round')
         );
-        $faceStickerGroups = [];
+
         foreach ($facePositions->getVisibleFaces() as $face) {
             $faceStickers = $stickers[$face->value];
             // Calculate face outline points.
@@ -82,15 +95,54 @@ class SvgBuilder
                     ));
                 }
             }
-            $faceStickerGroups[] = $group;
+            $svgGroups[] = $group;
+        }
+
+        if (View::TOP === $this->view) {
+            $ollGroup = Group::fromAttributes(
+                Attribute::fromNameAndValue('opacity', '1'),
+                Attribute::fromNameAndValue('stroke-opacity', '1'),
+                Attribute::fromNameAndValue('stroke-width', '0.02'),
+                Attribute::fromNameAndValue('stroke-linejoin', 'round')
+            );
+
+            foreach ([Face::R, Face::F, Face::L, Face::B] as $face) {
+                $faceStickers = $stickers[$face->value];
+                $v1 = Math::scale($facePositions->getPositionForFace($face), 0);
+                $v2 = Math::scale($facePositions->getPositionForFace($face), 0.2);
+
+                for ($i = 0; $i < $cubeSize; ++$i) {
+                    $center = Position::fromXYZ(
+                        ($faceStickers[$i][0]->getPosition()->getX() + $faceStickers[$i + 1][1]->getPosition()->getX()) / 2,
+                        ($faceStickers[$i][0]->getPosition()->getY() + $faceStickers[$i + 1][1]->getPosition()->getY()) / 2,
+                        0,
+                    );
+
+                    /** @var Sticker $sticker */
+                    $sticker = $faceStickers[0][$i];
+                    $ollGroup->addPolygon(Polygon::fromPointsAndFillColorAndStrokeColor(
+                        [
+                            Point::fromPosition(Math::translate(Math::transScale($faceStickers[$i][0]->getPosition(), $center, 0.94), $v1)),
+                            Point::fromPosition(Math::translate(Math::transScale($faceStickers[$i + 1][0]->getPosition(), $center, 0.94), $v1)),
+                            Point::fromPosition(Math::translate(Math::transScale($faceStickers[$i + 1][1]->getPosition(), $center, 0.94), $v2)),
+                            Point::fromPosition(Math::translate(Math::transScale($faceStickers[$i][1]->getPosition(), $center, 0.94), $v2)),
+                        ],
+                        $sticker->getColor(),
+                        $cube->getBaseColor()
+                    ));
+                }
+            }
+
+            $svgGroups[] = $ollGroup;
         }
 
         return Svg::fromValues(
             $this->cube,
             $this->size,
             $this->backgroundColor,
+            $this->view,
             $this->rotations,
-            [$cubeOutlineGroup, ...$faceStickerGroups],
+            [$cubeOutlineGroup, ...$svgGroups],
             $facePositions->getVisibleFaces(),
             $facePositions->getHiddenFaces(),
         );
@@ -125,6 +177,17 @@ class SvgBuilder
         }
 
         $this->rotations = $rotations;
+
+        return $this;
+    }
+
+    public function withView(View $view = null): self
+    {
+        if (!$view) {
+            return $this;
+        }
+
+        $this->view = $view;
 
         return $this;
     }

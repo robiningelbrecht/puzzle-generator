@@ -35,6 +35,11 @@ class FacePositions
         return new self($rotations);
     }
 
+    public function getPositionForFace(Face $face): Position
+    {
+        return $this->values[$face->value];
+    }
+
     /**
      * @return Face[]
      */

@@ -125,6 +125,7 @@
             }
         ],
         "backgroundColor": "#FFA100",
+        "view": "net",
         "viewbox": {
             "x": -0.9,
             "y": -0.9,

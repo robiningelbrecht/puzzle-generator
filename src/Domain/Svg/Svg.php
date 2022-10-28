@@ -3,6 +3,7 @@
 namespace App\Domain\Svg;
 
 use App\Domain\RubiksCube\RubiksCube;
+use App\Domain\RubiksCube\View;
 use App\Infrastructure\ValueObject\Color;
 
 class Svg implements \JsonSerializable
@@ -11,6 +12,7 @@ class Svg implements \JsonSerializable
         private readonly RubiksCube $cube,
         private readonly Size $size,
         private readonly Color $backgroundColor,
+        private readonly View $view,
         private readonly array $rotations,
         private readonly array $groups,
         private readonly array $visibleFaces,
@@ -22,6 +24,7 @@ class Svg implements \JsonSerializable
         RubiksCube $cube,
         Size $size,
         Color $backgroundColor,
+        View $view,
         array $rotations,
         array $groups,
         array $visibleFaces,
@@ -31,6 +34,7 @@ class Svg implements \JsonSerializable
             $cube,
             $size,
             $backgroundColor,
+            $view,
             $rotations,
             $groups,
             $visibleFaces,
@@ -51,6 +55,11 @@ class Svg implements \JsonSerializable
     public function getBackgroundColor(): Color
     {
         return $this->backgroundColor;
+    }
+
+    public function getView(): View
+    {
+        return $this->view;
     }
 
     public function getRotations(): array
@@ -86,6 +95,7 @@ class Svg implements \JsonSerializable
                 'size' => $this->getSize(),
                 'rotations' => $this->getRotations(),
                 'backgroundColor' => $this->getBackgroundColor(),
+                'view' => $this->getView(),
                 'viewbox' => $this->getViewBox(),
                 'faces' => [
                     'visible' => $this->getVisibleFaces(),

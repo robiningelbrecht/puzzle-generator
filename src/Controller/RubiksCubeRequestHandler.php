@@ -8,6 +8,7 @@ use App\Domain\RubiksCube\Mask;
 use App\Domain\RubiksCube\Rotation;
 use App\Domain\RubiksCube\RubiksCubeBuilder;
 use App\Domain\RubiksCube\Size as CubeSize;
+use App\Domain\RubiksCube\View;
 use App\Domain\Svg\Size as SvgSize;
 use App\Domain\Svg\SvgBuilder;
 use App\Infrastructure\Exception\PuzzleException;
@@ -67,6 +68,7 @@ class RubiksCubeRequestHandler
             ->withSize(SvgSize::fromOptionalInt($params['size'] ?? null))
             ->withBackgroundColor(Color::fromOptionalHexString($params['backgroundColor'] ?? null))
             ->withRotations(...Rotation::fromMap(!empty($params['rotations']) && is_array($params['rotations']) ? $params['rotations'] : []))
+            ->withView(View::tryFrom($params['view'] ?? ''))
             ->build();
 
         if (isset($params['json'])) {
@@ -75,7 +77,7 @@ class RubiksCubeRequestHandler
             return $response;
         }
 
-        $response->getBody()->write($this->twig->render('cube.html.twig', [
+        $response->getBody()->write($this->twig->render('svg.html.twig', [
             'svg' => $svg,
         ]));
 
