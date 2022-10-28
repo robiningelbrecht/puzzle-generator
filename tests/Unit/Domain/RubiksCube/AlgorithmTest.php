@@ -23,6 +23,14 @@ class AlgorithmTest extends TestCase
         $this->assertMatchesJsonSnapshot(Json::encode(Algorithm::fromString($algorithm)));
     }
 
+    public function testReverse(): void
+    {
+        $algorithm = Algorithm::fromString("F2 B' U' R' D2 F L U2 R2 L2 F D2 B' L2 F B2 L2 F R' U");
+        $algorithmReverse = Algorithm::fromString("U' R F' L2 B2 F' L2 B D2 F' L2 R2 U2 L' F' D2 R U B F2");
+
+        $this->assertEquals($algorithmReverse, $algorithm->reverse());
+    }
+
     public function testEdgeCases(): void
     {
         $this->snapshotName = 'edgeCase1';

@@ -10,6 +10,7 @@ use App\Domain\RubiksCube\RubiksCubeBuilder;
 use App\Domain\RubiksCube\Size as CubeSize;
 use App\Domain\Svg\Size as SvgSize;
 use App\Domain\Svg\SvgBuilder;
+use App\Infrastructure\Exception\PuzzleException;
 use App\Infrastructure\Json;
 use App\Infrastructure\ValueObject\Color;
 use Psr\Http\Message\ResponseInterface;
@@ -49,9 +50,18 @@ class RubiksCubeRequestHandler
                 ->withMask(Mask::tryFrom($cubeParams['mask'] ?? ''));
         }
 
+        if (!empty($cubeParams['case']) && !empty($cubeParams['algorithm'])) {
+            throw new PuzzleException('You can ony provide a "case" or an "algorithm", but not both.');
+        }
+
+        $algorithm = Algorithm::fromOptionalString($cubeParams['algorithm'] ?? null);
+        if ($algorithm->isEmpty()) {
+            $algorithm = Algorithm::fromOptionalString($cubeParams['case'] ?? null)->reverse();
+        }
+
         $cube = $cubeBuilder
             ->build()
-            ->scramble(Algorithm::fromOptionalString($cubeParams['algorithm'] ?? null));
+            ->scramble($algorithm);
 
         $svg = SvgBuilder::forCube($cube)
             ->withSize(SvgSize::fromOptionalInt($params['size'] ?? null))

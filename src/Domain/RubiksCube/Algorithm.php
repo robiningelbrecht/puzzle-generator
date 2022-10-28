@@ -12,7 +12,7 @@ class Algorithm implements \JsonSerializable
 {
     private const REGEX = "/^(?<slices>[2-9]+)?(?<move>[UuFfRrDdLlBbMESxyz])(?<outerBlockIndicator>w)?(?<turnType>\d+\\'|\\'\d+|\d+|\\')?$/";
 
-    private readonly array $turns;
+    private array $turns;
 
     private function __construct(
         Turn ...$turns
@@ -66,6 +66,16 @@ class Algorithm implements \JsonSerializable
     public function getTurns(): array
     {
         return $this->turns;
+    }
+
+    public function reverse(): self
+    {
+        $this->turns = array_map(
+            fn (Turn $turn) => $turn->getOpposite(),
+            array_reverse($this->turns)
+        );
+
+        return $this;
     }
 
     public function jsonSerialize(): array
