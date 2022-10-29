@@ -50,4 +50,12 @@ class RotationTest extends TestCase
 
         Rotation::fromMap([['john' => 'doe', 'value' => 3]]);
     }
+
+    public function testItShouldThrowOnInvalidMapCase3(): void
+    {
+        $this->expectException(PuzzleException::class);
+        $this->expectExceptionMessage('Invalid axis "doe" provided');
+
+        Rotation::fromMap([['axis' => 'doe', 'value' => 3]]);
+    }
 }

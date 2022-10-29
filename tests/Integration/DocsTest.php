@@ -19,6 +19,5 @@ class DocsTest extends WebTestCase
         );
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertMatchesHtmlSnapshot((string) $response->getBody());
     }
 }

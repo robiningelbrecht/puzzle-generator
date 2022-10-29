@@ -33,10 +33,14 @@ class Rotation implements \JsonSerializable
                 throw new PuzzleException('Invalid rotation provided. "axis" and "value" are required');
             }
 
-            return self::fromAxisAndValue(
-                Axis::from($item['axis']),
-                $item['value'],
-            );
+            try {
+                return self::fromAxisAndValue(
+                    Axis::from($item['axis']),
+                    $item['value'],
+                );
+            } catch (\Throwable) {
+                throw new PuzzleException(sprintf('Invalid axis "%s" provided', $item['axis']));
+            }
         }, $map);
     }
 
