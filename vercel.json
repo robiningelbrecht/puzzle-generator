@@ -6,8 +6,12 @@
   },
   "rewrites": [
     {
-      "source": "docs.css",
+      "source": "/docs.css",
       "destination": "api/docs.css"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/api/index.php"
     }
   ],
   "github": {
