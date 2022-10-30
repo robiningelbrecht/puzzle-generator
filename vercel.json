@@ -6,7 +6,7 @@
   },
   "rewrites": [
     {
-      "source": "/docs.css",
+      "source": "docs.css",
       "destination": "api/docs.css"
     }
   ],
