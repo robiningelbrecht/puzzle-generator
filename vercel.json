@@ -8,10 +8,6 @@
     {
       "source": "/docs.css",
       "destination": "api/docs.css"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/api/index.php"
     }
   ],
   "github": {
