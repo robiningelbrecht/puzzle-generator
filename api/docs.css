@@ -43,12 +43,16 @@ a {
     --ifm-color-emphasis-500: var(--ifm-color-gray-500)
 }
 
-.toggleButton_gllP, html {
+.toggle_button, html {
     -webkit-tap-highlight-color: transparent
 }
 
 * {
     box-sizing: border-box
+}
+
+.text-align-center{
+    text-align: center;
 }
 
 :root {
@@ -826,7 +830,7 @@ hr {
     padding: var(--ifm-navbar-padding-vertical) var(--ifm-navbar-padding-horizontal)
 }
 
-.docsWrapper_BCFX, .navbar, .navbar > .container {
+.main-wrapper, .navbar, .navbar > .container {
     display: flex
 }
 
@@ -968,16 +972,16 @@ body:not(.navigation-with-keyboard) :not(input):focus {
     outline: 0
 }
 
-.themedImage_ToTc, [data-theme=dark] .lightToggleIcon_pyhR, [data-theme=light] .darkToggleIcon_wfgR {
+[data-theme=dark] .lightToggleIcon, [data-theme=light] .darkToggleIcon {
     display: none
 }
 
-.toggle_vylO {
+.toggle_theme {
     height: 2rem;
     width: 2rem
 }
 
-.toggleButton_gllP {
+.toggle_button {
     align-items: center;
     border-radius: 50%;
     display: flex;
@@ -987,15 +991,15 @@ body:not(.navigation-with-keyboard) :not(input):focus {
     width: 100%
 }
 
-.toggleButton_gllP:hover {
+.toggle_button:hover {
     background: var(--ifm-color-emphasis-200)
 }
 
-[data-theme=light] .themedImage--light_HNdA {
+[data-theme=light] .navbar__logo img {
     display: initial
 }
 
-.iconExternalLink_nPIU {
+.icon_external_link {
     margin-left: .3rem
 }
 
@@ -1008,17 +1012,17 @@ body:not(.navigation-with-keyboard) :not(input):focus {
     }
 }
 
-.mainWrapper_z2l0 {
+.main-wrapper {
     flex: 1 0 auto
 }
 
-#__docusaurus {
+.docusaurus {
     display: flex;
     flex-direction: column;
     min-height: 100%
 }
 
-.tableOfContents_bqdL {
+.tableOfContents {
     max-height: calc(100vh - var(--ifm-navbar-height) - 2rem);
     overflow-y: auto;
     position: -webkit-sticky;
@@ -1031,7 +1035,7 @@ body:not(.navigation-with-keyboard) :not(input):focus {
     --docusaurus-collapse-button-bg-hover: hsla(0, 0%, 100%, .1)
 }
 
-.docMainContainer_gTbr, .docPage__5DB {
+.docMainContainer, .docPage {
     display: flex;
     width: 100%
 }
@@ -1054,12 +1058,12 @@ body:not(.navigation-with-keyboard) :not(input):focus {
             padding: .5rem 0 .5rem .5rem;
             scrollbar-gutter: stable
         }
-    }.docMainContainer_gTbr {
+    }.docMainContainer {
          flex-grow: 1;
          max-width: 100%
      }
 
-    .docItemCol_VOVn {
+    .docItemCol {
         max-width: 85% !important
     }
 }
@@ -1077,7 +1081,7 @@ body:not(.navigation-with-keyboard) :not(input):focus {
         margin-left: 0
     }
 
-    .tableOfContents_bqdL {
+    .tableOfContents {
         display: none
     }
 

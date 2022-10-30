@@ -18,7 +18,12 @@ It's heavily inspired by <a href="https://github.com/tdecker91/visualcube">visua
 and <a href="https://github.com/tdecker91/puzzle-gen">PuzzleGen</a>. Thanks to `tdecker91`
 for providing these!
 
-<h2 id="examples">Examples</h2>
+## Documentation
+
+The full documentation is available on 
+[https://puzzle-generator.robiningelbrecht.be](https://puzzle-generator.robiningelbrecht.be)
+
+## Some examples
 
 ### Default
 
@@ -36,100 +41,7 @@ https://puzzle-generator.robiningelbrecht.be/cube?cube[algorithm]=M2 E2 S2
 
 ![scrambled](https://puzzle-generator.robiningelbrecht.be/cube?cube[algorithm]=M2%20E2%20S2)
 
-### Cube size
-
-```
-https://puzzle-generator.robiningelbrecht.be/cube?cube[size]=6
-```
-
-![cube size](https://puzzle-generator.robiningelbrecht.be/cube?cube[size]=6)
-
-### Rotations
-
-```
-https://puzzle-generator.robiningelbrecht.be/cube?rotations[0][axis]=y&rotations[0][value]=120&rotations[1][axis]=x&rotations[1][value]=120
-```
-
-![rotations](https://puzzle-generator.robiningelbrecht.be/cube?rotations[0][axis]=y&rotations[0][value]=120&rotations[1][axis]=x&rotations[1][value]=120)
-
-### View from top
-
-```
-https://puzzle-generator.robiningelbrecht.be/cube?view=top
-```
-
-![view from top](https://puzzle-generator.robiningelbrecht.be/cube?view=top)
-
-### View as net
-
-```
-https://puzzle-generator.robiningelbrecht.be/cube?view=net
-```
-
-![view as net](https://puzzle-generator.robiningelbrecht.be/cube?view=net)
-
-### Combination
-
-```
-https://puzzle-generator.robiningelbrecht.be/cube?size=250&backgroundColor=cccccc&cube[size]=4&cube[algorithm]=R U D2
-```
-
-![view as net](https://puzzle-generator.robiningelbrecht.be/cube?size=250&backgroundColor=cccccc&cube[size]=4&cube[algorithm]=R%20U%20D2)
-
-## <h2 id="documentation">Documentation</h2>
-
-<table>
-    <thead>
-        <tr>
-            <th>Param</th>
-            <th>Default</th>
-            <th>Valid range</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>size</td>
-            <td>128</td>
-            <td>1 - 1024</td>
-            <td>The width and the height of the SVG container</td>
-        </tr>
-        <tr>
-            <td>backgroundColor</td>
-            <td>transparent</td>
-            <td>HTML hex color codes (ex. '#FFFFFF') or transparent</td>
-            <td>The background color of the SVG container</td>
-        </tr>
-       <tr>
-            <td>rotations</td>
-            <td>
-                <pre>
-<code>
-[ 'axis': 'y','value': 45 ], 
-[ 'axis': 'x','value': -34 ]
-</code>
-                </pre>
-            </td>
-            <td>x | y | z with any valid degree</td>
-            <td>
-                The angle the puzzle is viewed at can be adjusted by passing in rotations. 
-                They are a list of angle rotations to perform on the puzzle before rendering. 
-                They can be adjusted to get the perfect view of the puzzle for your purposes.
-            </td>
-        </tr>
-       <tr>
-            <td>view</td>
-            <td>3D</td>
-            <td>3D | top | net</td>
-            <td>
-                The view in which the cube will be rendered. 
-                Using <kbd>top</kbd> or <kbd>net</kbd>  will override any custom viewport rotations passed in.
-            </td>
-        </tr>
-    </tbody>
-</table>
-
-## <h2 id="development">Development</h2>
+## Development
 
 Feel free to fork and make changes to your needs. Consider giving it a ⭐ when you do.
 

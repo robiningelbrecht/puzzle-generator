@@ -3,55 +3,259 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ title }}</title>
+    <title>Puzzle generator</title>
     <link rel="stylesheet" href="/docs.css">
     <link rel="icon" type="image/x-icon" href="/logo.png">
 </head>
 <body>
-<div id="__docusaurus">
+<div class="docusaurus">
     <nav class="navbar navbar--fixed-top">
         <div class="navbar__inner">
             <div class="navbar__items">
                 <a class="navbar__brand" href="/">
-                    <div class="navbar__logo"><img src="/logo.png" alt="Logo"
-                                                   class="themedImage_ToTc themedImage--light_HNdA"></div>
-                    <b class="navbar__title text--truncate">Puzzle generator</b></a></div>
-            <div class="navbar__items navbar__items--right"><a
-                        href="https://github.com/robiningelbrecht/puzzle-generator" target="_blank"
-                        rel="noopener noreferrer" class="navbar__item navbar__link">GitHub
-                    <svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24"
-                         class="iconExternalLink_nPIU">
-                        <path fill="currentColor"
-                              d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path>
+                    <div class="navbar__logo">
+                        <img src="/logo.png" alt="Logo">
+                    </div>
+                    <b class="navbar__title text--truncate">Puzzle generator</b>
+                </a>
+            </div>
+            <div class="navbar__items navbar__items--right">
+                <a href="https://github.com/robiningelbrecht/puzzle-generator" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">
+                    GitHub
+                    <svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="icon_external_link">
+                        <path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path>
                     </svg>
                 </a>
-                <div class="toggle_vylO colorModeToggle_DEke">
-                    <button class="clean-btn toggleButton_gllP" type="button"
-                            title="Switch between dark and light mode (currently light mode)"
-                            aria-label="Switch between dark and light mode (currently light mode)">
-                        <svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR">
-                            <path fill="currentColor"
-                                  d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path>
+                <div class="toggle_theme">
+                    <button class="clean-btn toggle_button" type="button" title="Switch between dark and light mode" aria-label="Switch between dark and light mode">
+                        <svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon">
+                            <path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path>
                         </svg>
-                        <svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR">
-                            <path fill="currentColor"
-                                  d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path>
+                        <svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon">
+                            <path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path>
                         </svg>
                     </button>
                 </div>
             </div>
         </div>
     </nav>
-    <div class="main-wrapper mainWrapper_z2l0 docsWrapper_BCFX">
-        <div class="docPage__5DB">
-            <main class="docMainContainer_gTbr">
+    <div class="main-wrapper">
+        <div class="docPage">
+            <main class="docMainContainer">
                 <div class="container padding-top--md padding-bottom--lg">
                     <div class="row">
-                        <div class="col docItemCol_VOVn">
-                            {{ content | raw }}
+                        <div class="col docItemCol">
+                            <h1 class="text-align-center">Puzzle generator</h1>
+                            <p class="text-align-center">
+                                <a href="https://github.com/robiningelbrecht/puzzle-generator/actions/workflows/ci.yml">
+                                    <img src="https://github.com/robiningelbrecht/puzzle-generator/actions/workflows/ci.yml/badge.svg" alt="CI">
+                                </a>
+                                <a href="https://codecov.io/gh/robiningelbrecht/puzzle-generator">
+                                    <img src="https://codecov.io/gh/robiningelbrecht/puzzle-generator/branch/master/graph/badge.svg?token=hgnlFWvWvw" alt="Codecov.io" />
+                                </a>
+                                <a href="https://github.com/robiningelbrecht/puzzle-generator/blob/master/LICENSE">
+                                    <img src="https://img.shields.io/github/license/robiningelbrecht/puzzle-generator?color=428f7e&logo=open%20source%20initiative&logoColor=white" alt="License" />
+                                </a>
+                                <a href="https://phpstan.org/">
+                                    <img src="https://img.shields.io/badge/PHPStan-level%209-succes.svg?logo=php&logoColor=white&color=31C652" alt="PHPStan Enabled" />
+                                </a>
+                                <a href="https://php.net/">
+                                    <img src="https://img.shields.io/packagist/php-v/robiningelbrecht/puzzle-generator/dev-master?color=%23777bb3&logo=php&logoColor=white" alt="PHP" />
+                                </a>
+                            </p>
+                            <hr />
+                            <p>
+                                This is a PHP library intended to render Rubik's cube puzzles as SVG images. The idea is to do this by navigating to
+                                <a href="https://puzzle-generator.robiningelbrecht.be/cube">https://puzzle-generator.robiningelbrecht.be/cube</a>
+                                and provide query parameters to configure the desired cube.
+                            </p>
+                            <p>
+                                It's heavily inspired by <a href="https://github.com/tdecker91/visualcube">visualcube</a> and
+                                <a href="https://github.com/tdecker91/puzzle-gen">PuzzleGen</a>. Thanks to <code>tdecker91</code> for providing these!
+                            </p>
+
+                            <h2 id="examples">Examples</h2>
+
+                            <h3>Default</h3>
+                            <pre><code>https://puzzle-generator.robiningelbrecht.be/cube</code></pre>
+                            <p>
+                                <img src="https://puzzle-generator.robiningelbrecht.be/cube" alt="default" />
+                            </p>
+
+                            <h3>Scrambled</h3>
+                            <pre><code>https://puzzle-generator.robiningelbrecht.be/cube?cube[algorithm]=M2 E2 S2</code></pre>
+                            <p>
+                                <img src="https://puzzle-generator.robiningelbrecht.be/cube?cube[algorithm]=M2%20E2%20S2" alt="scrambled" />
+                            </p>
+
+                            <h3>Cube size</h3>
+                            <pre><code>https://puzzle-generator.robiningelbrecht.be/cube?cube[size]=6</code></pre>
+                            <p>
+                                <img src="https://puzzle-generator.robiningelbrecht.be/cube?cube[size]=6" alt="cube size" />
+                            </p>
+
+                            <h3>Rotations</h3>
+                            <pre><code>https://puzzle-generator.robiningelbrecht.be/cube?rotations[0][axis]=y&amp;rotations[0][value]=120&amp;rotations[1][axis]=x&amp;rotations[1][value]=120</code></pre>
+                            <p>
+                                <img src="https://puzzle-generator.robiningelbrecht.be/cube?rotations[0][axis]=y&amp;rotations[0][value]=120&amp;rotations[1][axis]=x&amp;rotations[1][value]=120" alt="rotations" />
+                            </p>
+
+                            <h3>Color scheme</h3>
+                            <pre><code>https://puzzle-generator.robiningelbrecht.be/cube?cube[colorScheme][U]=EFFF01&amp;cube[colorScheme][R]=047F01</code></pre>
+                            <p>
+                                <img src="https://puzzle-generator.robiningelbrecht.be/cube?cube[colorScheme][U]=EFFF01&amp;cube[colorScheme][R]=047F01" alt="color scheme" />
+                            </p>
+
+                            <h3>Mask</h3>
+                            <pre><code>https://puzzle-generator.robiningelbrecht.be/cube?cube[mask]=lastLayerEdges</code></pre>
+                            <p>
+                                <img src="https://puzzle-generator.robiningelbrecht.be/cube?cube[mask]=lastLayerEdges" alt="mask" />
+                            </p>
+
+                            <h3>Case</h3>
+                            <pre><code>https://puzzle-generator.robiningelbrecht.be/cube?cube[case]=F U' F' U2 F U R U' R' U' F'</code></pre>
+                            <p>
+                                <img src="https://puzzle-generator.robiningelbrecht.be/cube?cube[case]=F%20U&#039;%20F&#039;%20U2%20F%20U%20R%20U&#039;%20R&#039;%20U&#039;%20F&#039;" alt="Case" />
+                            </p>
+
+                            <h3>View from top</h3>
+                            <pre><code>https://puzzle-generator.robiningelbrecht.be/cube?view=top</code></pre>
+                            <p>
+                                <img src="https://puzzle-generator.robiningelbrecht.be/cube?view=top" alt="view from top" />
+                            </p>
+
+                            <h3>View as net</h3>
+                            <pre><code>https://puzzle-generator.robiningelbrecht.be/cube?view=net</code></pre>
+                            <p>
+                                <img src="https://puzzle-generator.robiningelbrecht.be/cube?view=net" alt="view as net" />
+                            </p>
+
+                            <h3>Combination</h3>
+                            <pre><code>https://puzzle-generator.robiningelbrecht.be/cube?size=250&amp;backgroundColor=cccccc&amp;cube[size]=4&amp;cube[algorithm]=R U D2</code></pre>
+                            <p>
+                                <img src="https://puzzle-generator.robiningelbrecht.be/cube?size=250&amp;backgroundColor=cccccc&amp;cube[size]=4&amp;cube[algorithm]=R%20U%20D2" alt="view as net" />
+                            </p>
+
+                            <h2>
+                                <h2 id="documentation">Documentation</h2>
+                            </h2>
+
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>Param</th>
+                                    <th>Default</th>
+                                    <th>Valid range</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>size</td>
+                                    <td>128</td>
+                                    <td>1 - 1024</td>
+                                    <td>The width and the height of the SVG container</td>
+                                </tr>
+                                <tr>
+                                    <td>backgroundColor</td>
+                                    <td>transparent</td>
+                                    <td>HTML hex color codes (ex. <code>#FFFFFF</code>) or <code>transparent</code></td>
+                                    <td>The background color of the SVG container</td>
+                                </tr>
+                                <tr>
+                                    <td>rotations</td>
+                                    <td>
+<pre><code>[
+  'axis': 'y',
+  'value': 45,
+],
+[
+  'axis': 'x',
+  'value': -34,
+]</code></pre>
+                                    </td>
+                                    <td><code>x</code> | <code>y</code> | <code>z</code> with any valid degree</td>
+                                    <td> The angle the puzzle is viewed at can be adjusted by passing in rotations. They are a list of angle rotations to perform on the puzzle before rendering. They can be adjusted to get the perfect view of the puzzle for your purposes. </td>
+                                </tr>
+                                <tr>
+                                    <td>view</td>
+                                    <td><code>3D</code></td>
+                                    <td><code>3D</code> | <code>top</code> | <code>net</code></td>
+                                    <td> The view in which the cube will be rendered. Using <code>top</code> or <code>net</code> will override any custom viewport rotations passed in. </td>
+                                </tr>
+                                <tr>
+                                    <td>cube[size]</td>
+                                    <td>3</td>
+                                    <td>1 - 10</td>
+                                    <td> Value <i>n</i> represent an <i>N</i>x<i>N</i>x<i>N</i> cube </td>
+                                </tr>
+                                <tr>
+                                    <td>cube[colorScheme]</td>
+                                    <td>
+<pre><code>[
+  'U': '#FEFE00',
+  'R': '#EE0000',
+  'F': '#0000F2',
+  'D': '#FFFFFF',
+  'L': '#FFA100',
+  'B': '#00D800',
+]</code></pre>
+                                    </td>
+                                    <td>HTML hex color codes (ex. <code>#FFFFFF</code>)</td>
+                                    <td> Any color can be used, but each color has to be unique. </td>
+                                </tr>
+                                <tr>
+                                    <td>cube[baseColor]</td>
+                                    <td><code>#000000</code></td>
+                                    <td>HTML hex color codes (ex. <code>#FFFFFF</code>)</td>
+                                    <td>Base color of the cube. In other words the lines between the stickers.</td>
+                                </tr>
+                                <tr>
+                                    <td>cube[mask]</td>
+                                    <td></td>
+                                    <td>
+                                        <code>firstLayer</code> | <code>F2L</code> | <code>lastLayer</code> |
+                                        <code>lastLayerCorners</code> | <code>lastLayerEdges</code> | <code>OLL</code>
+                                    </td>
+                                    <td>
+                                        Mask will gray out certain stickers of the puzzle to highlight the remaining stickers.
+                                        Stickers are grayed out before algorithms are applied so we can see the effect of the algorithm.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>cube[algorithm]</td>
+                                    <td></td>
+                                    <td><code>([2-9]+)?([UuFfRrDdLlBbMESxyz])(w)?(\d+\\'|\\'\d+|\d+|\\')?</code></td>
+                                    <td>
+                                        WCA cube notation. The rendered image will show the state of the puzzle after the algorithm has been applied.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>cube[case]</td>
+                                    <td></td>
+                                    <td><code>([2-9]+)?([UuFfRrDdLlBbMESxyz])(w)?(\d+\\'|\\'\d+|\d+|\\')?</code></td>
+                                    <td>
+                                        Case is the opposite of an algorithm. It reverses the algorithm and then applies it to the puzzle.
+                                        This is helpful to show the state of the puzzle before an algorithm is applied. This cannot be combined
+                                        with <i>algorithm</i>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            <h2 id="development">Development</h2>
+
+                            <p>Feel free to fork and make changes to your needs. Consider giving it a ⭐ when you do.</p>
+                            <p>Clone repository</p>
+                            <pre><code>&gt; git clone git@github.com:robiningelbrecht/puzzle-generator.git</code></pre>
+                            <p>Build Docker containers</p>
+                            <pre><code>&gt; docker-compose up --build -d</code></pre>
+                            <p>Install dependencies</p>
+                            <pre><code>&gt; docker-compose run --rm php-cli composer install</code></pre>
+                            <p>Navigate to <code>http://localhost:9090</code></p>
                         </div>
                         <div class="col col--3">
-                            <div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop">
+                            <div class="tableOfContents thin-scrollbar theme-doc-toc-desktop">
                                 <ul class="table-of-contents table-of-contents__left-border">
                                     <li><a href="#examples" class="table-of-contents__link">Examples</a></li>
                                     <li><a href="#documentation" class="table-of-contents__link">Documentation</a></li>
@@ -67,17 +271,14 @@
 </div>
 <script>
     const htmlEl = document.getElementsByTagName('html')[0];
-
     let currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : (window.matchMedia('(prefers-color-scheme: dark)') ? 'dark' : 'light');
-    const toggleSwitch = document.querySelector('button.toggleButton_gllP');
+    const toggleSwitch = document.querySelector('button.toggle_button');
     htmlEl.dataset.theme = currentTheme;
-
     const switchTheme = () => {
         currentTheme = currentTheme === 'light' ? 'dark' : 'light';
         htmlEl.dataset.theme = currentTheme;
         localStorage.setItem('theme', currentTheme);
     }
-
     toggleSwitch.addEventListener('click', switchTheme, false);
 </script>
 </body>
