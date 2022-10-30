@@ -6,8 +6,8 @@
   },
   "rewrites": [
     {
-      "source": "/docs.css",
-      "destination": "public/docs.css"
+      "source": "/^(.*).(css|png)$",
+      "destination": "public/$1.$2"
     },
     {
       "source": "/(.*)",
