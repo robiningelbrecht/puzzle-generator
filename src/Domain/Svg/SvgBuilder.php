@@ -47,9 +47,7 @@ class SvgBuilder
         $cubeSize = $cube->getSize()->getValue();
 
         if (VIEW::NET === $this->view) {
-            $length = 1;
-            $halfLength = $length / 2;
-            $elementWidth = $length / $cubeSize;
+            $elementWidth = 1 / $cubeSize;
             $halfElementWidth = $elementWidth / 2;
 
             $group = Group::fromAttributes(
@@ -60,9 +58,9 @@ class SvgBuilder
             );
             foreach ([Face::U, Face::R, Face::F, Face::D, Face::L, Face::B] as $face) {
                 for ($i = 0; $i < $cubeSize; ++$i) {
-                    $vOffset = -(-$halfLength + $halfElementWidth + $elementWidth * $i);
+                    $vOffset = -(-0.5 + $halfElementWidth + $elementWidth * $i);
                     for ($j = 0; $j < $cubeSize; ++$j) {
-                        $hOffset = -$halfLength + $halfElementWidth + $elementWidth * $j;
+                        $hOffset = -0.5 + $halfElementWidth + $elementWidth * $j;
 
                         $translation = match ($face) {
                             Face::U => Position::fromXYZ(0, 1, 0),
