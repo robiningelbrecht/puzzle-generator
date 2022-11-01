@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1e647984dd97060d087be81dcc6fd227",
+    "content-hash": "5b5ac5114ee57413154e9f6dc6fa027b",
     "packages": [
         {
             "name": "davedevelopment/stiphle",
@@ -953,41 +953,6 @@
             "time": "2019-03-08T08:55:37+00:00"
         },
         {
-            "name": "sleiman/airtable-php",
-            "version": "2.4.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sleiman/airtable-php.git",
-                "reference": "655188ea9c0641a7658dd88f82428c835ce6baec"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sleiman/airtable-php/zipball/655188ea9c0641a7658dd88f82428c835ce6baec",
-                "reference": "655188ea9c0641a7658dd88f82428c835ce6baec",
-                "shasum": ""
-            },
-            "require": {
-                "davedevelopment/stiphle": "^0.9.2",
-                "php": ">=5.4"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "TANIOS\\Airtable\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "A PHP wrapper for the Airtable API",
-            "support": {
-                "issues": "https://github.com/sleiman/airtable-php/issues",
-                "source": "https://github.com/sleiman/airtable-php/tree/v2.4.6"
-            },
-            "time": "2020-09-16T14:15:08+00:00"
-        },
-        {
             "name": "slim/psr7",
             "version": "1.5",
             "source": {
@@ -1730,6 +1695,54 @@
                 }
             ],
             "time": "2022-10-16T01:01:54+00:00"
+        },
+        {
+            "name": "zadorin/airtable-php",
+            "version": "v0.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/eugenezadorin/airtable-php.git",
+                "reference": "1bccf7dbc885e7322b7e6bfc1c657174ef85a212"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/eugenezadorin/airtable-php/zipball/1bccf7dbc885e7322b7e6bfc1c657174ef85a212",
+                "reference": "1bccf7dbc885e7322b7e6bfc1c657174ef85a212",
+                "shasum": ""
+            },
+            "require": {
+                "davedevelopment/stiphle": "^0.9.2",
+                "ext-curl": "*",
+                "ext-json": "*",
+                "php": "^7.4|^8.0",
+                "symfony/polyfill-php80": "^1.25"
+            },
+            "require-dev": {
+                "pestphp/pest": "^1.0",
+                "vimeo/psalm": "^4.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Zadorin\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Eugene Zadorin",
+                    "email": "mail@eugenezadorin.ru"
+                }
+            ],
+            "description": "Simple PHP wrapper for Airtable API",
+            "support": {
+                "issues": "https://github.com/eugenezadorin/airtable-php/issues",
+                "source": "https://github.com/eugenezadorin/airtable-php/tree/v0.6.0"
+            },
+            "time": "2022-05-29T12:32:57+00:00"
         }
     ],
     "packages-dev": [
