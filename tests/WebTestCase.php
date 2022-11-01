@@ -2,16 +2,20 @@
 
 namespace App\Tests;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestFactoryInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\App;
+use Zadorin\Airtable\Client;
 
 abstract class WebTestCase extends TestCase
 {
     private App $app;
+    /** @var \DI\Container */
     private ContainerInterface $container;
+    protected MockObject $airtableClient;
 
     protected function createRequest(string $method, string $uri, array $serverParams = []): ServerRequestInterface
     {
@@ -27,6 +31,10 @@ abstract class WebTestCase extends TestCase
 
         $this->app = (require dirname(__DIR__).'/config/bootstrap.php');
         $this->container = $this->app->getContainer();
+
+        // Mock AirTable client.
+        $this->airtableClient = $this->createMock(Client::class);
+        $this->container->set(Client::class, $this->airtableClient);
     }
 
     public function getApp(): App

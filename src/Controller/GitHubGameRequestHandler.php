@@ -58,7 +58,7 @@ class GitHubGameRequestHandler
             ->select('Name')
             ->limit(1)
             ->execute()
-        ->fetch();
+            ->fetch();
 
         $record->setFields(['Name' => $record->getFields()['Name'].' '.$turn]);
         $this->airtable->table('Scrambles')->update($record)->execute();
