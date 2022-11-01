@@ -22,7 +22,7 @@ final class ContainerFactory
         $dotenv->safeLoad();
 
         $builder->addDefinitions([
-            FilesystemLoader::class => \DI\create(FilesystemLoader::class)->constructor(dirname(__DIR__, 2) . '/templates'),
+            FilesystemLoader::class => \DI\create(FilesystemLoader::class)->constructor(dirname(__DIR__, 2).'/templates'),
             Environment::class => \DI\create(Environment::class)->constructor(\DI\get(FilesystemLoader::class)),
             ServerRequestFactoryInterface::class => \DI\get(ServerRequestFactory::class),
             Client::class => function () {

@@ -9,33 +9,31 @@ use App\Domain\Svg\Size as SvgSize;
 use App\Domain\Svg\SvgBuilder;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use TANIOS\Airtable\Airtable;
 use Twig\Environment;
 use Zadorin\Airtable\Client;
 
 class GitHubGameRequestHandler
 {
-    private const SPREADSHEET_RANGE = 'Scramble!A1';
-
     public function __construct(
         private readonly Environment $twig,
         private readonly Client $airtable
-    )
-    {
+    ) {
     }
 
     public function renderCube(
         ServerRequestInterface $request,
         ResponseInterface $response): ResponseInterface
     {
-        $recordset = $this->airtable->table('Scrambles')
+        /** @var \Zadorin\Airtable\Record $record */
+        $record = $this->airtable->table('Scrambles')
             ->select('Name')
             ->limit(1)
-            ->execute();
+            ->execute()
+            ->fetch();
 
         $cube = RubiksCubeBuilder::fromDefaults()
             ->build()
-            ->scramble(Algorithm::fromString($recordset->fetch()->getFields()['Name']));
+            ->scramble(Algorithm::fromString($record->getFields()['Name']));
 
         $svg = SvgBuilder::forCube($cube)
             ->withSize(SvgSize::fromOptionalInt(250))
@@ -55,14 +53,14 @@ class GitHubGameRequestHandler
         string $turn): ResponseInterface
     {
         Algorithm::fromString($turn);
-        $recordset = $this->airtable->table('Scrambles')
+        /** @var \Zadorin\Airtable\Record $record */
+        $record = $this->airtable->table('Scrambles')
             ->select('Name')
             ->limit(1)
-            ->execute();
+            ->execute()
+        ->fetch();
 
-        $record = $recordset->fetch();
-
-        $record->setFields(['Name' => $recordset->asArray()[0]['Name'] . ' ' . $turn]);
+        $record->setFields(['Name' => $record->getFields()['Name'].' '.$turn]);
         $this->airtable->table('Scrambles')->update($record);
 
         return $response->withStatus(302)->withHeader('Location', 'https://github.com/robiningelbrecht');
