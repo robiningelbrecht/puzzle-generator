@@ -63,6 +63,6 @@ class GitHubGameRequestHandler
         $record->setFields(['Name' => $record->getFields()['Name'].' '.$turn]);
         $this->airtable->table('Scrambles')->update($record)->execute();
 
-        return $response->withStatus(302)->withHeader('Location', 'https://github.com/robiningelbrecht#jigsaw-lets-solve-this-rubuks-cube');
+        return $response->withStatus(302)->withHeader('Location', 'https://github.com/robiningelbrecht#jigsaw-lets-solve-this-rubiks-cube');
     }
 }
