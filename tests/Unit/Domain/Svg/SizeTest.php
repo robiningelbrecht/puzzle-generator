@@ -24,7 +24,7 @@ class SizeTest extends TestCase
     public function testItShouldThrowWhenSizeSmallerThanOne(): void
     {
         $this->expectException(PuzzleException::class);
-        $this->expectExceptionMessage('Invalid svg size "0" provided');
+        $this->expectExceptionMessage('Invalid svg size <strong>0</strong> provided, valid range is 1 - 1024.');
 
         Size::fromInt(0);
     }
@@ -32,7 +32,7 @@ class SizeTest extends TestCase
     public function testItShouldThrowWhenSizeGreaterThan(): void
     {
         $this->expectException(PuzzleException::class);
-        $this->expectExceptionMessage('Invalid svg size "1025" provided');
+        $this->expectExceptionMessage('Invalid svg size <strong>1025</strong> provided, valid range is 1 - 1024.');
 
         Size::fromInt(1025);
     }

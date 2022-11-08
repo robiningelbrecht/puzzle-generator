@@ -10,7 +10,7 @@ class Size implements \JsonSerializable, \Stringable
         private readonly int $value
     ) {
         if ($this->value < 1 || $this->value > 1024) {
-            throw new PuzzleException(sprintf('Invalid svg size "%s" provided', $this->value));
+            throw new PuzzleException(sprintf('Invalid svg size <strong>%s</strong> provided, valid range is 1 - 1024.', $this->value));
         }
     }
 
