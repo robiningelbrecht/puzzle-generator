@@ -18,12 +18,14 @@ class ErrorRenderer extends HtmlErrorRenderer
     public function __invoke(\Throwable $exception, bool $displayErrorDetails): string
     {
         if ($exception instanceof PuzzleException || $exception instanceof HttpNotFoundException) {
-            $title = $this->getErrorTitle($exception);
-            $content = $exception->getMessage();
-            if ($exception instanceof HttpNotFoundException) {
-                $title = 'Lost your way?';
-                $content = "Sorry, we can't find that page...";
-            }
+            $title = match (true) {
+                $exception instanceof HttpNotFoundException => 'Lost your way?',
+                default => $this->getErrorTitle($exception)
+            };
+            $content = match (true) {
+                $exception instanceof HttpNotFoundException => "Sorry, we can't find that page...",
+                default => $exception->getMessage()
+            };
 
             return $this->twig->render('error.html.twig', [
                 'title' => $title,
