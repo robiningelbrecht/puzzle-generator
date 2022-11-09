@@ -16,4 +16,9 @@ enum Move: string
     case x = 'x';
     case y = 'y';
     case z = 'z';
+
+    public static function casesAsStrings(): array
+    {
+        return array_map(fn (Move $move) => $move->value, self::cases());
+    }
 }

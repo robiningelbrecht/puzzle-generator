@@ -21,7 +21,7 @@ class Color implements \Stringable, \JsonSerializable
             $hex = '#'.$hex;
         }
         if (!preg_match('/^#[a-f0-9]{6}$/i', $hex)) {
-            throw new PuzzleException(sprintf('Invalid hex color "%s"', $hex));
+            throw new PuzzleException(sprintf('Invalid hex color <strong%s</strong>.', $hex));
         }
 
         return new self(strtoupper($hex));

@@ -108,7 +108,7 @@ class RubiksCubeTest extends TestCase
     public function testItShouldThrowOnInvalidSlices(): void
     {
         $this->expectException(PuzzleException::class);
-        $this->expectExceptionMessage('The number of slices (3) must be smaller than the cube size (2)');
+        $this->expectExceptionMessage('The number of slices (<strong>3</strong>) must be smaller than the cube size (<strong>2</strong>)');
 
         $cube = RubiksCubeBuilder::fromDefaults()
             ->withSize(Size::fromInt(2))

@@ -5,6 +5,7 @@ namespace App\Domain\RubiksCube;
 use App\Domain\RubiksCube\Turn\Turn;
 use App\Domain\RubiksCube\Turn\TurnType;
 use App\Infrastructure\Exception\PuzzleException;
+use App\Infrastructure\Implode;
 
 use function Safe\preg_match;
 
@@ -30,7 +31,7 @@ class Algorithm implements \JsonSerializable
         $turns = [];
         foreach (explode(' ', $string) as $notation) {
             if (!preg_match(self::REGEX, $notation, $matches)) {
-                throw new PuzzleException(sprintf('Invalid move "%s"', $notation));
+                throw new PuzzleException(sprintf('Invalid move <strong>%s</strong>, valid moves are %s', $notation, Implode::wrapElementsWithTag(', ', 'code', Move::casesAsStrings())));
             }
 
             $move = $matches['move'];

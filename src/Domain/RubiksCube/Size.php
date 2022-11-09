@@ -10,7 +10,7 @@ class Size implements \JsonSerializable
         private readonly int $value
     ) {
         if ($this->value < 1 || $this->value > 10) {
-            throw new PuzzleException(sprintf('Invalid cube size "%s" provided', $this->value));
+            throw new PuzzleException(sprintf('Invalid cube size <strong>%s</strong> provided, valid range is 1 - 10.', $this->value));
         }
     }
 

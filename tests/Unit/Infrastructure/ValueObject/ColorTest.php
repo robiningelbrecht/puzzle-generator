@@ -31,7 +31,7 @@ class ColorTest extends TestCase
     public function testItShouldThrowOnInvalidString(): void
     {
         $this->expectException(PuzzleException::class);
-        $this->expectExceptionMessage('Invalid hex color "#invalid"');
+        $this->expectExceptionMessage('Invalid hex color <strong#invalid</strong>.');
 
         Color::fromHexString('invalid');
     }

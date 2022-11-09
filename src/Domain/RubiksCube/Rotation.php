@@ -4,6 +4,7 @@ namespace App\Domain\RubiksCube;
 
 use App\Domain\RubiksCube\Axis\Axis;
 use App\Infrastructure\Exception\PuzzleException;
+use App\Infrastructure\Implode;
 
 class Rotation implements \JsonSerializable
 {
@@ -15,7 +16,7 @@ class Rotation implements \JsonSerializable
         private readonly int $value,
     ) {
         if ($value < -360 || $value > 360) {
-            throw new PuzzleException(sprintf('Invalid number (%s) of rotation degrees provided', $this->value));
+            throw new PuzzleException(sprintf('Invalid rotation degree <strong>%s</strong> provided.', $this->value));
         }
     }
 
@@ -30,7 +31,7 @@ class Rotation implements \JsonSerializable
     {
         return array_map(function (array $item) {
             if (empty($item['axis']) || empty($item['value'])) {
-                throw new PuzzleException('Invalid rotation provided. "axis" and "value" are required');
+                throw new PuzzleException('Invalid rotation provided, <strong>axis</strong> and <strong>value</strong> are required');
             }
 
             try {
@@ -39,7 +40,7 @@ class Rotation implements \JsonSerializable
                     $item['value'],
                 );
             } catch (\Throwable) {
-                throw new PuzzleException(sprintf('Invalid axis "%s" provided', $item['axis']));
+                throw new PuzzleException(sprintf('Invalid axis <strong>%s</strong> provided, valid values are %s', $item['axis'], Implode::wrapElementsWithTag(', ', 'code', Axis::casesAsStrings())));
             }
         }, $map);
     }

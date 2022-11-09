@@ -54,7 +54,7 @@ class AlgorithmTest extends TestCase
     public function testItShouldThrowOnInvalidAlgorithm(): void
     {
         $this->expectException(PuzzleException::class);
-        $this->expectExceptionMessage('Invalid move "P"');
+        $this->expectExceptionMessage('Invalid move <strong>P</strong>, valid moves are <code>F</code>, <code>U</code>, <code>R</code>, <code>L</code>, <code>D</code>, <code>B</code>, <code>M</code>, <code>E</code>, <code>S</code>, <code>x</code>, <code>y</code>, <code>z</code>');
 
         Algorithm::fromString('P');
     }
@@ -62,7 +62,7 @@ class AlgorithmTest extends TestCase
     public function testItShouldThrowOnInvalidAlgorithmCase2(): void
     {
         $this->expectException(PuzzleException::class);
-        $this->expectExceptionMessage('Invalid move "DD"');
+        $this->expectExceptionMessage('Invalid move <strong>DD</strong>, valid moves are <code>F</code>, <code>U</code>, <code>R</code>, <code>L</code>, <code>D</code>, <code>B</code>, <code>M</code>, <code>E</code>, <code>S</code>, <code>x</code>, <code>y</code>, <code>z</code>');
 
         Algorithm::fromString('DD');
     }
@@ -70,7 +70,7 @@ class AlgorithmTest extends TestCase
     public function testItShouldThrowOnInvalidAlgorithmCase3(): void
     {
         $this->expectException(PuzzleException::class);
-        $this->expectExceptionMessage('Invalid move "DX"');
+        $this->expectExceptionMessage('Invalid move <strong>DX</strong>, valid moves are <code>F</code>, <code>U</code>, <code>R</code>, <code>L</code>, <code>D</code>, <code>B</code>, <code>M</code>, <code>E</code>, <code>S</code>, <code>x</code>, <code>y</code>, <code>z</code>');
 
         Algorithm::fromString('DX');
     }
@@ -78,7 +78,7 @@ class AlgorithmTest extends TestCase
     public function testItShouldThrowOnInvalidAlgorithmCase4(): void
     {
         $this->expectException(PuzzleException::class);
-        $this->expectExceptionMessage('Invalid move "X"');
+        $this->expectExceptionMessage('Invalid move <strong>X</strong>, valid moves are <code>F</code>, <code>U</code>, <code>R</code>, <code>L</code>, <code>D</code>, <code>B</code>, <code>M</code>, <code>E</code>, <code>S</code>, <code>x</code>, <code>y</code>, <code>z</code>');
 
         Algorithm::fromString('X');
     }

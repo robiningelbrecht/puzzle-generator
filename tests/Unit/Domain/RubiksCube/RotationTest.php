@@ -30,7 +30,7 @@ class RotationTest extends TestCase
     public function testItShouldThrowOnInvalidValue(): void
     {
         $this->expectException(PuzzleException::class);
-        $this->expectExceptionMessage('Invalid number (361) of rotation degrees provided');
+        $this->expectExceptionMessage('Invalid rotation degree <strong>361</strong> provided.');
 
         Rotation::fromAxisAndValue(Axis::Y, 361);
     }
@@ -38,7 +38,7 @@ class RotationTest extends TestCase
     public function testItShouldThrowOnInvalidMap(): void
     {
         $this->expectException(PuzzleException::class);
-        $this->expectExceptionMessage('Invalid rotation provided. "axis" and "value" are required');
+        $this->expectExceptionMessage('Invalid rotation provided, <strong>axis</strong> and <strong>value</strong> are required');
 
         Rotation::fromMap([['axis' => 'x', 'john' => 'doe']]);
     }
@@ -46,7 +46,7 @@ class RotationTest extends TestCase
     public function testItShouldThrowOnInvalidMapCase2(): void
     {
         $this->expectException(PuzzleException::class);
-        $this->expectExceptionMessage('Invalid rotation provided. "axis" and "value" are required');
+        $this->expectExceptionMessage('Invalid rotation provided, <strong>axis</strong> and <strong>value</strong> are required');
 
         Rotation::fromMap([['john' => 'doe', 'value' => 3]]);
     }
@@ -54,7 +54,7 @@ class RotationTest extends TestCase
     public function testItShouldThrowOnInvalidMapCase3(): void
     {
         $this->expectException(PuzzleException::class);
-        $this->expectExceptionMessage('Invalid axis "doe" provided');
+        $this->expectExceptionMessage('Invalid axis <strong>doe</strong> provided, valid values are <code>x</code>, <code>y</code>, <code>z</code>');
 
         Rotation::fromMap([['axis' => 'doe', 'value' => 3]]);
     }

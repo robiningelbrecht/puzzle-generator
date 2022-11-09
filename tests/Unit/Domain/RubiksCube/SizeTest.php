@@ -24,7 +24,7 @@ class SizeTest extends TestCase
     public function testItShouldThrowWhenSizeSmallerThanOne(): void
     {
         $this->expectException(PuzzleException::class);
-        $this->expectExceptionMessage('Invalid cube size "0" provided');
+        $this->expectExceptionMessage('Invalid cube size <strong>0</strong> provided, valid range is 1 - 10.');
 
         Size::fromInt(0);
     }
@@ -32,7 +32,7 @@ class SizeTest extends TestCase
     public function testItShouldThrowWhenSizeGreaterThan(): void
     {
         $this->expectException(PuzzleException::class);
-        $this->expectExceptionMessage('Invalid cube size "11" provided');
+        $this->expectExceptionMessage('Invalid cube size <strong>11</strong> provided, valid range is 1 - 10.');
 
         Size::fromInt(11);
     }
