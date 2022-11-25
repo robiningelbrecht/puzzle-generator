@@ -488,6 +488,33 @@ html {
     padding: 2rem !important
 }
 
+.d-table{
+    display: table;
+}
+
+.w-full{
+    width: 100%;
+}
+
+.items-center {
+    align-items: center;
+}
+.justify-center {
+    justify-content: center;
+}
+.flex {
+    display: flex;
+}
+.w-3 {
+    width: 0.75rem;
+}
+.h-3 {
+    height: 0.75rem;
+}
+.ml-1 {
+    margin-left: 0.25rem;
+}
+
 code {
     background-color: var(--ifm-code-background);
     border: .1rem solid rgba(0, 0, 0, .1);

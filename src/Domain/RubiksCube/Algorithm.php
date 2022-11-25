@@ -9,7 +9,7 @@ use App\Infrastructure\Implode;
 
 use function Safe\preg_match;
 
-class Algorithm implements \JsonSerializable
+class Algorithm implements \JsonSerializable, \Stringable
 {
     private const REGEX = "/^(?<slices>[2-9]+)?(?<move>[UuFfRrDdLlBbMESxyz])(?<outerBlockIndicator>w)?(?<turnType>\d+\\'|\\'\d+|\d+|\\')?$/";
 
@@ -82,6 +82,11 @@ class Algorithm implements \JsonSerializable
     public function jsonSerialize(): array
     {
         return $this->getTurns();
+    }
+
+    public function __toString(): string
+    {
+        return implode(' ', array_map(fn (Turn $turn) => $turn->getNotation(), $this->getTurns()));
     }
 
     private static function getTurnTypeByTurnAbbreviation(string $turnAbbreviation): TurnType
