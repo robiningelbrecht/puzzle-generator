@@ -2,7 +2,7 @@
 
 namespace App\Tests;
 
-use App\Domain\TrackRecordFilePath;
+use App\Domain\TrackRecord\TrackRecordFilePath;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;

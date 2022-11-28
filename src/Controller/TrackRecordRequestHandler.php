@@ -6,7 +6,10 @@ use App\Domain\RubiksCube\Algorithm;
 use App\Domain\RubiksCube\RubiksCubeBuilder;
 use App\Domain\RubiksCube\View;
 use App\Domain\Svg\SvgBuilder;
-use App\Domain\TrackRecordFilePath;
+use App\Domain\TrackRecord\TrackRecordFilePath;
+use App\Domain\TrackRecord\TrackRecordSortField;
+use App\Infrastructure\Request\Sorting\Sorting;
+use App\Infrastructure\Request\Sorting\SortingDirection;
 use App\Infrastructure\ValueObject\Time;
 use League\Csv\Reader;
 use League\Csv\Statement;
@@ -28,6 +31,11 @@ class TrackRecordRequestHandler
         ResponseInterface $response): ResponseInterface
     {
         $header = ['puzzle', 'category', 'time', 'date', 'scramble', 'penalty', 'comment'];
+        $sorting = Sorting::with(
+            TrackRecordSortField::from($request->getQueryParams()['sort']['field'] ?? 'date'),
+            SortingDirection::from($request->getQueryParams()['sort']['direction'] ?? 'desc')
+        );
+
         $csv = Reader::createFromPath($this->trackRecordFilePath->getPath());
         $csv->setHeaderOffset(null);
         $csv->setDelimiter(';');
@@ -35,7 +43,7 @@ class TrackRecordRequestHandler
         $stmt = Statement::create()
             ->offset(0)
             ->limit(50)
-            ->orderBy(function (array $a, array $b) use ($header): int {
+            ->orderBy(function (array $a, array $b) use ($header, $sorting): int {
                 if (count($a) !== count($header)) {
                     return 0;
                 }
@@ -45,11 +53,11 @@ class TrackRecordRequestHandler
                 $csvRowA = array_combine($header, $a);
                 $csvRowB = array_combine($header, $b);
 
-                if ($csvRowA['date'] < $csvRowB['date']) {
-                    return 1;
+                if ($csvRowA[$sorting->getSortableFieldName()->value] < $csvRowB[$sorting->getSortableFieldName()->value]) {
+                    return SortingDirection::DESCENDING === $sorting->getSortingDirection() ? 1 : -1;
                 }
-                if ($csvRowA['date'] > $csvRowB['date']) {
-                    return -1;
+                if ($csvRowA[$sorting->getSortableFieldName()->value] > $csvRowB[$sorting->getSortableFieldName()->value]) {
+                    return SortingDirection::DESCENDING === $sorting->getSortingDirection() ? -1 : 1;
                 }
 
                 return 0;

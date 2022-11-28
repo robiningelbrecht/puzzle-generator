@@ -2,7 +2,7 @@
 
 namespace App\Infrastructure;
 
-use App\Domain\TrackRecordFilePath;
+use App\Domain\TrackRecord\TrackRecordFilePath;
 use DI\ContainerBuilder;
 use Dotenv\Dotenv;
 use Psr\Container\ContainerInterface;
@@ -10,6 +10,7 @@ use Psr\Http\Message\ServerRequestFactoryInterface;
 use Slim\Psr7\Factory\ServerRequestFactory;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
+use Twig\TwigFilter;
 use Zadorin\Airtable\Client;
 
 final class ContainerFactory
@@ -24,7 +25,16 @@ final class ContainerFactory
 
         $builder->addDefinitions([
             FilesystemLoader::class => \DI\create(FilesystemLoader::class)->constructor(dirname(__DIR__, 2).'/templates'),
-            Environment::class => \DI\create(Environment::class)->constructor(\DI\get(FilesystemLoader::class)),
+            Environment::class => function (FilesystemLoader $filesystemLoader) {
+                $twig = new Environment($filesystemLoader);
+                $twig->addFilter(
+                    new TwigFilter('strpad', function (string $string, int $length, string $pad_string = ' ', int $pad_type = STR_PAD_RIGHT) {
+                        return str_pad($string, $length, $pad_string, $pad_type);
+                    })
+                );
+
+                return $twig;
+            },
             ServerRequestFactoryInterface::class => \DI\get(ServerRequestFactory::class),
             Client::class => function () {
                 return new Client(
