@@ -23,6 +23,15 @@ class AlgorithmTest extends TestCase
         $this->assertMatchesJsonSnapshot(Json::encode(Algorithm::fromString($algorithm)));
     }
 
+    /**
+     * @dataProvider provideStringAlgorithms
+     */
+    public function testToString(string $algorithm, int $size): void
+    {
+        $this->snapshotName = $size.'x'.$size;
+        $this->assertMatchesTextSnapshot((string) Algorithm::fromString($algorithm));
+    }
+
     public function testReverse(): void
     {
         $algorithm = Algorithm::fromString("F2 B' U' R' D2 F L U2 R2 L2 F D2 B' L2 F B2 L2 F R' U");
