@@ -87,7 +87,7 @@
                                 {% for row in rows %}
                                     <tr>
                                         <th>{{ row.date|date("d-m-Y") }}</th>
-                                        <td>{{ row.time|raw }}</td>
+                                        <td>{{ row.time.getMinutes() }}:{{ row.time.getSeconds() }}.<small>{{ row.time.getMilliSeconds() }}</small></td>
                                         <td>
                                             <div><small>{{ row.scramble }}</small></div>
                                             <div>{{ row.svgThreeD|raw }}{{ row.svgNet|raw }}</div>

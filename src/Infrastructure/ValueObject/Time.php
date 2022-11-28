@@ -2,7 +2,7 @@
 
 namespace App\Infrastructure\ValueObject;
 
-class Time implements \Stringable
+class Time
 {
     private function __construct(
         private readonly int $milliSeconds
@@ -14,17 +14,18 @@ class Time implements \Stringable
         return new self($milliSeconds);
     }
 
-    public function __toString(): string
+    public function getMilliSeconds(): int
     {
-        $milliSeconds = $this->milliSeconds % 1000;
-        $input = floor($this->milliSeconds / 1000);
+        return $this->milliSeconds % 1000;
+    }
 
-        $seconds = $input % 60;
-        $input = floor($input / 60);
+    public function getSeconds(): int
+    {
+        return floor($this->milliSeconds / 1000) % 60;
+    }
 
-        $minutes = $input % 60;
-
-        return str_pad((string) $minutes, 2, '0', STR_PAD_LEFT).':'.
-            str_pad((string) $seconds, 2, '0', STR_PAD_LEFT).'.<small>'.str_pad((string) $milliSeconds, 2, '0', STR_PAD_LEFT).'</small>';
+    public function getMinutes(): int
+    {
+        return floor($this->milliSeconds / 1000 / 60) % 60;
     }
 }

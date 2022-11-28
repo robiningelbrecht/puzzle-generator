@@ -2,6 +2,7 @@
 
 namespace App\Tests;
 
+use App\Domain\TrackRecordFilePath;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
@@ -35,6 +36,9 @@ abstract class WebTestCase extends TestCase
         // Mock AirTable client.
         $this->airtableClient = $this->createMock(Client::class);
         $this->container->set(Client::class, $this->airtableClient);
+
+        // Use test track record csv.
+        $this->container->set(TrackRecordFilePath::class, TrackRecordFilePath::fromString(__DIR__.'/Integration/track-record.csv'));
     }
 
     public function getApp(): App
