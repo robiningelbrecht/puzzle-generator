@@ -32,8 +32,8 @@ class TrackRecordRequestHandler
     {
         $header = ['puzzle', 'category', 'time', 'date', 'scramble', 'penalty', 'comment'];
         $sorting = Sorting::with(
-            TrackRecordSortField::from($request->getQueryParams()['sort']['field'] ?? 'date'),
-            SortingDirection::from($request->getQueryParams()['sort']['direction'] ?? 'desc')
+            TrackRecordSortField::tryFrom($request->getQueryParams()['sort']['field'] ?? '') ?? TrackRecordSortField::DATE,
+            SortingDirection::tryFrom($request->getQueryParams()['sort']['direction'] ?? '') ?? SortingDirection::DESCENDING,
         );
 
         $csv = Reader::createFromPath($this->trackRecordFilePath->getPath());
