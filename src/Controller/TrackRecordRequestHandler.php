@@ -68,6 +68,7 @@ class TrackRecordRequestHandler
         array_shift($csvRows);
 
         $response->getBody()->write($this->twig->render('track-record.html.twig', [
+            'sorting' => $sorting,
             'rows' => array_map(function (array $csvRow) use ($header): array {
                 $csvRow = array_combine($header, $csvRow);
                 $algorithm = Algorithm::fromString($csvRow['scramble']);
