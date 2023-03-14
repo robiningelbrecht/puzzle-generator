@@ -2,7 +2,6 @@
 
 namespace App\Infrastructure;
 
-use App\Domain\TrackRecord\TrackRecordFilePath;
 use DI\ContainerBuilder;
 use Dotenv\Dotenv;
 use Psr\Container\ContainerInterface;
@@ -42,9 +41,6 @@ final class ContainerFactory
                     $_ENV['AIRTABLE_BASE'],
                 );
             },
-            TrackRecordFilePath::class => \DI\factory([TrackRecordFilePath::class, 'fromString'])->parameter(
-                'path', dirname(__DIR__, 2).'/public/track-record.csv'
-            ),
         ]);
 
         return $builder->build();
